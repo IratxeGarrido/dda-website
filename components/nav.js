@@ -68,7 +68,7 @@ class DuckNav extends HTMLElement {
                     </a>
 
                     <div class="nav-links">
-                        <a href="/about" class="nav-link">About</a>
+                        <a href="/index.html" class="nav-link">About</a>
                         <a href="/events.html" class="nav-link">Events</a>
                         <a href="/how-it-works" class="nav-link">How It Works</a>
                         <a href="/contact.html" class="nav-link">Contact</a>
