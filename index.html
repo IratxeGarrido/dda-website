@@ -3,244 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duck Dating Apps - Real-Time Speed Dating</title>
+    <title>Duck Dating Quackery - Real-Time Speed Dating</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        duckyellow: '#FFD166',
+                        duckorange: '#FF9A3C',
+                        duckdark: '#2F2F2F',
+                        ducklight: '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-white font-sans">
-    <custom-navbar></custom-navbar>
+<body class="bg-ducklight font-sans">
+    <!-- Navigation Component -->
+    <duck-nav></duck-nav>
+    
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-duckyellow to-duckorange py-20 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-bold text-duckdark mb-4">🦆 Duck Dating Quackery</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-white mb-8">Real-Time Speed Dating for Monogamous People</h2>
+            <p class="text-xl text-duckdark mb-10 max-w-3xl mx-auto">
+                Tired of dating apps, endless chats, and expensive nights out that lead nowhere? 
+                Duck Dating Quackery is about meeting real people in real time — from the comfort of your own space.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="/events" class="bg-duckdark hover:bg-black text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                    Join an Event
+                </a>
+                <a href="/how-it-works" class="bg-white hover:bg-gray-100 text-duckdark font-bold py-3 px-8 rounded-full transition duration-300">
+                    How It Works
+                </a>
+            </div>
+        </div>
+    </section>
 
-    <main class="container mx-auto px-4 py-12">
-        <!-- Hero Section -->
-        <section class="flex flex-col md:flex-row items-center gap-8 mb-20">
-            <div class="md:w-1/2">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gray-800">
-                    Real-Time Speed Dating <span class="text-orange-500">for Monogamous People</span>
-                </h1>
-                <p class="text-lg text-gray-600 mb-8">
-                    Tired of dating apps, endless chats, and expensive nights out that lead nowhere? 
-                    Duck Dating Apps is about meeting real people in real time — from the comfort of your own space.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#how-it-works" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium text-center transition duration-300">
-                        How It Works
-                    </a>
-                    <a href="#" class="border-2 border-orange-500 text-orange-500 hover:bg-orange-50 px-6 py-3 rounded-lg font-medium text-center transition duration-300">
-                        Apply Now
-                    </a>
+    <!-- About Section -->
+    <section class="py-16 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-duckdark mb-8 text-center">Dating That Actually Happens</h2>
+        <p class="text-lg text-gray-700 mb-10 text-center max-w-3xl mx-auto">
+            We organize modern speed dating events — both <strong>online and offline</strong> — designed for people who want real connection, not endless texting.
+        </p>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <i data-feather="heart" class="w-12 h-12 text-duckorange mx-auto mb-4"></i>
+                <h3 class="text-xl font-bold text-duckdark mb-2">Monogamous-focused</h3>
+                <p class="text-gray-600">For those seeking meaningful one-on-one connections</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <i data-feather="flag" class="w-12 h-12 text-duckorange mx-auto mb-4"></i>
+                <h3 class="text-xl font-bold text-duckdark mb-2">LGBTQIA+ friendly</h3>
+                <p class="text-gray-600">Inclusive spaces for all identities and orientations</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                <i data-feather="users" class="w-12 h-12 text-duckorange mx-auto mb-4"></i>
+                <h3 class="text-xl font-bold text-duckdark mb-2">Respectful & warm</h3>
+                <p class="text-gray-600">Honoring everyone's boundaries and comfort</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Preview -->
+    <section class="py-16 px-4 bg-duckdark text-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-8 text-center">How It Works</h2>
+            <div class="grid md:grid-cols-5 gap-6">
+                <div class="text-center">
+                    <div class="bg-duckorange rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">1</span>
+                    </div>
+                    <p>Join an event online</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-duckorange rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">2</span>
+                    </div>
+                    <p>Enter our interactive space</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-duckorange rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">3</span>
+                    </div>
+                    <p>Have 5 private dates</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-duckorange rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">4</span>
+                    </div>
+                    <p>Choose romantic or social matches</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-duckorange rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold">5</span>
+                    </div>
+                    <p>Get your matches later</p>
                 </div>
             </div>
-            <div class="md:w-1/2">
-                <img src="http://static.photos/white/1024x576/42" alt="Duck logo" class="rounded-xl shadow-xl transform hover:scale-105 transition duration-500">
+            <div class="text-center mt-10">
+                <a href="/how-it-works" class="bg-duckyellow hover:bg-yellow-400 text-duckdark font-bold py-3 px-8 rounded-full transition duration-300 inline-block">
+                    See Full Process
+                </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Value Proposition -->
-        <section class="mb-20">
-            <div class="bg-orange-50 rounded-2xl p-8 md:p-12">
-                <p class="text-xl md:text-2xl text-center font-medium text-gray-800 leading-relaxed">
-                    "We create an environment where meaningful connections can grow, shaped by warmth, curiosity, respect, and inclusivity. We celebrate diversity in identities, backgrounds, and experiences."
-                </p>
-            </div>
-        </section>
-
-        <!-- How It Works -->
-        <section id="how-it-works" class="mb-20">
-            <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">How It Works</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                        <i data-feather="users" class="text-orange-500"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Meet Online</h3>
-                    <p class="text-gray-600">Modern, interactive, and slightly flirty platform</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                        <i data-feather="clock" class="text-orange-500"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Five 5-Minute Dates</h3>
-                    <p class="text-gray-600">Quick connections that matter</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                        <i data-feather="heart" class="text-orange-500"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Match After</h3>
-                    <p class="text-gray-600">No pressure, private decisions</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                        <i data-feather="smile" class="text-orange-500"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Romantic or Social</h3>
-                    <p class="text-gray-600">Choose your connection type</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Requirements -->
-        <section class="mb-20 bg-gray-50 rounded-2xl p-8 md:p-12">
-            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">What You'll Need</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i data-feather="wifi" class="text-orange-500"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Stable internet connection</h3>
-                        <p class="text-gray-600">Essential for smooth video connections</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i data-feather="video" class="text-orange-500"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Laptop with camera</h3>
-                        <p class="text-gray-600">Required for video participation</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i data-feather="home" class="text-orange-500"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Private space</h3>
-                        <p class="text-gray-600">A quiet environment during the event</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i data-feather="smartphone" class="text-orange-500"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Smartphone</h3>
-                        <p class="text-gray-600">For the matching process</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Event Details -->
-        <section class="mb-20">
-            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Event Details</h2>
+    <!-- Event Types -->
+    <section class="py-16 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-duckdark mb-8 text-center">We Host Different Dating Formats</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                <div class="md:flex">
-                    <div class="md:w-1/2 bg-orange-500 p-8 md:p-12 flex flex-col justify-center text-white">
-                        <div class="mb-8">
-                            <h3 class="text-2xl font-bold mb-2">Sunday, 15 February 2026</h3>
-                            <p class="text-orange-100">19:00–21:00 (CET)</p>
-                        </div>
-                        <div class="mb-8">
-                            <h3 class="text-2xl font-bold mb-2">Online Event</h3>
-                            <p class="text-orange-100">Access details shared after acceptance</p>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Participation Fee: €5</h3>
-                            <p class="text-orange-100">Application deadline: 8 February 2026</p>
-                        </div>
-                    </div>
-                    <div class="md:w-1/2 p-8 md:p-12">
-                        <h3 class="text-xl font-bold mb-6 text-gray-800">Important Notes</h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-2">
-                                <i data-feather="alert-circle" class="text-orange-500 mt-1 flex-shrink-0"></i>
-                                <span class="text-gray-700">RSVP alone does not guarantee participation.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i data-feather="users" class="text-orange-500 mt-1 flex-shrink-0"></i>
-                                <span class="text-gray-700">Places are limited and curated for balanced group.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i data-feather="dollar-sign" class="text-orange-500 mt-1 flex-shrink-0"></i>
-                                <span class="text-gray-700">No refunds or spot transfers.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i data-feather="calendar" class="text-orange-500 mt-1 flex-shrink-0"></i>
-                                <span class="text-gray-700">We'll respond to applications by 10 February 2026.</span>
-                            </li>
-                        </ul>
-                        <a href="#" class="mt-8 inline-block bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium text-center transition duration-300">
-                            Apply Now
-                        </a>
-                    </div>
+                <div class="bg-duckyellow p-6">
+                    <span class="text-3xl">💛</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-duckdark mb-2">Monogamous Speed Dating</h3>
+                    <p class="text-gray-600 mb-4">For people seeking exclusive, long-term connections</p>
+                    <a href="/events/monogamous" class="text-duckorange font-semibold hover:underline">View Events</a>
                 </div>
             </div>
-        </section>
-
-        <!-- Testimonials -->
-        <section class="mb-20">
-            <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">What People Say</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <img src="http://static.photos/people/200x200/1" alt="Testimonial" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-semibold">Alex</h4>
-                            <div class="flex text-orange-400">
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">"Met my current partner here! So much better than swiping endlessly."</p>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-duckyellow p-6">
+                    <span class="text-3xl">🌈</span>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <img src="http://static.photos/people/200x200/2" alt="Testimonial" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-semibold">Sam</h4>
-                            <div class="flex text-orange-400">
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">"The time limits actually help you focus on real connection."</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <img src="http://static.photos/people/200x200/3" alt="Testimonial" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-semibold">Jordan</h4>
-                            <div class="flex text-orange-400">
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star" class="fill-current"></i>
-                                <i data-feather="star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">"Made 3 great friends from the social matches. Will be back!"</p>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-duckdark mb-2">LGBTQIA+ Inclusive</h3>
+                    <p class="text-gray-600 mb-4">Open, affirming spaces for queer dating</p>
+                    <a href="/events/lgbtq" class="text-duckorange font-semibold hover:underline">View Events</a>
                 </div>
             </div>
-        </section>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-duckyellow p-6">
+                    <span class="text-3xl">🔥</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-duckdark mb-2">Polyamorous Dating</h3>
+                    <p class="text-gray-600 mb-4">For ethically non-monogamous people</p>
+                    <a href="/events/polyamorous" class="text-duckorange font-semibold hover:underline">View Events</a>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-duckyellow p-6">
+                    <span class="text-3xl">🌍</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-duckdark mb-2">Online Global Events</h3>
+                    <p class="text-gray-600 mb-4">Join from anywhere and meet people worldwide</p>
+                    <a href="/events/online" class="text-duckorange font-semibold hover:underline">View Events</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- CTA -->
-        <section class="bg-orange-500 rounded-2xl p-8 md:p-12 text-center text-white">
-            <h2 class="text-3xl font-bold mb-4">Ready to Meet Someone Special?</h2>
-            <p class="text-xl mb-8 text-orange-100">Join our next speed dating event and find meaningful connections.</p>
-            <a href="#" class="inline-block bg-white text-orange-500 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition duration-300">
-                Apply Now
+    <!-- Closing CTA -->
+    <section class="py-20 px-4 bg-gradient-to-r from-duckyellow to-duckorange">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-duckdark mb-6">Stop Swiping. Start Meeting.</h2>
+            <a href="/events" class="bg-duckdark hover:bg-black text-white font-bold py-3 px-12 rounded-full text-lg transition duration-300 inline-block">
+                Find Your Event
             </a>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <custom-footer></custom-footer>
+    <!-- Footer Component -->
+    <duck-footer></duck-footer>
 
-    <script src="components/navbar.js"></script>
+    <script src="components/nav.js"></script>
     <script src="components/footer.js"></script>
-    <script src="script.js"></script>
-    <script>feather.replace();</script>
+    <script>
+        feather.replace();
+    </script>
+<script src="https://huggingface.co/deepsite/deepsite-badge.js"></script>
 </body>
 </html>

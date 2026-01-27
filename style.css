@@ -1,36 +1,40 @@
+/* Custom styles that extend Tailwind */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-html {
-    scroll-behavior: smooth;
-}
 
 body {
     font-family: 'Inter', sans-serif;
+    line-height: 1.6;
 }
 
-/* Custom animation */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+/* Animation for buttons */
+.btn-hover-effect {
+    transition: all 0.3s ease;
+    transform: translateY(0);
 }
 
-.floating {
-    animation: float 3s ease-in-out infinite;
+.btn-hover-effect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Navbar active item styling */
-.nav-item.active {
-    position: relative;
+/* Custom duck-themed elements */
+.duck-badge {
+    background-color: #FFD166;
+    color: #2F2F2F;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    display: inline-block;
 }
 
-.nav-item.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: #f97316;
-    border-radius: 2px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .event-card {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
 }
