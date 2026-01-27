@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events — Duck Dating Apps</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        duckyellow: '#FFD166',
+                        duckorange: '#FF9A3C',
+                        duckdark: '#2F2F2F',
+                        ducklight: '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-ducklight font-sans">
+
+    <!-- Navigation -->
+    <duck-nav></duck-nav>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-r from-duckyellow to-duckorange py-16 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-duckdark mb-4">Events</h1>
+            <p class="text-duckdark text-lg md:text-xl">
+                Upcoming speed dating events will appear here.
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Area (EMPTY — add sections like calendar here) -->
+    <main class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div id="dda-calendar"></div>
+
+        </div>
+    </main>
+
+<script>
+(function () {
+  const MONTHS = [
+    "January","February","March","April","May","June",
+    "July","August","September","October","November","December"
+  ];
+  const WEEKDAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+  function pad2(n) { return String(n).padStart(2, "0"); }
+  function ymd(d) { return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`; }
+  function startOfMonth(date) { return new Date(date.getFullYear(), date.getMonth(), 1); }
+  function endOfMonth(date) { return new Date(date.getFullYear(), date.getMonth() + 1, 0); }
+  function mondayFirstDayIndex(jsDay) { return (jsDay + 6) % 7; }
+
+  function createCalendar(container) {
+    const state = { current: new Date(), selected: null };
+
+    container.innerHTML = `
+      <style>
+        .dda-cal-card{background:#fff;border-radius:18px;box-shadow:0 10px 22px rgba(0,0,0,.10);overflow:hidden}
+        .dda-cal-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:linear-gradient(90deg,#FFD166,#FF9A3C)}
+        .dda-cal-title{font-weight:800;color:#2F2F2F;font-size:18px}
+        .dda-cal-actions{display:flex;gap:10px}
+        .dda-cal-btn{border:none;cursor:pointer;background:rgba(255,255,255,.9);color:#2F2F2F;border-radius:999px;padding:8px 12px;font-weight:800}
+        .dda-cal-btn:hover{background:rgba(255,255,255,1)}
+        .dda-cal-body{padding:12px 12px 16px}
+        .dda-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+        .dda-cal-weekday{text-align:center;font-size:12px;font-weight:800;color:rgba(47,47,47,.70);padding:6px 0}
+        .dda-cal-cell{border:1px solid rgba(47,47,47,.12);border-radius:14px;min-height:54px;background:#fff;padding:8px;cursor:pointer;transition:transform .08s ease, box-shadow .08s ease, border-color .08s ease;text-align:left}
+        .dda-cal-cell:hover{transform:translateY(-1px);box-shadow:0 8px 16px rgba(0,0,0,.10);border-color:rgba(255,154,60,.5)}
+        .dda-cal-cell--blank{background:transparent;border:none;cursor:default}
+        .dda-cal-cell--today{border-color:rgba(47,47,47,.45)}
+        .dda-cal-cell--selected{outline:3px solid rgba(255,154,60,.55)}
+        .dda-cal-daynum{font-weight:800;color:#2F2F2F}
+        .dda-cal-footer{margin-top:12px;text-align:center;font-size:14px;color:rgba(47,47,47,.75)}
+      </style>
+
+      <div class="dda-cal-card">
+        <div class="dda-cal-header">
+          <div class="dda-cal-title" id="dda-cal-title"></div>
+          <div class="dda-cal-actions">
+            <button class="dda-cal-btn" id="dda-cal-prev">← Prev</button>
+            <button class="dda-cal-btn" id="dda-cal-today">Today</button>
+            <button class="dda-cal-btn" id="dda-cal-next">Next →</button>
+          </div>
+        </div>
+
+        <div class="dda-cal-body">
+          <div class="dda-cal-grid" id="dda-cal-weekdays"></div>
+          <div class="dda-cal-grid" id="dda-cal-days"></div>
+          <div class="dda-cal-footer" id="dda-cal-footer">Click a day to select it.</div>
+        </div>
+      </div>
+    `;
+
+    const elTitle = container.querySelector("#dda-cal-title");
+    const elWeekdays = container.querySelector("#dda-cal-weekdays");
+    const elDays = container.querySelector("#dda-cal-days");
+    const elFooter = container.querySelector("#dda-cal-footer");
+
+    const btnPrev = container.querySelector("#dda-cal-prev");
+    const btnNext = container.querySelector("#dda-cal-next");
+    const btnToday = container.querySelector("#dda-cal-today");
+
+    elWeekdays.innerHTML = WEEKDAYS.map(d => `<div class="dda-cal-weekday">${d}</div>`).join("");
+
+    function render() {
+      const viewDate = state.current;
+      const monthStart = startOfMonth(viewDate);
+      const monthEnd = endOfMonth(viewDate);
+
+      elTitle.textContent = `${MONTHS[viewDate.getMonth()]} ${viewDate.getFullYear()}`;
+
+      const lead = mondayFirstDayIndex(monthStart.getDay());
+      const daysInMonth = monthEnd.getDate();
+
+      const cells = [];
+      for (let i = 0; i < lead; i++) cells.push({ type: "blank" });
+      for (let day = 1; day <= daysInMonth; day++) {
+        cells.push({ type: "day", date: new Date(viewDate.getFullYear(), viewDate.getMonth(), day) });
+      }
+      const trail = (7 - (cells.length % 7)) % 7;
+      for (let i = 0; i < trail; i++) cells.push({ type: "blank" });
+
+      const todayKey = ymd(new Date());
+
+      elDays.innerHTML = cells.map(c => {
+        if (c.type === "blank") return `<div class="dda-cal-cell dda-cal-cell--blank"></div>`;
+
+        const key = ymd(c.date);
+        const isToday = key === todayKey;
+        const isSelected = state.selected && ymd(state.selected) === key;
+
+        const cls = [
+          "dda-cal-cell",
+          isToday ? "dda-cal-cell--today" : "",
+          isSelected ? "dda-cal-cell--selected" : "",
+        ].filter(Boolean).join(" ");
+
+        return `
+          <button class="${cls}" type="button" data-date="${key}">
+            <div class="dda-cal-daynum">${c.date.getDate()}</div>
+          </button>
+        `;
+      }).join("");
+
+      if (state.selected) {
+        elFooter.textContent = `Selected: ${ymd(state.selected)}`;
+      } else {
+        elFooter.textContent = "Click a day to select it.";
+      }
+    }
+
+    btnPrev.addEventListener("click", () => {
+      state.current = new Date(state.current.getFullYear(), state.current.getMonth() - 1, 1);
+      render();
+    });
+    btnNext.addEventListener("click", () => {
+      state.current = new Date(state.current.getFullYear(), state.current.getMonth() + 1, 1);
+      render();
+    });
+    btnToday.addEventListener("click", () => {
+      state.current = new Date();
+      state.selected = null;
+      render();
+    });
+
+    container.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-date]");
+      if (!btn) return;
+      const [Y, M, D] = btn.dataset.date.split("-").map(Number);
+      state.selected = new Date(Y, M - 1, D);
+      render();
+    });
+
+    render();
+  }
+
+  const mount = document.getElementById("dda-calendar");
+  if (!mount) {
+    console.warn("Calendar mount #dda-calendar not found.");
+    return;
+  }
+  createCalendar(mount);
+})();
+</script>
+
+
+    <!-- Footer -->
+    <duck-footer></duck-footer>
+
+    <script src="components/nav.js"></script>
+    <script src="components/footer.js"></script>
+    <script>
+        feather.replace();
+    </script>
+
+</body>
+</html>

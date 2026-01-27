@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Duck Dating Apps</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            duckyellow: '#FFD166',
+            duckorange: '#FF9A3C',
+            duckdark: '#2F2F2F',
+            ducklight: '#F8F9FA'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-ducklight font-sans">
+  <duck-nav></duck-nav>
+
+  <!-- Header -->
+  <section class="relative bg-gradient-to-r from-duckyellow to-duckorange py-16 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-center gap-4 mb-4">
+        <img src="/images/duck.png" alt="Duck" class="w-10 md:w-12 h-auto" />
+        <h1 class="text-4xl md:text-6xl font-extrabold text-duckdark">Contact</h1>
+      </div>
+      <p class="max-w-3xl mx-auto text-center text-duckdark text-lg md:text-xl">
+        Questions, partnerships, press, or event ideas? Send us a message — we’ll get back to you.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main class="py-16 px-4">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10">
+
+      <!-- Contact cards -->
+      <aside class="space-y-6">
+        <div class="bg-white rounded-2xl shadow-md p-8">
+          <h2 class="text-2xl font-bold text-duckdark mb-4">Quick Contacts</h2>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="bg-duckyellow rounded-full w-10 h-10 flex items-center justify-center shrink-0">
+                <i data-feather="mail" class="text-duckdark"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-duckdark">Email</p>
+                <p class="text-gray-600">duckdatingapps@gmail.com</p>
+                <p class="text-sm text-gray-500">Best for support & questions</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="bg-duckyellow rounded-full w-10 h-10 flex items-center justify-center shrink-0">
+                <i data-feather="instagram" class="text-duckdark"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-duckdark">Meetup App</p>
+                <p class="text-gray-600">www.meetup.com/duck-dating-apps-speed-dating/</p>
+                <p class="text-sm text-gray-500">Updates, event drops, stories</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="bg-duckyellow rounded-full w-10 h-10 flex items-center justify-center shrink-0">
+                <i data-feather="map-pin" class="text-duckdark"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-duckdark">Base City</p>
+                <p class="text-gray-600">Berlin</p>
+                <p class="text-sm text-gray-500">We host offline events here + online globally</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-duckorange">
+          <h3 class="text-xl font-bold text-duckdark mb-2">Safety & Inclusivity</h3>
+          <p class="text-gray-700">
+            Duck Dating Apps is LGBTQIA+ friendly and consent-focused. If something felt off at an event,
+            contact us — we take boundaries seriously.
+          </p>
+        </div>
+      </aside>
+
+      <!-- Form -->
+      <section class="bg-white rounded-2xl shadow-md p-8">
+        <h2 class="text-2xl font-bold text-duckdark mb-2">Send a Message</h2>
+        <p class="text-gray-600 mb-6">We usually respond within 1–2 business days.</p>
+
+        <!-- NOTE: This is static HTML. Wire it to Formspree / Netlify Forms / your backend later -->
+        <form class="space-y-4" action="#" method="post">
+          <div>
+            <label class="block text-sm font-semibold text-duckdark mb-1" for="name">Your name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              class="w-full rounded-xl border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-duckorange"
+              placeholder="**Form still under construction**"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-duckdark mb-1" for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              class="w-full rounded-xl border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-duckorange"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-duckdark mb-1" for="topic">Topic</label>
+            <select
+              id="topic"
+              name="topic"
+              class="w-full rounded-xl border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-duckorange"
+            >
+              <option>General question</option>
+              <option>Upcoming events</option>
+              <option>Partnership / collaboration</option>
+              <option>Press / media</option>
+              <option>Safety / Code of Conduct</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-duckdark mb-1" for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              required
+              class="w-full rounded-xl border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-duckorange"
+              placeholder="Tell us what you need…"
+            ></textarea>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <input id="consent" name="consent" type="checkbox" class="mt-1" required />
+            <label for="consent" class="text-sm text-gray-600">
+              I understand that Duck Dating Apps will use my message to respond to my request.
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-duckdark hover:bg-black text-white font-bold py-3 px-8 rounded-full transition duration-300"
+          >
+            Send Message
+          </button>
+
+          <p class="text-xs text-gray-500 text-center">
+            Tip: If you’re reporting an issue, include the event date + city (online/offline).
+          </p>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- CTA -->
+  <section class="py-16 px-4 bg-duckdark text-white">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Want to join an event instead?</h2>
+      <p class="text-white/80 mb-8 max-w-2xl mx-auto">
+        Check what’s coming up in Berlin and online — and meet real people in real time.
+      </p>
+      <a href="/events"
+         class="bg-duckyellow hover:bg-yellow-400 text-duckdark font-bold py-3 px-10 rounded-full transition duration-300 inline-block">
+        View Events
+      </a>
+    </div>
+  </section>
+
+  <duck-footer></duck-footer>
+
+  <script src="components/nav.js"></script>
+  <script src="components/footer.js"></script>
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>
