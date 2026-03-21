@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Lena",
+    "event": "BDD",
+    "date": "04 Apr 2026",
+    "review": "Way less awkward than apps. I actually met people I wanted to keep talking to.",
+    "avatarColor": "#ffd8e7"
+  },
+  {
+    "name": "Jonas",
+    "event": "PSD",
+    "date": "16 Feb 2026",
+    "review": "It felt curated in a good way. Not random, not forced, just easy to be there.",
+    "avatarColor": "#d7f0cb"
+  },
+  {
+    "name": "Mira",
+    "event": "BDD",
+    "date": "22 Mar 2026",
+    "review": "Loved that I didn’t have to ask for numbers on the spot. So much less pressure.",
+    "avatarColor": "#d7e7f5"
+  },
+  {
+    "name": "Alex",
+    "event": "PSD",
+    "date": "11 Jan 2026",
+    "review": "This was the first dating thing in ages that didn’t feel cringe. Big win.",
+    "avatarColor": "#f9df9b"
+  },
+  {
+    "name": "Sara",
+    "event": "BDD",
+    "date": "04 Apr 2026",
+    "review": "Good people, playful atmosphere, and no weird swipe-game energy. I’d go again.",
+    "avatarColor": "#ffd8e7"
+  },
+  {
+    "name": "Tobias",
+    "event": "PSD",
+    "date": "03 Mar 2026",
+    "review": "I expected chaos. It was actually super smooth and surprisingly warm.",
+    "avatarColor": "#d7f0cb"
+  },
+  {
+    "name": "Nina",
+    "event": "BDD",
+    "date": "15 Mar 2026",
+    "review": "Honestly? Better vibe than any app date I’ve had in the past year.",
+    "avatarColor": "#d7e7f5"
+  },
+  {
+    "name": "David",
+    "event": "PSD",
+    "date": "28 Feb 2026",
+    "review": "The mutual match thing is genius. Takes out all the weird guessing afterward.",
+    "avatarColor": "#f9df9b"
+  },
+  {
+    "name": "Kat",
+    "event": "BDD",
+    "date": "04 Apr 2026",
+    "review": "It felt human. Which is a wild thing to say about dating these days.",
+    "avatarColor": "#ffd8e7"
+  },
+  {
+    "name": "Maks",
+    "event": "PSD",
+    "date": "09 Feb 2026",
+    "review": "Small group, real chemistry, no endless texting. Exactly what I wanted.",
+    "avatarColor": "#d7f0cb"
+  }
+]
