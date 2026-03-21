@@ -9,7 +9,7 @@ class DuckFooter extends HTMLElement {
           </div>
 
 <div class="flex gap-6 text-sm text-black/60">
-  <a href="/imprint.html">Impressum</a>
+  <a href="/imprint.html">Imprint</a>
   <a href="/privacy.html">Datenschutz</a>
 </div>
         </div>

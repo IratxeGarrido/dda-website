@@ -4,61 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FAQ’s | Blind Duck Dating</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f4efe8;
-      color: #2f2f2f;
-    }
 
-    .chaos-gradient {
-      background: linear-gradient(135deg, #ffd36e 0%, #ffb14a 45%, #ff8b4e 100%);
-    }
-
-    .grid-bg {
-      background-image:
-        linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
-      background-size: 28px 28px;
-    }
-
-    .sticker {
-      transform: rotate(-2deg);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    }
-
-    .cta-shadow {
-      box-shadow: 0 14px 30px rgba(0,0,0,0.12);
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/components/header.js" defer></script>
+  <script src="/components/footer.js" defer></script>
 </head>
 <body data-page="faq">
 
-  <!-- NAV -->
-  <header class="sticky top-0 z-50 bg-[#f4efe8]/90 backdrop-blur border-b border-black/5">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-black/10 bg-pink-200">
-          <img src="/images/DDA-logo.jpg" alt="Blind Duck Dating logo" class="w-full h-full object-cover">
-        </div>
-        <div>
-          <div class="text-2xl md:text-3xl font-black tracking-tight leading-none">BLIND DUCK</div>
-          <div class="text-2xl md:text-3xl font-black tracking-tight leading-none">DATING</div>
-        </div>
-      </a>
-
-      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold">
-        <a href="/index.html" class="hover:opacity-70">WTF is this?</a>
-        <a href="/events.html" class="hover:opacity-70">Events</a>
-        <a href="/faq.html" class="hover:opacity-70">FAQ’s</a>
-        <a href="/contact.html" class="hover:opacity-70">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <duck-header></duck-header>
 
   <!-- HERO -->
   <section class="relative overflow-hidden">
@@ -125,7 +83,7 @@
           <p class="mt-3 text-lg text-black/70">
             On the Events page.
           </p>
-          <a href="/events" class="mt-4 inline-block font-bold underline underline-offset-4">Go to Events</a>
+          <a href="/events.html" class="mt-4 inline-block font-bold underline underline-offset-4">Go to Events</a>
         </div>
 
         <div class="bg-white rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
@@ -133,7 +91,7 @@
           <p class="mt-3 text-lg text-black/70">
             Reach out through the Contact page.
           </p>
-          <a href="/contacts" class="mt-4 inline-block font-bold underline underline-offset-4">Go to Contact</a>
+          <a href="/contact.html" class="mt-4 inline-block font-bold underline underline-offset-4">Go to Contact</a>
         </div>
 
       </div>
@@ -149,10 +107,10 @@
           Meet people <span class="text-white">for real.</span>
         </h2>
         <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/events" class="inline-flex items-center justify-center rounded-full bg-[#2f2f2f] text-white px-8 py-4 font-bold text-lg cta-shadow">
+          <a href="/events.html" class="inline-flex items-center justify-center rounded-full bg-[#2f2f2f] text-white px-8 py-4 font-bold text-lg cta-shadow">
             See Events
           </a>
-          <a href="/contacts" class="inline-flex items-center justify-center rounded-full bg-white border border-black/10 px-8 py-4 font-bold text-lg hover:bg-black hover:text-white transition">
+          <a href="/contact.html" class="inline-flex items-center justify-center rounded-full bg-white border border-black/10 px-8 py-4 font-bold text-lg hover:bg-black hover:text-white transition">
             Contact
           </a>
         </div>
@@ -160,21 +118,7 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="py-10 border-t border-black/10">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-      <div>
-        <div class="font-black text-2xl">BLIND DUCK DATING</div>
-        <div class="text-black/60 mt-1">In-person dating events for people tired of dating apps.</div>
-      </div>
-
-      <div class="flex gap-6 text-sm text-black/60">
-        <a href="/events">Events</a>
-        <a href="/faq.html">FAQ’s</a>
-        <a href="/contacts">Contact</a>
-      </div>
-    </div>
-  </footer>
+  <duck-footer></duck-footer>
 
 </body>
 </html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imprint — Blind Duck Dating</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/components/header.js" defer></script>
+  <script src="/components/footer.js" defer></script>
+</head>
+
+<body data-page="">
+
+  <duck-header></duck-header>
+
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg opacity-40 pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-6 pt-16 pb-12 md:pt-20 md:pb-14 relative text-center">
+      <div class="inline-flex items-center gap-2 bg-white border border-black/10 rounded-full px-4 py-2 text-sm font-bold sticker mb-6">
+        <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+        LEGAL INFO
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[0.95]">
+        Imprint
+      </h1>
+
+      <p class="mt-6 text-lg md:text-2xl text-black/70 max-w-3xl mx-auto">
+        Placeholder legal information for the website operator.
+      </p>
+    </div>
+  </section>
+
+  <main class="pb-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-[2rem] border border-black/10 p-8 md:p-10 shadow-sm space-y-8">
+
+        <section>
+          <h2 class="text-2xl font-black">Information according to § 5 TMG</h2>
+          <div class="mt-4 text-black/70 leading-relaxed">
+            <p>[Full Name / Company Name]</p>
+            <p>[Street and House Number]</p>
+            <p>[Postal Code, City]</p>
+            <p>[Country]</p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-black">Contact</h2>
+          <div class="mt-4 text-black/70 leading-relaxed">
+            <p>Email: [your@email.com]</p>
+            <p>Phone: [optional phone number]</p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-black">Responsible for content</h2>
+          <div class="mt-4 text-black/70 leading-relaxed">
+            <p>[Full Name]</p>
+            <p>[Street and House Number]</p>
+            <p>[Postal Code, City]</p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-black">VAT ID</h2>
+          <p class="mt-4 text-black/70 leading-relaxed">
+            [VAT identification number, if applicable]
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-black">Disclaimer</h2>
+          <p class="mt-4 text-black/70 leading-relaxed">
+            This page is a placeholder and does not yet contain final legal information.
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <duck-footer></duck-footer>
+
+</body>
+</html>
