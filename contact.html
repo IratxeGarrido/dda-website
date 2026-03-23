@@ -26,17 +26,12 @@
     <div class="absolute inset-0 grid-bg opacity-40 pointer-events-none"></div>
 
     <div class="max-w-6xl mx-auto px-6 pt-16 pb-12 md:pt-20 md:pb-14 relative text-center">
-      <div class="inline-flex items-center gap-2 bg-white border border-black/10 rounded-full px-4 py-2 text-sm font-bold sticker mb-6">
-        <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
-        LET’S TALK
-      </div>
-
       <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[0.95]">
-        Contact
+        Stay in the loop
       </h1>
 
       <p class="mt-6 text-lg md:text-2xl text-black/70 max-w-3xl mx-auto">
-        Questions, partnerships, press, or event ideas? Send us a message and we’ll get back to you.
+        We are super-duper GDPR compliant. We will only send you updates about our events (!)
       </p>
     </div>
   </section>
@@ -67,8 +62,12 @@
                 <i data-feather="instagram" class="text-[#2f2f2f] w-5 h-5"></i>
               </div>
               <div>
-                <p class="font-bold text-[#2f2f2f]">Meetup App</p>
-                <p class="text-black/70 break-all">www.meetup.com/duck-dating-apps-speed-dating/</p>
+                <p class="font-bold text-[#2f2f2f]">PolyFest IG</p>
+                <p class="text-black/70 break-all">
+                  <a href="https://www.instagram.com/polyfest_berlin" target="_blank" rel="noopener noreferrer" class="underline hover:text-black/80">
+                    https://www.instagram.com/polyfest_berlin
+                  </a>
+                </p>
                 <p class="text-sm text-black/50">Updates, event drops, stories</p>
               </div>
             </div>
@@ -95,28 +94,27 @@
         </div>
       </aside>
 
-      <!-- FORM -->
+      <!-- MAILING LIST FORM -->
       <section class="bg-white rounded-[2rem] shadow-md p-8 border border-black/10">
-        <h2 class="text-2xl font-black text-[#2f2f2f] mb-2">Send a Message</h2>
-        <p class="text-black/60 mb-6">We usually respond within 1–2 business days.</p>
+        <h2 class="text-2xl font-black text-[#2f2f2f] mb-2">Join the Mailing List</h2>
+        <p class="text-black/60 mb-6">Get updates about upcoming events, new formats, and announcements.</p>
 
-        <form class="space-y-4" action="#" method="post">
+        <form class="space-y-4" action="https://formspree.io/f/mnjgejbq" method="POST">
           <div>
-            <label class="block text-sm font-bold text-[#2f2f2f] mb-1" for="name">Your name</label>
+            <label class="block text-sm font-bold text-[#2f2f2f] mb-1" for="ml-name">Your name</label>
             <input
-              id="name"
+              id="ml-name"
               name="name"
               type="text"
-              required
               class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-              placeholder="Form still under construction"
+              placeholder="Optional"
             />
           </div>
 
           <div>
-            <label class="block text-sm font-bold text-[#2f2f2f] mb-1" for="email">Email</label>
+            <label class="block text-sm font-bold text-[#2f2f2f] mb-1" for="ml-email">Email</label>
             <input
-              id="email"
+              id="ml-email"
               name="email"
               type="email"
               required
@@ -126,36 +124,25 @@
           </div>
 
           <div>
-            <label class="block text-sm font-bold text-[#2f2f2f] mb-1" for="topic">Topic</label>
+            <label class="block text-sm font-bold text-[#2f2f2f] mb-1" for="ml-interest">What would you like to hear about?</label>
             <select
-              id="topic"
-              name="topic"
+              id="ml-interest"
+              name="interest"
               class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
             >
-              <option>General question</option>
-              <option>Upcoming events</option>
-              <option>Partnership / collaboration</option>
-              <option>Press / media</option>
-              <option>Safety / Code of Conduct</option>
+              <option>All Duck-Dating-Apps events</option>
+              <option>Blind Duck Dating</option>
+              <option>Poly Speed Dating</option>
+              <option>PolyFest</option>
             </select>
           </div>
 
-          <div>
-            <label class="block text-sm font-bold text-[#2f2f2f] mb-1" for="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="6"
-              required
-              class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-              placeholder="Tell us what you need…"
-            ></textarea>
-          </div>
+          <input type="hidden" name="_subject" value="Mailing list signup" />
 
           <div class="flex items-start gap-2">
-            <input id="consent" name="consent" type="checkbox" class="mt-1" required />
-            <label for="consent" class="text-sm text-black/60">
-              I understand that Duck Dating Apps will use my message to respond to my request.
+            <input id="ml-consent" name="consent" type="checkbox" class="mt-1" required />
+            <label for="ml-consent" class="text-sm text-black/60">
+              Sign me up for the Duck Dating Apps mailing list. I agree to receive emails about events and updates.
             </label>
           </div>
 
@@ -163,38 +150,17 @@
             type="submit"
             class="w-full bg-[#2f2f2f] hover:bg-black text-white font-bold py-3 px-8 rounded-full transition duration-300 cta-shadow"
           >
-            Send Message
+            Add to Mailing List
           </button>
 
           <p class="text-xs text-black/50 text-center">
-            Tip: If you’re reporting an issue, include the event date and city.
+            You can unsubscribe at any time through the link in our emails.
           </p>
         </form>
       </section>
 
     </div>
   </main>
-
-  <!-- CTA -->
-  <section class="pb-20 px-4">
-    <div class="max-w-5xl mx-auto">
-      <div class="rounded-[2.5rem] p-10 md:p-14 chaos-gradient text-center shadow-2xl">
-        <p class="text-sm font-black uppercase tracking-[0.2em] text-black/70">Want to join an event instead?</p>
-        <h2 class="mt-4 text-4xl md:text-6xl font-black tracking-tight">
-          Meet people <span class="text-white">for real.</span>
-        </h2>
-        <p class="mt-5 text-lg md:text-2xl max-w-3xl mx-auto font-medium text-[#2f2f2f]">
-          Check what’s coming up in Berlin and meet real people in real time.
-        </p>
-        <div class="mt-8">
-          <a href="/events.html"
-             class="inline-flex items-center justify-center rounded-full bg-[#2f2f2f] text-white px-8 py-4 font-bold text-lg cta-shadow">
-            View Events
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <duck-footer></duck-footer>
 
