@@ -33,24 +33,19 @@ window.DDA_EVENTS = [
 
     highlights: [
       "Small curated group format",
-      "Real-life chemistry over endless texting",
-      "Less pressure, less awkwardness",
-      "Intentional and structured experience"
+      "Balanced participants; in gender, values, orientation, interests...",
+      "Meetup in a chilled place of your choice",
+      "If you apply once, you will be invited to numerous events"
     ],
 
     schedule: [
-      "Apply before the current registry deadline",
-      "Applications are reviewed and curated",
-      "Selected participants receive confirmation and details",
-      "Attend the in-person group experience in Berlin"
+      "You receive a group summary (vibes, interests...), with suggested time & place. You decide if you can to join.",
+      "Meet at place of group choice; bar, park, Café, bar or bouldering > 90 min date.",
+      "After event, fill out Matching Software; who you like socially, who romantically.",
+      "We share the results the next day, if there is a mutual match.",
     ],
 
-    included: [
-      "Curated participant selection",
-      "Structured social format",
-      "Pre-event coordination",
-      "Follow-up communication"
-    ],
+  
 
     faq: [
       {

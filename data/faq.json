@@ -50,6 +50,10 @@
   {
     "question": "What if I need to cancel?",
     "answer": "Please let us know as early as possible. Even if a refund is not possible, cancelling in time may allow someone else to take the spot and helps us organise the event fairly."
+  }, 
+    {
+    "question": "Do you have a referral system?",
+    "answer": "Yes. We currently have two different referral systems, one for Poly Speed Dating (PSD) and one for Blind Duck Dating (BDD). Both reward you for bringing aligned people into the community, but they work slightly differently depending on the format."
   }
 
   ],
@@ -169,7 +173,16 @@
     {
       "question": "What is the main benefit of PSD in one sentence?",
       "answer": "You can show interest honestly, without awkwardness, and only mutual connections are revealed."
-    }
+    },
+    {
+    "question": "How does the Poly Speed Dating (PSD) referral system work?",
+    "answer": "The PSD referral system rewards you based on accepted referrals. 1 accepted referral gives you a reserved seat for a future event (you still pay, but your spot is guaranteed). 2 accepted referrals give you one reserved free spot. 3 accepted referrals give you one free spot for yourself plus one free spot for a friend. Referrals only count once the person is accepted into the event. Rewards are valid starting from the next event (not the current one if already full), and must be used within 365 days. As a bonus, you are also prioritised at the top of the waiting list. If you are called into the same event, the voucher is considered used."
+  },
+  {
+  "question": "How do vouchers work for Poly Speed Dating (PSD)?",
+  "answer": "Some participants may receive vouchers. These vouchers guarantee you a secure seat at an event, but they do not always mean a completely free event, as we still have costs to cover (and drinks are usually included). Vouchers have an expiration date and can also be passed on to friends."
+}
+
   ],
   "polyfest": [
     {
@@ -187,24 +200,52 @@
     {
       "question": "Will there be more PolyFest events?",
       "answer": "That’s the plan. Follow updates through the website and mailing list."
-    }
+    },
+    {
+  "question": "Can I volunteer at PolyFest?",
+  "answer": "Yes. We are always looking for volunteers to support PolyFest. Volunteers do not pay an entrance fee and usually help with around 2-hour shifts. It’s a great way to be part of the event, contribute to the community, and still have time to enjoy the experience. write us an e-mail if you're interested."
+},
+{
+  "question": "Can I suggest ideas or host a workshop at PolyFest?",
+  "answer": "Yes, absolutely. If you have ideas to improve PolyFest or would like to propose a workshop, we would love to hear from you. Feel free to reach out and share your thoughts — we are always open to new contributions from the community."
+}
   ],
   "dda": [
-    {
-      "question": "How does Blind Duck Dating work?",
-      "answer": "You apply for the pool, we curate a group, and selected people are invited to a live event."
-    },
-    {
-      "question": "How many people are usually at one event?",
-      "answer": "Usually around 8 hand-picked participants, so it stays personal and manageable."
-    },
-    {
-      "question": "How do matches happen?",
-      "answer": "After the event, you privately choose who you’d like to connect with. If it’s mutual, you get matched."
-    },
-    {
-      "question": "Is registration free?",
-      "answer": "Yes, joining the pool is currently free."
-    }
+      {
+    "question": "What is Blind Duck Dating and how does it work?",
+    "answer": "Blind Duck Dating is a curated in-person dating format for people who want something more intentional than swiping. You apply for the pool, we curate a small group, and selected people are invited to a live event. Confirmed participants receive the event details and a short summary of the group vibes and interests before deciding whether to join."
+  },
+  {
+    "question": "How many people are usually at one event?",
+    "answer": "Usually around 8 hand-picked participants, so the experience stays personal, manageable, and more intentional."
+  },
+  {
+    "question": "Why is the event limited to around 8 people?",
+    "answer": "We believe a small group works best for creating a relaxed and meaningful atmosphere. A typical setup is around a 4+4 balance (unless queer formats, where ratios may differ). If the group is curated well, this size allows for better conversations, more ease, and real connection without overwhelm."
+  },
+  {
+    "question": "Will there be more events if groups are so small?",
+    "answer": "Yes. The idea is to run many events relatively frequently (every few weeks), rather than having large groups. This keeps the experience high-quality while still giving people multiple opportunities to join."
+  },
+  {
+    "question": "How do matches happen afterwards?",
+    "answer": "After the event, you choose in our Software who you would like to connect with. Depending on the format, you may be able to choose people socially and romantically. If the interest is mutual, you receive a match the next day."
+  },
+  {
+    "question": "Is registration free?",
+    "answer": "Yes. Joining the pool is currently free. Payment is only requested after confirmation, if you are invited to a specific event and choose to take the spot."
+  },
+  {
+    "question": "What if I do not have PayPal?",
+    "answer": "If you do not have PayPal, please contact us and we will let you know whether another payment option is available for that event."
+  },
+  {
+    "question": "What if I cannot make it?",
+    "answer": "Please let us know as soon as possible. We will not be able to refund you, but this gives another person the chance to take the spot, and we really appreciate that. We do keep track of reliable and unreliable participation patterns when prioritising future invitations."
+  },
+  {
+    "question": "How does the Blind Duck Dating (BDD) referral system work?",
+    "answer": "The BDD referral system is simpler. If you refer one person who is accepted, you receive a 50% discount on your event. If you refer two people who are accepted and register, you receive one free spot."
+  }
   ]
 }
