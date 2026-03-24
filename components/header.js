@@ -26,7 +26,8 @@ class DuckHeader extends HTMLElement {
           <nav class="hidden md:flex items-center gap-2">
             <a href="/index.html" class="${navLinkClass("home")}">WTF is this?</a>
             <a href="/events.html" class="${navLinkClass("events")}">Events Calendar</a>
-            <a href="/faq.html" class="${navLinkClass("faq")}">Duck Facts</a>
+           <a href="/jewel.html" class="${navLinkClass('jewel')}">Our Jewel</a>
+            <a href="/faq.html" class="${navLinkClass("faq")}">DAQ's</a>
             <a href="/contact.html" class="${navLinkClass("contact")}">Stay in the loop</a>
           </nav>
         </div>
