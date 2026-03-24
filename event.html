@@ -30,7 +30,19 @@
         EVENT
       </div>
 
-      <h1 id="event-title" class="text-4xl md:text-6xl font-black tracking-tight leading-[0.95] max-w-4xl">
+      <a
+        class="dda-single-event-link inline-flex items-center justify-center w-9 h-9 rounded-full bg-pink-500 text-white hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-300 shadow-sm"
+        href="./events.html"
+        aria-label="Back to Events"
+        title="Back to Events"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        <span class="sr-only">Back to events</span>
+      </a>
+
+      <h1 id="event-title" class="text-4xl md:text-6xl font-black tracking-tight leading-[0.95] max-w-4xl mt-6">
         Event
       </h1>
 
@@ -41,52 +53,131 @@
   <!-- CONTENT -->
   <main class="pb-20 px-4">
     <div class="max-w-5xl mx-auto">
-      <div id="event-card" class="dda-single-event-card">
-        <div class="dda-single-event-head">
-          <div class="dda-single-event-head-left">
-            <p id="event-type" class="dda-single-event-kicker">EVENT</p>
-            <h2 id="event-name-2" class="dda-single-event-heading">Event Name</h2>
-            <p id="event-description" class="dda-single-event-description"></p>
+      <div id="event-card" class="rounded-[2rem] border border-black/10 shadow-md overflow-hidden p-6 md:p-8">
+
+        <!-- TOP -->
+        <div class="grid md:grid-cols-[1.4fr_0.8fr] gap-8 items-start">
+          <div>
+            <p id="event-type" class="text-sm font-black uppercase tracking-[0.2em] text-pink-500">EVENT</p>
+            <h2 id="event-name-2" class="mt-3 text-3xl md:text-5xl font-black tracking-tight leading-[0.98]">Event Name</h2>
+            <p id="event-description" class="mt-4 text-base md:text-lg text-black/75 max-w-2xl"></p>
           </div>
 
-          <div class="dda-single-event-logo-wrap">
-            <img id="event-logo" class="dda-single-event-logo" src="" alt="">
-          </div>
-        </div>
-
-        <div class="dda-single-event-info-grid">
-          <div class="dda-single-event-info-box">
-            <span class="dda-single-event-info-label">Date</span>
-            <strong id="event-date-text"></strong>
-          </div>
-
-          <div class="dda-single-event-info-box">
-            <span class="dda-single-event-info-label">Location</span>
-            <strong id="event-location"></strong>
-          </div>
-
-          <div class="dda-single-event-info-box">
-            <span class="dda-single-event-info-label">Frequency</span>
-            <strong id="event-frequency"></strong>
-          </div>
-
-          <div class="dda-single-event-info-box">
-            <span class="dda-single-event-info-label">Status</span>
-            <strong id="event-badge-text"></strong>
+          <div class="flex justify-center md:justify-end">
+            <div class="bg-white rounded-[2rem] border border-black/10 shadow-sm p-4 w-full max-w-[260px] aspect-square flex items-center justify-center">
+              <img id="event-logo" class="max-h-full max-w-full object-contain" src="" alt="">
+            </div>
           </div>
         </div>
 
-        <div id="event-deadline-wrap" class="dda-single-event-deadline" style="display:none;">
+        <!-- INFO GRID -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Date</span>
+            <strong id="event-date-text" class="block mt-2 text-lg"></strong>
+          </div>
+
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Location</span>
+            <strong id="event-location" class="block mt-2 text-lg"></strong>
+          </div>
+
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Frequency</span>
+            <strong id="event-frequency" class="block mt-2 text-lg"></strong>
+          </div>
+
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Application Deadline</span>
+            <strong id="event-badge-text" class="block mt-2 text-lg"></strong>
+          </div>
+
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Price</span>
+            <strong id="event-price" class="block mt-2 text-lg"></strong>
+            <p id="event-price-note" class="mt-1 text-sm text-black/60"></p>
+          </div>
+
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Language</span>
+            <strong id="event-language" class="block mt-2 text-lg"></strong>
+          </div>
+
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Duration</span>
+            <strong id="event-duration" class="block mt-2 text-lg"></strong>
+          </div>
+
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Capacity</span>
+            <strong id="event-capacity" class="block mt-2 text-lg"></strong>
+          </div>
+
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Format</span>
+            <strong id="event-format" class="block mt-2 text-lg"></strong>
+          </div>
+
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Audience</span>
+            <strong id="event-audience" class="block mt-2 text-lg"></strong>
+          </div>
+
+          <div class="bg-white/80 rounded-3xl border border-black/10 p-4">
+            <span class="block text-xs font-bold uppercase tracking-[0.15em] text-black/50">Organizer</span>
+            <strong id="event-organizer" class="block mt-2 text-lg"></strong>
+          </div>
+        </div>
+
+        <!-- DEADLINE -->
+        <div id="event-deadline-wrap" class="mt-8 rounded-3xl border border-black/10 bg-white px-5 py-4 hidden">
           <strong>Important:</strong>
           <span id="event-deadline"></span>
         </div>
 
-        <div class="dda-single-event-actions">
-          <a id="event-apply-btn" class="dda-single-event-btn" href="#" target="_blank" rel="noopener noreferrer">
+        <!-- GALLERY -->
+        <section id="event-gallery-section" class="mt-12 hidden">
+          <h3 class="text-2xl md:text-3xl font-black tracking-tight">Gallery</h3>
+          <div id="event-gallery" class="grid sm:grid-cols-2 gap-4 mt-5"></div>
+        </section>
+
+        <!-- LONG DESCRIPTION -->
+        <section id="event-long-description-wrap" class="mt-12 hidden">
+          <h3 class="text-2xl md:text-3xl font-black tracking-tight">About this event</h3>
+          <p id="event-long-description" class="mt-4 text-base md:text-lg text-black/75 leading-relaxed"></p>
+        </section>
+
+        <!-- HIGHLIGHTS -->
+        <section id="event-highlights-wrap" class="mt-12 hidden">
+          <h3 class="text-2xl md:text-3xl font-black tracking-tight">Why join</h3>
+          <ul id="event-highlights" class="mt-5 grid md:grid-cols-2 gap-3"></ul>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section id="event-schedule-wrap" class="mt-12 hidden">
+          <h3 class="text-2xl md:text-3xl font-black tracking-tight">How it works</h3>
+          <ol id="event-schedule" class="mt-5 grid gap-3"></ol>
+        </section>
+
+        <!-- INCLUDED -->
+        <section id="event-included-wrap" class="mt-12 hidden">
+          <h3 class="text-2xl md:text-3xl font-black tracking-tight">What is included</h3>
+          <ul id="event-included" class="mt-5 grid md:grid-cols-2 gap-3"></ul>
+        </section>
+
+        <!-- FAQ -->
+        <section id="event-faq-wrap" class="mt-12 hidden">
+          <h3 class="text-2xl md:text-3xl font-black tracking-tight">FAQ</h3>
+          <div id="event-faq" class="mt-5 grid gap-4"></div>
+        </section>
+
+        <!-- ACTIONS -->
+        <div class="flex flex-wrap items-center gap-4 mt-12">
+          <a id="event-apply-btn" class="inline-flex items-center justify-center rounded-full bg-black text-white px-6 py-3 font-bold hover:opacity-90 transition" href="#" target="_blank" rel="noopener noreferrer">
             Apply / Open event
           </a>
 
-          <a class="dda-single-event-link" href="./events.html">
+          <a class="inline-flex items-center justify-center rounded-full border border-black/15 bg-white px-6 py-3 font-bold hover:bg-black/5 transition" href="./events.html">
             Back to all events
           </a>
         </div>
@@ -119,6 +210,33 @@
       const deadlineWrapEl = document.getElementById("event-deadline-wrap");
       const deadlineEl = document.getElementById("event-deadline");
 
+      const priceEl = document.getElementById("event-price");
+      const priceNoteEl = document.getElementById("event-price-note");
+      const languageEl = document.getElementById("event-language");
+      const durationEl = document.getElementById("event-duration");
+      const capacityEl = document.getElementById("event-capacity");
+      const formatEl = document.getElementById("event-format");
+      const audienceEl = document.getElementById("event-audience");
+      const organizerEl = document.getElementById("event-organizer");
+
+      const gallerySectionEl = document.getElementById("event-gallery-section");
+      const galleryEl = document.getElementById("event-gallery");
+
+      const longDescriptionWrapEl = document.getElementById("event-long-description-wrap");
+      const longDescriptionEl = document.getElementById("event-long-description");
+
+      const highlightsWrapEl = document.getElementById("event-highlights-wrap");
+      const highlightsEl = document.getElementById("event-highlights");
+
+      const scheduleWrapEl = document.getElementById("event-schedule-wrap");
+      const scheduleEl = document.getElementById("event-schedule");
+
+      const includedWrapEl = document.getElementById("event-included-wrap");
+      const includedEl = document.getElementById("event-included");
+
+      const faqWrapEl = document.getElementById("event-faq-wrap");
+      const faqEl = document.getElementById("event-faq");
+
       function escapeHtml(str) {
         return String(str || "")
           .replace(/&/g, "&amp;")
@@ -128,14 +246,22 @@
           .replace(/'/g, "&#039;");
       }
 
+      function setText(el, value, fallback = "TBA") {
+        if (!el) return;
+        el.textContent = value || fallback;
+      }
+
+      function hideIfEmpty(el, hasContent) {
+        if (!el) return;
+        if (!hasContent) el.classList.add("hidden");
+      }
+
       if (!event) {
         document.title = "Event not found — Blind Duck Dating";
         titleEl.textContent = "Event not found";
         name2El.textContent = "Sorry, we couldn’t find that event.";
         descEl.textContent = "The link may be outdated or the event may have been removed.";
-        metaEl.innerHTML = `
-          <span class="dda-meta-pill">Please return to the event list</span>
-        `;
+        metaEl.innerHTML = `<span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">Please return to the event list</span>`;
         cardEl.style.background = "#ffffff";
         applyBtnEl.href = "./events.html";
         applyBtnEl.removeAttribute("target");
@@ -145,30 +271,98 @@
 
       document.title = `${event.name} — Blind Duck Dating`;
 
-      titleEl.textContent = event.name;
-      name2El.textContent = event.name;
+      titleEl.textContent = event.name || "Event";
+      name2El.textContent = event.name || "Event";
       typeEl.textContent = (event.shortName || "EVENT").toUpperCase();
       descEl.textContent = event.shortDescription || "";
-      dateEl.textContent = event.dateText || "";
-      locationEl.textContent = event.location || "";
-      frequencyEl.textContent = event.frequency || "";
-      badgeTextEl.textContent = event.badge || "";
+
+      setText(dateEl, event.dateText);
+      setText(locationEl, event.location);
+      setText(frequencyEl, event.frequency);
+      setText(badgeTextEl, event.badge);
+      setText(priceEl, event.price);
+      setText(languageEl, event.language);
+      setText(durationEl, event.duration);
+      setText(capacityEl, event.capacity);
+      setText(formatEl, event.format);
+      setText(audienceEl, event.audience);
+      setText(organizerEl, event.organizer);
+
+      priceNoteEl.textContent = event.priceNote || "";
+
       logoEl.src = event.logo || "";
       logoEl.alt = event.logoAlt || event.name || "Event logo";
+
       applyBtnEl.href = event.applicationUrl || event.externalUrl || "#";
       applyBtnEl.textContent = event.ctaText || "Open event";
 
       cardEl.style.background = event.cardBg || "#ffffff";
 
       metaEl.innerHTML = `
-        <span class="dda-meta-pill">${escapeHtml(event.dateText || "")}</span>
-        <span class="dda-meta-pill">${escapeHtml(event.location || "")}</span>
-        <span class="dda-meta-pill">${escapeHtml(event.frequency || "")}</span>
+        <span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">${escapeHtml(event.dateText || "")}</span>
+        <span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">${escapeHtml(event.location || "")}</span>
+        <span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">${escapeHtml(event.frequency || "")}</span>
       `;
 
       if (event.deadlineText) {
-        deadlineWrapEl.style.display = "flex";
+        deadlineWrapEl.classList.remove("hidden");
         deadlineEl.textContent = event.deadlineText;
+      }
+
+      if (event.longDescription) {
+        longDescriptionWrapEl.classList.remove("hidden");
+        longDescriptionEl.textContent = event.longDescription;
+      }
+
+      if (Array.isArray(event.images) && event.images.length) {
+        gallerySectionEl.classList.remove("hidden");
+        galleryEl.innerHTML = event.images.slice(0, 4).map((src, index) => `
+          <div class="overflow-hidden rounded-[1.5rem] border border-black/10 bg-white aspect-[4/3]">
+            <img
+              src="${escapeHtml(src)}"
+              alt="${escapeHtml(event.name)} image ${index + 1}"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        `).join("");
+      }
+
+      if (Array.isArray(event.highlights) && event.highlights.length) {
+        highlightsWrapEl.classList.remove("hidden");
+        highlightsEl.innerHTML = event.highlights.map(item => `
+          <li class="rounded-3xl border border-black/10 bg-white px-5 py-4 font-medium">
+            ${escapeHtml(item)}
+          </li>
+        `).join("");
+      }
+
+      if (Array.isArray(event.schedule) && event.schedule.length) {
+        scheduleWrapEl.classList.remove("hidden");
+        scheduleEl.innerHTML = event.schedule.map((item, index) => `
+          <li class="rounded-3xl border border-black/10 bg-white px-5 py-4">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-pink-500 text-white text-sm font-black mr-3 align-middle">${index + 1}</span>
+            <span class="align-middle font-medium">${escapeHtml(item)}</span>
+          </li>
+        `).join("");
+      }
+
+      if (Array.isArray(event.included) && event.included.length) {
+        includedWrapEl.classList.remove("hidden");
+        includedEl.innerHTML = event.included.map(item => `
+          <li class="rounded-3xl border border-black/10 bg-white px-5 py-4 font-medium">
+            ${escapeHtml(item)}
+          </li>
+        `).join("");
+      }
+
+      if (Array.isArray(event.faq) && event.faq.length) {
+        faqWrapEl.classList.remove("hidden");
+        faqEl.innerHTML = event.faq.map(item => `
+          <div class="rounded-3xl border border-black/10 bg-white px-5 py-4">
+            <strong class="block text-lg">${escapeHtml(item.q || "")}</strong>
+            <p class="mt-2 text-black/70 leading-relaxed">${escapeHtml(item.a || "")}</p>
+          </div>
+        `).join("");
       }
     })();
   </script>
