@@ -19,205 +19,212 @@
   <duck-header></duck-header>
 
   <!-- SEARCH BAR -->
-<div class="mb-10">
-  <div class="max-w-5xl mx-auto px-6" style="padding-top: 20px;">
-    <div class="bg-white rounded-[2rem] border border-black/10 shadow-sm p-4 md:p-5">
-      <label for="faq-search" class="block text-sm font-black uppercase tracking-[0.16em] text-[#ff5b92] mb-3">
-        Search FAQ
-      </label>
-      <input
-        id="faq-search"
-        type="text"
-        placeholder="Search questions, topics, events..."
-        class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-      />
+  <div class="mb-10">
+    <div class="max-w-5xl mx-auto px-6" style="padding-top: 20px;">
+      <div class="bg-white rounded-[2rem] border border-black/10 shadow-sm p-4 md:p-5">
+        <label for="faq-search" class="block text-sm font-black uppercase tracking-[0.16em] text-[#ff5b92] mb-3">
+          Search FAQ
+        </label>
+        <input
+          id="faq-search"
+          type="text"
+          placeholder="Search questions, topics, events..."
+          class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+        />
+      </div>
     </div>
   </div>
-</div>
-  
 
-<!-- FAQ LIST -->
-<section class="pb-20">
-  <div class="max-w-5xl mx-auto px-6">
+  <!-- FAQ LIST -->
+  <section class="pb-20">
+    <div id="faq-container" class="max-w-5xl mx-auto px-6"></div>
+  </section>
 
-<!-- GENERAL -->
-<div class="mb-14" data-faq-section>
-  <div class="flex items-center gap-2 bg-[#2f2f2f] text-white rounded-full px-5 text-sm font-black uppercase tracking-[0.16em] mb-6 w-full" style="padding-top: calc(0.8rem * 1.3); padding-bottom: calc(0.8rem * 1.3);">
-    General
-  </div>
+  <script>
+    const FAQ_SECTIONS = {
+      general: {
+        title: "General",
+        pillClass: "bg-[#2f2f2f] text-white",
+        cardClass: "bg-[#f5f5f5]"
+      },
+      dda: {
+        title: "Blind Duck Dating",
+        pillClass: "bg-[#ff5b92] text-white",
+        cardClass: "bg-[#fff1f6]"
+      },
+      psd: {
+        title: "Poly Speed Dating",
+        pillClass: "bg-[#ffd36e] text-[#2f2f2f]",
+        cardClass: "bg-[#fff8dd]"
+      },
+      polyfest: {
+        title: "PolyFest",
+        pillClass: "bg-[#8fd3c7] text-[#2f2f2f]",
+        cardClass: "bg-[#eefaf6]"
+      }
+    };
 
-  <div class="space-y-5">
-    <div data-faq-item class="bg-[#f5f5f5] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Is this in person?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        Yes. That’s the whole point. Our formats are built around meeting people in real life.
-      </p>
-    </div>
+    function createFaqItem(item, cardClass) {
+      const faqItem = document.createElement("div");
+      faqItem.setAttribute("data-faq-item", "");
+      faqItem.className = `${cardClass} rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm`;
 
-    <div data-faq-item class="bg-[#f5f5f5] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Do I need to use an app?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        Not in the classic dating-app sense. Our events happen in person. The software is only used where needed for matching afterward.
-      </p>
-    </div>
+      const question = document.createElement("h2");
+      question.className = "text-2xl font-black";
+      question.textContent = item.question;
 
-    <div data-faq-item class="bg-[#f5f5f5] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Is this only for romantic matches?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        Not always. Some formats also allow for social connections, depending on the event.
-      </p>
-    </div>
+      const answer = document.createElement("p");
+      answer.className = "mt-3 text-lg text-black/70";
+      answer.textContent = item.answer;
 
-    <div data-faq-item class="bg-[#f5f5f5] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Where can I see upcoming events?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        On the Events page.
-      </p>
-      <a href="/events.html" class="mt-4 inline-block font-bold underline underline-offset-4">Go to Events</a>
-    </div>
-  </div>
-</div>
+      faqItem.appendChild(question);
+      faqItem.appendChild(answer);
 
-<!-- BLIND DUCK DATING -->
-<div class="mb-14" data-faq-section>
-  <div class="flex items-center gap-2 bg-[#ff5b92] text-white rounded-full px-5 text-sm font-black uppercase tracking-[0.16em] mb-6 w-full" style="padding-top: calc(0.8rem * 1.3); padding-bottom: calc(0.8rem * 1.3);">
-    Blind Duck Dating
-  </div>
+      if (item.link && item.linkText) {
+        const link = document.createElement("a");
+        link.href = item.link;
+        link.className = "mt-4 inline-block font-bold underline underline-offset-4";
+        link.textContent = item.linkText;
+        faqItem.appendChild(link);
+      }
 
-  <div class="space-y-5">
-    <div data-faq-item class="bg-[#fff1f6] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">How does Blind Duck Dating work?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        You apply for the pool, we curate a group, and selected people are invited to a live event.
-      </p>
-    </div>
+      return faqItem;
+    }
 
-    <div data-faq-item class="bg-[#fff1f6] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">How many people are usually at one event?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        Usually around 8 hand-picked participants, so it stays personal and manageable.
-      </p>
-    </div>
+    function createChevron(isOpen = false) {
+      const chevron = document.createElement("span");
+      chevron.className = "ml-auto text-lg transition-transform duration-200";
+      chevron.innerHTML = "⌄";
+      if (isOpen) chevron.style.transform = "rotate(180deg)";
+      return chevron;
+    }
 
-    <div data-faq-item class="bg-[#fff1f6] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">How do matches happen?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        After the event, you privately choose who you’d like to connect with. If it’s mutual, you get matched.
-      </p>
-    </div>
+    function createFaqSection(sectionKey, items, isOpenByDefault = false) {
+      const config = FAQ_SECTIONS[sectionKey];
+      if (!config || !Array.isArray(items) || items.length === 0) return null;
 
-    <div data-faq-item class="bg-[#fff1f6] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Is registration free?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        Yes, joining the pool is currently free.
-      </p>
-    </div>
-  </div>
-</div>
+      const section = document.createElement("div");
+      section.className = "mb-14";
+      section.setAttribute("data-faq-section", "");
 
-<!-- PSD -->
-<div class="mb-14" data-faq-section>
-  <div class="flex items-center gap-2 bg-[#ffd36e] text-[#2f2f2f] rounded-full px-5 text-sm font-black uppercase tracking-[0.16em] mb-6 w-full" style="padding-top: calc(0.8rem * 1.3); padding-bottom: calc(0.8rem * 1.3);">
-    Poly Speed Dating
-  </div>
+      const title = document.createElement("button");
+      title.type = "button";
+      title.className = `flex items-center gap-2 rounded-full px-5 text-sm font-black uppercase tracking-[0.16em] mb-6 w-full text-left ${config.pillClass}`;
+      title.style.paddingTop = "calc(0.8rem * 1.3)";
+      title.style.paddingBottom = "calc(0.8rem * 1.3)";
+      title.setAttribute("data-faq-toggle", "");
+      title.setAttribute("aria-expanded", isOpenByDefault ? "true" : "false");
 
-  <div class="space-y-5">
-    <div data-faq-item class="bg-[#fff8dd] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Who is Poly Speed Dating for?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        It is designed for polyamorous people and people open to non-monogamous connection styles.
-      </p>
-    </div>
+      const titleText = document.createElement("span");
+      titleText.textContent = config.title;
 
-    <div data-faq-item class="bg-[#fff8dd] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Is it moderated?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        Yes. The event is guided live, so the structure feels clear and welcoming.
-      </p>
-    </div>
+      const chevron = createChevron(isOpenByDefault);
+      chevron.setAttribute("data-faq-chevron", "");
 
-    <div data-faq-item class="bg-[#fff8dd] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">How often does PSD happen?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        Usually every few months, depending on planning and capacity.
-      </p>
-    </div>
+      title.appendChild(titleText);
+      title.appendChild(chevron);
 
-    <div data-faq-item class="bg-[#fff8dd] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Can I connect romantically and socially?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        Depending on the setup, yes — the format can include both romantic and social matching.
-      </p>
-    </div>
-  </div>
-</div>
+      const list = document.createElement("div");
+      list.className = "space-y-5";
+      list.setAttribute("data-faq-content", "");
+      list.style.display = isOpenByDefault ? "" : "none";
 
-<!-- POLYFEST -->
-<div data-faq-section>
-  <div class="flex items-center gap-2 bg-[#8fd3c7] text-[#2f2f2f] rounded-full px-5 text-sm font-black uppercase tracking-[0.16em] mb-6 w-full" style="padding-top: calc(0.8rem * 1.3); padding-bottom: calc(0.8rem * 1.3);">
-    PolyFest
-  </div>
+      items.forEach((item) => {
+        list.appendChild(createFaqItem(item, config.cardClass));
+      });
 
-  <div class="space-y-5">
-    <div data-faq-item class="bg-[#eefaf6] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">What is PolyFest?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        PolyFest is a broader community event with workshops, talks, and connection-focused programming.
-      </p>
-    </div>
+      title.addEventListener("click", () => {
+        const isOpen = list.style.display !== "none";
+        list.style.display = isOpen ? "none" : "";
+        title.setAttribute("aria-expanded", isOpen ? "false" : "true");
+        chevron.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
+      });
 
-    <div data-faq-item class="bg-[#eefaf6] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Is PolyFest only about dating?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        No. It is also about community, learning, discussion, and meeting like-minded people.
-      </p>
-    </div>
+      section.appendChild(title);
+      section.appendChild(list);
 
-    <div data-faq-item class="bg-[#eefaf6] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Can I come alone?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        Absolutely. Many people come on their own and meet others there.
-      </p>
-    </div>
+      return section;
+    }
 
-    <div data-faq-item class="bg-[#eefaf6] rounded-[1.75rem] border border-black/10 p-6 md:p-8 shadow-sm">
-      <h2 class="text-2xl font-black">Will there be more PolyFest events?</h2>
-      <p class="mt-3 text-lg text-black/70">
-        That’s the plan. Follow updates through the website and mailing list.
-      </p>
-    </div>
-  </div>
-</div>
-</section>
+    async function loadFaqs() {
+      const faqContainer = document.getElementById("faq-container");
+      const searchInput = document.getElementById("faq-search");
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.getElementById("faq-search");
-    const sections = document.querySelectorAll("[data-faq-section]");
+      if (!faqContainer) return;
 
-    if (!searchInput) return;
+      try {
+        const response = await fetch("/data/faq.json");
+        if (!response.ok) {
+          throw new Error("Could not load FAQ JSON");
+        }
 
-    searchInput.addEventListener("input", () => {
-      const query = searchInput.value.toLowerCase().trim();
+        const faqData = await response.json();
 
-      sections.forEach((section) => {
-        const items = section.querySelectorAll("[data-faq-item]");
-        let visibleCount = 0;
+        const sectionOrder = ["general", "dda", "psd", "polyfest"];
 
-        items.forEach((item) => {
-          const text = item.textContent.toLowerCase();
-          const matches = text.includes(query);
-
-          item.style.display = matches ? "" : "none";
-          if (matches) visibleCount++;
+        sectionOrder.forEach((sectionKey, index) => {
+          const section = createFaqSection(sectionKey, faqData[sectionKey], index === 0);
+          if (section) faqContainer.appendChild(section);
         });
 
-        section.style.display = visibleCount > 0 ? "" : "none";
-      });
-    });
-  });
-</script>
- 
+        const sections = document.querySelectorAll("[data-faq-section]");
+
+        if (!searchInput) return;
+
+        searchInput.addEventListener("input", () => {
+          const query = searchInput.value.toLowerCase().trim();
+
+          sections.forEach((section) => {
+            const items = section.querySelectorAll("[data-faq-item]");
+            const content = section.querySelector("[data-faq-content]");
+            const toggle = section.querySelector("[data-faq-toggle]");
+            const chevron = section.querySelector("[data-faq-chevron]");
+            let visibleCount = 0;
+
+            items.forEach((item) => {
+              const text = item.textContent.toLowerCase();
+              const matches = text.includes(query);
+
+              item.style.display = matches ? "" : "none";
+              if (matches) visibleCount++;
+            });
+
+            if (visibleCount > 0) {
+              section.style.display = "";
+              if (query !== "") {
+                content.style.display = "";
+                toggle.setAttribute("aria-expanded", "true");
+                chevron.style.transform = "rotate(180deg)";
+              }
+            } else {
+              section.style.display = "none";
+            }
+
+            if (query === "") {
+              const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+              content.style.display = isExpanded ? "" : "none";
+              chevron.style.transform = isExpanded ? "rotate(180deg)" : "rotate(0deg)";
+              section.style.display = "";
+            }
+          });
+        });
+
+      } catch (error) {
+        faqContainer.innerHTML = `
+          <div class="bg-white rounded-[1.75rem] border border-red-200 p-6 shadow-sm">
+            <h2 class="text-2xl font-black text-red-700">Could not load FAQ</h2>
+            <p class="mt-3 text-lg text-red-600/80">
+              Please check that <code>/data/faq.json</code> exists and contains valid JSON.
+            </p>
+          </div>
+        `;
+        console.error(error);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadFaqs);
+  </script>
+
   <duck-footer></duck-footer>
 
 </body>

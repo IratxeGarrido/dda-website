@@ -1,0 +1,210 @@
+{
+  "general": [
+    {
+      "question": "Is this in person?",
+      "answer": "Yes. That’s the whole point. Our formats are built around meeting people in real life."
+    },
+    {
+      "question": "Do I need to use an app?",
+      "answer": "Not in the classic dating-app sense. Our events happen in person. The software is only used where needed for matching afterward."
+    },
+    {
+      "question": "Is this only for romantic matches?",
+      "answer": "Not always. Depending on the event, we may facilitate both romantic and social connections. We believe attraction is only one part of connection, and that expanding social circles and building community also matters."
+    },
+    {
+      "question": "How do matches happen?",
+      "answer": "After the event, you privately choose who you would like to connect with. If the interest is mutual, you receive the match. In some formats, this can include both romantic and social matching."
+    },
+    {
+      "question": "Will anyone know if I selected them?",
+      "answer": "No. People do not see who selected them unless there is a mutual match."
+    },
+    {
+      "question": "Do I have to share my contact details with everyone?",
+      "answer": "No. Contact sharing only happens through mutual matches."
+    },
+    {
+      "question": "Where can I see upcoming events?",
+      "answer": "On the Events page.",
+      "link": "/events.html",
+      "linkText": "Go to Events"
+    }, 
+  {
+    "question": "How does payment work?",
+    "answer": "For paid events, you only pay if you are invited or selected. Payment details are shared with you afterwards. Not every format works the same way, so always check the event description carefully.",
+    "keyword": "payment"
+  },
+  {
+    "question": "What if I do not have PayPal?",
+    "answer": "If you do not have PayPal, please contact us and we will let you know whether another payment option is available for that event."
+  },
+  {
+    "question": "Should I be punctual?",
+    "answer": "Yes, please. Our events are structured and often start with a welcome, explanation, or group introduction. Arriving on time helps the event run smoothly and is respectful to everyone taking part."
+  },
+  {
+    "question": "Can I come alone?",
+    "answer": "Yes, absolutely. Many people come on their own. Our formats are designed to make meeting others easier, so you do not need to arrive with anyone."
+  },
+  {
+    "question": "What if I need to cancel?",
+    "answer": "Please let us know as early as possible. Even if a refund is not possible, cancelling in time may allow someone else to take the spot and helps us organise the event fairly."
+  }
+
+  ],
+  "psd": [
+    {
+      "question": "What is Poly Speed Dating?",
+      "answer": "Poly Speed Dating is a structured social and romantic connection event for poly and ENM people. You meet multiple participants in person through guided rounds, and afterwards our matching system helps reveal mutual interest."
+    },
+    {
+  "question": "Can I join with my partner?",
+  "answer": "In some cases, yes — but our events are not designed for unicorn hunting or couple-based searching for a third person. Also, if your partner has applied, it has no corelation to your application. We aim to create a respectful and balanced space where people can connect as individuals. If you are unsure whether the format is right for you, please contact us before applying."
+},
+    {
+      "question": "Who is Poly Speed Dating for?",
+      "answer": "PSD is for poly and ENM people, and for people who are genuinely open to these relationship structures. Depending on the event, this can include people looking for romantic connection, social connection, community, and new poly / ENM-friendly circles."
+    },
+    {
+      "question": "What separates PSD from other events?",
+      "answer": "Our strongest focus is the match-making process. We facilitate both romantic and social connections, because attraction is only one part of connection. We believe there is great value in expanding social circles and building community, not only finding attraction. We also invest real time and energy into curating groups and thinking carefully about who meets whom. Our software helps remove the awkwardness of having to ask for contact exchange and helps people avoid unwanted or one-sided connection attempts. We want to make the process of match-making smoother and help connect people who genuinely want to connect."
+    },
+    {
+      "question": "How does the matching system work, and why is that useful?",
+      "answer": "After the event, you select who you would like to connect with, romantically or socially. You will only receive someone’s contact if the interest is mutual. If both people choose each other romantically, it is a romantic match. If one person chooses romantic and the other social, it becomes a social match. If interest is not mutual, nothing is revealed. This makes things easier, clearer, and emotionally safer. It helps prevent pressure, awkward asking, unclear signals, and unnecessary rejection."
+    },
+    {
+      "question": "Can I connect romantically and socially?",
+      "answer": "Yes. PSD includes both romantic and social matching."
+    },
+    {
+      "question": "What if I like someone romantically, but they only like me socially?",
+      "answer": "Then it becomes a social match. This is one of the strengths of the system. It still allows for a meaningful connection without unnecessary discomfort. Instead of a full rejection, there is still room for friendship, community, and future connection."
+    },
+    {
+      "question": "Will I know who did not choose me?",
+      "answer": "No. You only see the matches that are mutual."
+    },
+    {
+      "question": "Do I need to be experienced in polyamory or ENM?",
+      "answer": "Not always, but you should be genuinely informed, respectful, and aligned with the event concept. Specific events may have different expectations, which will usually be explained in the application."
+    },
+    {
+      "question": "How many people will I meet?",
+      "answer": "This depends on the event format, but generally you will meet multiple participants through structured rounds, including one-on-one interactions."
+    },
+    {
+      "question": "What happens at the event?",
+      "answer": "A typical event includes arrival and check-in, a short welcome and explanation of the format, participant introductions and icebreakers, and 5 one-on-one speed dating rounds of 5 minutes each. We also support with connecting and facilitating the process throughout the event."
+    },
+    {
+      "question": "Is it moderated?",
+      "answer": "Yes. The event is guided live, so the structure feels clear and welcoming."
+    },
+    {
+      "question": "What happens after the event?",
+      "answer": "After the event, you log into the app, select who you want to connect with, wait for match processing, and receive your mutual matches once results are released."
+    },
+    {
+      "question": "When do I get my matches?",
+      "answer": "Usually the next day, often around 12:00. Exact timing depends on the event and will be communicated clearly. We believe it is good to sleep on the decision of who you want to connect with, rather than making a rushed decision in the moment."
+    },
+    {
+      "question": "Can I contact people directly at the event?",
+      "answer": "We generally encourage people to let the system handle the matching part. That helps keep the event safer, fairer, and less pressured for everyone."
+    },
+    {
+      "question": "Why not just ask people directly?",
+      "answer": "Because many people find that part stressful, unclear, or emotionally exhausting. PSD is built to make connection easier: you can express interest privately, no one gets publicly rejected, no one has to perform confidence, and mutual interest is the only thing revealed."
+    },
+    {
+      "question": "Is this only about dating?",
+      "answer": "No. PSD is also about building poly / ENM community. For many people, finding like-minded friends, community members, future collaborators, or familiar faces in the scene is just as valuable as finding romance."
+    },
+    {
+      "question": "What if I do not match with anyone?",
+      "answer": "That can happen, and it does not mean the evening was a failure. Many people still leave with interesting conversations, a better sense of the community, more confidence, and a fun social experience. If you do not match with anyone and would like feedback on why that might have happened, please write to us. We will try to give you objective and constructive feedback."
+    },
+    {
+      "question": "Is the matching software AI-based?",
+      "answer": "No. Our software does not use AI to match people. We only use AI as a support tool for things like creating designs, texts, and coding assistance. But the matching logic itself is not AI-based. It is our own self-made system designed specifically around mutual romantic and social connection."
+    },
+    {
+      "question": "Do I need to apply in advance?",
+      "answer": "Yes. Usually there is an application form and a deadline. This helps us prepare the event and create a balanced participant group."
+    },
+    {
+      "question": "Is there a deadline?",
+      "answer": "Yes. Each event has its own application deadline, which is announced in advance."
+    },
+    {
+      "question": "Do I pay to apply?",
+      "answer": "No. You only pay if you are invited."
+    },
+    {
+      "question": "How often does PSD happen?",
+      "answer": "Usually every few months, depending on planning and capacity."
+    },
+    {
+      "question": "Is this an LGBTQ-friendly event?",
+      "answer": "Yes. PSD is an LGBTQ-friendly event, and we aim to create a respectful and welcoming space for a broad range of identities, preferences, and relationship structures."
+    },
+    {
+      "question": "Can I apply if I already participated or applied before?",
+      "answer": "Yes, of course. We usually give some priority to people who have not yet participated, but we are very happy to have people apply again and to see familiar faces return."
+    },
+    {
+      "question": "What is your return policy?",
+      "answer": "Once your place is paid and confirmed, we have a no-refund policy."
+    },
+    {
+      "question": "What if I cannot make it?",
+      "answer": "Please let us know as soon as possible. We will not be able to refund you, but this gives another person the chance to take the spot, and we really appreciate that. Polyamory is built on transparent communication and trust, and we ask for the same in organisational matters. We do keep track of reliable and unreliable participation patterns when prioritising future invitations."
+    },
+    {
+      "question": "How much does it cost?",
+      "answer": "Usually around 15–20 EUR, depending on the event and location. Most of the time, drinks are included in the price. PSD is a non-profit event. The remaining money goes into app development, web hosting, venue rental, printouts, and other organisational costs."
+    },
+    {
+      "question": "What is the main benefit of PSD in one sentence?",
+      "answer": "You can show interest honestly, without awkwardness, and only mutual connections are revealed."
+    }
+  ],
+  "polyfest": [
+    {
+      "question": "What is PolyFest?",
+      "answer": "PolyFest is a broader community event with workshops, talks, and connection-focused programming."
+    },
+    {
+      "question": "Is PolyFest only about dating?",
+      "answer": "No. It is also about community, learning, discussion, and meeting like-minded people."
+    },
+    {
+      "question": "Can I come alone?",
+      "answer": "Absolutely. Many people come on their own and meet others there."
+    },
+    {
+      "question": "Will there be more PolyFest events?",
+      "answer": "That’s the plan. Follow updates through the website and mailing list."
+    }
+  ],
+  "dda": [
+    {
+      "question": "How does Blind Duck Dating work?",
+      "answer": "You apply for the pool, we curate a group, and selected people are invited to a live event."
+    },
+    {
+      "question": "How many people are usually at one event?",
+      "answer": "Usually around 8 hand-picked participants, so it stays personal and manageable."
+    },
+    {
+      "question": "How do matches happen?",
+      "answer": "After the event, you privately choose who you’d like to connect with. If it’s mutual, you get matched."
+    },
+    {
+      "question": "Is registration free?",
+      "answer": "Yes, joining the pool is currently free."
+    }
+  ]
+}
