@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: dda-website
+    runtime: static
+    buildCommand: echo "No build step needed"
+    staticPublishPath: .
+    autoDeploy: true
