@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Dating Events Berlin | Blind Duck Dating</title>
-  <meta name="description" content="Discover Blind Duck Dating events in Berlin. Explore inclusive in-person dating events, blind dating nights, and ways to meet singles offline." />
+  <meta name="description" content="Discover Blind Duck Dating events in Berlin. Explore inclusive in-person dating events, blind dating nights, and ways to meet people offline." />
   <link rel="canonical" href="https://www.duckdatingapps.com/events.html" />
 
   <meta property="og:title" content="Dating Events Berlin | Blind Duck Dating" />
-  <meta property="og:description" content="Explore blind dating and in-person singles events in Berlin with Blind Duck Dating." />
+  <meta property="og:description" content="Explore blind dating and in-person people events in Berlin with Blind Duck Dating." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.duckdatingapps.com/events.html" />
 
@@ -34,12 +34,10 @@
 
     <div class="max-w-6xl mx-auto px-6 pt-16 pb-12 md:pt-20 md:pb-14 relative text-center">
       <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[0.95]">
-        Blind Dating & Singles Events in Berlin
+Try a new way to meet people
       </h1>
 
-      <p class="mt-6 max-w-3xl mx-auto text-base md:text-lg text-black/75">
-        Explore inclusive in-person dating events in Berlin by Blind Duck Dating. Find blind dating nights, singles events, and real-life ways to meet people beyond apps.
-      </p>
+  
     </div>
   </section>
 
@@ -49,15 +47,7 @@
 
       <!-- EVENT LIST -->
       <section class="mb-10">
-        <div class="inline-flex items-center gap-2 bg-white border border-black/10 rounded-full px-4 py-2 text-sm font-bold sticker mb-6">
-          <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
-          BERLIN EVENTS
-        </div>
-
-        <p class="mb-6 text-black/75 max-w-3xl">
-          Browse upcoming blind dating events in Berlin and discover new ways to meet singles in person in a fun, welcoming setting.
-        </p>
-
+    
         <div id="dda-event-list" class="dda-event-list-grid"></div>
       </section>
 
@@ -185,7 +175,7 @@
         listEl.innerHTML = events.map(event => `
           <a
             href="./event.html?slug=${encodeURIComponent(event.slug)}"
-            class="dda-event-card"
+            class="dda-event-card relative"
             style="background:${event.cardBg || "#ffffff"};"
           >
             <img
@@ -215,6 +205,15 @@
                 <span class="dda-event-card-date">${escapeHtml(event.dateText || event.date)}</span>
               </div>
             </div>
+            ${event.slug === "blind-duck-dating" ? `
+  <div
+    class="absolute bottom-4 right-4 bg-[#ffd36e] text-[#2f2f2f] px-4 py-2 rounded-full font-black text-[11px] md:text-sm border border-black/10 shadow-md text-center leading-tight"
+    style="transform: rotate(-8deg);"
+  >
+    Flock of registered Ducklings:
+    <span id="pool-count">...</span>
+  </div>
+` : ""}
           </a>
         `).join("");
       }
@@ -391,6 +390,8 @@
       }
     })();
   </script>
+
+  <script src="/js/pool-count.js"></script>
 
 </body>
 </html>

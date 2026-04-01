@@ -9,7 +9,7 @@ window.DDA_EVENTS = [
     frequency: "Ongoing",
     badge: "Apply by 4 April 2026",
     cardBg: "#e6f7ff",
-    logo: "./images/BDD logo.png",
+    logo: "./images/DDA-logo.png",
     logoAlt: "Blind Duck Dating Berlin logo",
 
     shortDescription:
