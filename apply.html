@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply | Duck Dating Apps</title>
+
+  <meta
+    name="description"
+    content="Apply for a Duck Dating Apps event. Submit your application and receive an automatic confirmation email."
+  />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./components/header.js" defer></script>
+  <script src="./components/footer.js" defer></script>
+
+  <style>
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .scribble-highlight {
+      position: relative;
+      display: inline;
+      z-index: 0;
+    }
+
+    .scribble-highlight::after {
+      content: "";
+      position: absolute;
+      left: -0.1em;
+      right: -0.1em;
+      bottom: 0.06em;
+      height: 0.45em;
+      background: rgba(255, 211, 110, 0.8);
+      z-index: -1;
+      border-radius: 999px;
+      transform: rotate(-1.5deg);
+    }
+  </style>
+</head>
+
+<body data-page="apply" class="bg-[#f4efe8] text-[#2f2f2f]">
+  <duck-header></duck-header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-6 pt-12 pb-8 md:pt-16 md:pb-10 relative">
+      <div class="bg-white rounded-[2rem] border border-black/10 shadow-sm p-6 md:p-8">
+        <div
+          class="inline-flex items-center gap-2 bg-[#ff5b92] text-white rounded-full px-4 py-2 text-sm font-black uppercase tracking-[0.16em]"
+          style="transform: rotate(-2deg);"
+        >
+          Event application
+        </div>
+
+        <h1 class="mt-5 text-4xl md:text-6xl font-black leading-[0.98] tracking-tight">
+          Apply for a
+          <span class="block text-[#ff5b92]">Duck Dating Apps event</span>
+        </h1>
+
+        <p class="mt-5 text-lg md:text-xl text-black/70 max-w-3xl">
+          Fill in your details below. Once submitted, your application will be saved into our table
+          and you’ll receive an automatic confirmation email.
+        </p>
+
+        <p class="mt-4 text-base md:text-lg max-w-3xl">
+          This confirms that we <span class="scribble-highlight font-extrabold">received</span> your application.
+          It does not automatically confirm a spot.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <main class="pb-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="bg-white rounded-[2rem] border border-black/10 shadow-sm p-6 md:p-8">
+        <form
+          id="application-form"
+          class="space-y-8"
+          method="POST"
+          target="hidden_iframe"
+        >
+          <input type="hidden" name="eventName" id="eventNameHidden" value="Blind Duck Dating Berlin" />
+
+          <section>
+            <h2 class="text-2xl md:text-3xl font-black">Event details</h2>
+            <div class="mt-5 grid gap-5">
+              <div>
+                <label for="eventNameDisplay" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Event
+                </label>
+                <input
+                  id="eventNameDisplay"
+                  type="text"
+                  value="Blind Duck Dating Berlin"
+                  disabled
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base text-black/70"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="text-2xl md:text-3xl font-black">About you</h2>
+
+            <div class="mt-5 grid md:grid-cols-2 gap-5">
+              <div>
+                <label for="firstName" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  First name *
+                </label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  required
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+
+              <div>
+                <label for="lastName" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Last name
+                </label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+            </div>
+
+            <div class="mt-5 grid md:grid-cols-2 gap-5">
+              <div>
+                <label for="email" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Email *
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+
+              <div>
+                <label for="phone" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Phone
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="text"
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+            </div>
+
+            <div class="mt-5 grid md:grid-cols-2 gap-5">
+              <div>
+                <label for="age" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Age *
+                </label>
+                <input
+                  id="age"
+                  name="age"
+                  type="number"
+                  min="18"
+                  required
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+
+              <div>
+                <label for="city" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  City
+                </label>
+                <input
+                  id="city"
+                  name="city"
+                  type="text"
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <h2 class="text-2xl md:text-3xl font-black">Identity & attraction</h2>
+              <a
+                href="./identity.html"
+                class="inline-block font-bold underline underline-offset-4 text-[#2f2f2f] hover:text-[#ff5b92] transition"
+              >
+                See how we tackle identity and attraction
+              </a>
+            </div>
+
+            <div class="mt-5 grid md:grid-cols-2 gap-5">
+              <div>
+                <label for="pronouns" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Pronouns
+                </label>
+                <input
+                  id="pronouns"
+                  name="pronouns"
+                  type="text"
+                  placeholder="e.g. he/him, she/her, they/them"
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+
+              <div>
+                <label for="genderIdentity" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Gender identity
+                </label>
+                <input
+                  id="genderIdentity"
+                  name="genderIdentity"
+                  type="text"
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+            </div>
+
+            <div class="mt-5 grid md:grid-cols-2 gap-5">
+              <div>
+                <label for="attraction" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Who are you interested in meeting?
+                </label>
+                <input
+                  id="attraction"
+                  name="attraction"
+                  type="text"
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+
+              <div>
+                <label for="relationshipStyle" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Relationship style
+                </label>
+                <input
+                  id="relationshipStyle"
+                  name="relationshipStyle"
+                  type="text"
+                  placeholder="e.g. monogamous, polyamorous, open, exploring"
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="text-2xl md:text-3xl font-black">Anything else?</h2>
+
+            <div class="mt-5">
+              <label for="notes" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                Notes
+              </label>
+              <textarea
+                id="notes"
+                name="notes"
+                rows="6"
+                class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                placeholder="Anything you’d like us to know?"
+              ></textarea>
+            </div>
+          </section>
+
+          <section>
+            <div class="rounded-[1.5rem] bg-[#fff8dd] border border-black/10 p-5">
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input
+                  id="consent"
+                  name="consent"
+                  type="checkbox"
+                  required
+                  class="mt-1 h-5 w-5 rounded border-black/20"
+                />
+                <span class="text-base text-black/75">
+                  I understand that submitting this form means my application will be reviewed, but it does not automatically confirm a spot.
+                </span>
+              </label>
+            </div>
+          </section>
+
+          <section class="pt-2">
+            <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              <button
+                id="submit-btn"
+                type="submit"
+                class="inline-block bg-[#ff5b92] text-white font-black px-8 py-4 rounded-full shadow-md hover:translate-y-[-2px] transition disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                Submit application
+              </button>
+
+              <div
+                id="form-message"
+                class="hidden rounded-2xl px-4 py-3 text-sm md:text-base font-semibold"
+              ></div>
+            </div>
+          </section>
+        </form>
+
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <duck-footer></duck-footer>
+
+  <script>
+    const form = document.getElementById("application-form");
+    const submitBtn = document.getElementById("submit-btn");
+    const formMessage = document.getElementById("form-message");
+    const hiddenIframe = document.getElementById("hidden_iframe");
+
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyPCGasbFJDpnXNzhA-QMqDPlExZIZVsTmRoV3CQdkXyWK0MfmgaS22tmTtkE9JxsMP1A/exec";
+
+    let isSubmitting = false;
+
+    function setMessage(type, text) {
+      formMessage.classList.remove(
+        "hidden",
+        "bg-[#e8fff1]",
+        "text-[#17663a]",
+        "bg-[#fff0f0]",
+        "text-[#b42318]"
+      );
+
+      if (type === "success") {
+        formMessage.classList.add("bg-[#e8fff1]", "text-[#17663a]");
+      } else {
+        formMessage.classList.add("bg-[#fff0f0]", "text-[#b42318]");
+      }
+
+      formMessage.textContent = text;
+    }
+
+    form.action = SCRIPT_URL;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if (SCRIPT_URL.includes("PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE")) {
+        setMessage("error", "Please add your Google Apps Script Web App URL first.");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+      formMessage.classList.add("hidden");
+      isSubmitting = true;
+
+      form.submit();
+    });
+
+    hiddenIframe.addEventListener("load", () => {
+      if (!isSubmitting) return;
+
+      setMessage("success", "Application received. Please check your email for confirmation.");
+      form.reset();
+      document.getElementById("eventNameHidden").value = "Blind Duck Dating Berlin";
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit application";
+      isSubmitting = false;
+    });
+  </script>
+</body>
+</html>
