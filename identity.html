@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Identity | Duck Dating Apps</title>
+  <meta
+    name="description"
+    content="How Duck Dating Apps approaches identity, attraction, and respectful inclusive matching."
+  />
+  <link rel="canonical" href="https://www.duckdatingapps.com/identity.html" />
+
+  <meta property="og:title" content="Identity | Duck Dating Apps" />
+  <meta
+    property="og:description"
+    content="How we approach identity, attraction, and respectful matching at Duck Dating Apps."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.duckdatingapps.com/identity.html" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="/styles.css" />
+
+  <script src="/components/header.js" defer></script>
+  <script src="/components/footer.js" defer></script>
+
+  <style>
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .soft-card {
+      background: white;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+    }
+
+    .scribble-highlight {
+      position: relative;
+      display: inline;
+      z-index: 0;
+    }
+
+    .scribble-highlight::after {
+      content: "";
+      position: absolute;
+      left: -0.12em;
+      right: -0.12em;
+      bottom: 0.08em;
+      height: 0.42em;
+      background: rgba(255, 211, 110, 0.8);
+      z-index: -1;
+      border-radius: 999px;
+      transform: rotate(-1.5deg);
+    }
+  </style>
+</head>
+
+<body data-page="identity">
+
+  <duck-header></duck-header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-14 pb-10 md:pt-20 md:pb-12 relative">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+        <!-- LEFT -->
+        <div>
+          <div
+            class="inline-flex items-center gap-2 bg-white border border-black/10 rounded-full px-4 py-2 text-sm font-bold mb-6"
+            style="transform: rotate(-3deg); box-shadow: 0 10px 30px rgba(0,0,0,0.08);"
+          >
+            <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+            IDENTITY & MATCHING
+          </div>
+
+          <h1 class="text-5xl md:text-7xl font-black leading-[0.95] tracking-tight max-w-3xl">
+            Respectful matching
+            <span class="block text-[#ff5b92]">without defining people</span>
+          </h1>
+
+          <p class="mt-6 text-lg md:text-2xl font-medium max-w-2xl leading-snug">
+            We want to create an experience that feels
+            <span class="scribble-highlight font-extrabold">inclusive, thoughtful, and respectful</span>
+            for everyone.
+          </p>
+
+          <p class="mt-6 text-base md:text-lg text-black/70 max-w-2xl">
+            Gender identity and attraction are complex. Our goal is not to put anyone into a box, but to create the most accurate and respectful matching experience we can.
+          </p>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="relative">
+          <div class="absolute -top-8 -left-6 w-28 h-28 bg-pink-300/50 blob blur-xl"></div>
+          <div class="absolute -bottom-10 right-0 w-36 h-36 bg-yellow-300/50 blob blur-xl"></div>
+
+          <div class="relative bg-white border border-black/10 rounded-[2rem] p-4 md:p-6 shadow-2xl">
+            <img
+              src="/images/genderbread-person.png"
+              alt="Genderbread Person framework illustration"
+              class="w-full h-auto rounded-[1.5rem] object-cover bg-white"
+            />
+
+            <div
+              class="absolute -top-4 -right-4 bg-[#2f2f2f] text-white px-4 py-3 rounded-2xl font-black text-sm md:text-base shadow-md"
+              style="transform: rotate(3deg);"
+            >
+              A framework,<br>
+              not a definition.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN TEXT -->
+  <section class="py-12 md:py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="soft-card rounded-[2rem] p-7 md:p-10">
+        <h2 class="text-3xl md:text-4xl font-black text-[#2f2f2f]">
+          How we think about identity at Duck Dating Apps
+        </h2>
+
+        <div class="mt-6 space-y-5 text-base md:text-lg text-black/75 leading-relaxed">
+          <p>
+            We aim to create an inclusive and respectful experience for everyone. We understand that gender identity and attraction are complex, and while we strive to accommodate as many identities and preferences as possible, we recognize that our current options may not perfectly reflect everyone’s experience.
+          </p>
+
+          <p>
+            Our structure is inspired by the Genderbread Person model.
+            <a
+              href="https://www.genderbread.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-bold underline underline-offset-4 text-[#ff5b92] hover:text-[#2f2f2f] transition"
+            >
+              Check the website for more details
+            </a>.
+          </p>
+
+          <p>
+            This framework helps us organize matching in a practical way, but it is not meant to define or limit anyone’s identity.
+          </p>
+
+          <p>
+            To approach this thoughtfully, we’ve consulted many friends from both heteronormative and queer communities to get feedback on this topic. Interestingly, we’ve received differing and sometimes opposing feedback.
+          </p>
+
+          <p>
+            On one hand, we want to avoid placing anyone in an “Other” category, as this can feel diminishing or exclusionary. On the other hand, we also want to avoid labeling people as “Cis” or “Trans” in a way that could imply they are not simply men or women.
+          </p>
+
+          <p>
+            Our intention is never to categorize or define identities, but purely to create the most accurate and respectful matching experience possible.
+          </p>
+
+          <p>
+            If something feels missing, unclear, or could be improved, we genuinely welcome your feedback and suggestions. We are continuously learning and refining this process to better serve all participants.
+          </p>
+
+          <p class="font-semibold text-[#2f2f2f]">
+            Thank you for your understanding and support 💛
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE SUPPORT CARDS -->
+  <section class="py-10 md:py-14 bg-[#f4efe8]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="bg-[#ffd8e7] rounded-[1.75rem] p-6 border border-black/10 shadow-sm">
+          <h3 class="text-xl md:text-2xl font-black">1. We are trying to be practical</h3>
+          <p class="mt-3 text-black/70 text-base md:text-lg">
+            Matching needs some structure. We use a framework so people can actually be grouped and matched in a useful and respectful way.
+          </p>
+        </div>
+
+        <div class="bg-[#d7f0cb] rounded-[1.75rem] p-6 border border-black/10 shadow-sm">
+          <h3 class="text-xl md:text-2xl font-black">2. We know no framework is perfect</h3>
+          <p class="mt-3 text-black/70 text-base md:text-lg">
+            Identity and attraction are nuanced and personal. Our current options may not fully reflect every lived experience, and we want to stay honest about that.
+          </p>
+        </div>
+
+        <div class="bg-[#f9df9b] rounded-[1.75rem] p-6 border border-black/10 shadow-sm">
+          <h3 class="text-xl md:text-2xl font-black">3. We welcome feedback</h3>
+          <p class="mt-3 text-black/70 text-base md:text-lg">
+            If something feels off, missing, or unclear, we truly want to hear from you. We are learning and refining this process continuously.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-14 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <div class="soft-card rounded-[2rem] p-8 md:p-10">
+        <h2 class="text-3xl md:text-4xl font-black text-[#2f2f2f]">
+          Help us improve this
+        </h2>
+
+        <p class="mt-4 text-lg text-black/70 max-w-2xl mx-auto">
+          We’d rather keep refining than pretend we’ve solved it perfectly. If you have thoughts, feedback, or suggestions, we’d genuinely love to hear from you.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="/contact.html"
+            class="inline-block bg-[#ff5b92] text-white font-black px-8 py-4 rounded-full shadow-md hover:translate-y-[-2px] transition"
+          >
+            Send feedback
+          </a>
+
+          <a
+            href="/events.html"
+            class="inline-block bg-[#ffd36e] text-[#2f2f2f] font-black px-8 py-4 rounded-full shadow-md hover:translate-y-[-2px] transition"
+          >
+            Explore events
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <duck-footer></duck-footer>
+
+</body>
+</html>

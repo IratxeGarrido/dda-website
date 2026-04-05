@@ -246,6 +246,11 @@
   {
     "question": "How does the Blind Duck Dating (BDD) referral system work?",
     "answer": "The BDD referral system is simpler. If you refer one person who is accepted, you receive a 50% discount on your event. If you refer two people who are accepted and register, you receive one free spot."
-  }
+  }, {
+  "question": "How do you tackle identity and attraction?",
+  "answer": "We aim to create an inclusive and respectful experience for everyone. You can read more about how we currently approach identity, attraction, matching, and the limits of our framework on our Identity page.",
+  "link": "/identity.html",
+  "linkText": "Read our Identity page"
+}
   ]
 }
