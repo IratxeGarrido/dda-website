@@ -1,13 +1,13 @@
 window.DDA_EVENTS = [
   {
     slug: "blind-duck-dating-registry-deadline-april-2026",
-    name: "Blind Duck Dating Berlin",
-    shortName: "BDD",
-    date: "2026-30-04",
-    dateText: "Mid May 2026",
+    name: "Blind Duck Dating Deadline",
+    shortName: "BDD Deadline",
+    date: "2026-04-30",
+    dateText: "30 April 2026",
     location: "Berlin",
     frequency: "Ongoing",
-    badge: "Apply by 4 April 2026",
+    badge: "Apply by 30 April 2026",
     cardBg: "#e6f7ff",
     logo: "./images/DDA-logo.png",
     logoAlt: "Blind Duck Dating Berlin logo",
@@ -17,13 +17,6 @@ window.DDA_EVENTS = [
 
     longDescription:
       "Blind Duck Dating Berlin is a curated in-person dating format for people who want something more intentional than swiping. Instead of endless chatting and unclear signals, participants join a carefully structured real-life dating experience designed to create ease, chemistry and meaningful conversation. The format focuses on making dating in Berlin feel lighter, more human and less awkward, while still keeping a sense of intention and selection. It is ideal for singles who want to meet people offline in Berlin through a smaller, more personal and thoughtfully matched group setting.",
-
-    // images: [
-    //   "./images/bdd-1.jpg",
-    //   "./images/bdd-2.jpg",
-    //   "./images/bdd-3.jpg",
-    //   "./images/bdd-4.jpg"
-    // ],
 
     price: "5 EUR",
     priceNote: "Payment is requested only after confirmation.",
@@ -67,18 +60,20 @@ window.DDA_EVENTS = [
     ctaText: "Register to the Dating Flock (free)",
     externalUrl: "https://forms.gle/iKNUU8ozepe3AWfb6",
     applicationUrl: "https://forms.gle/iKNUU8ozepe3AWfb6",
-    deadlineText: "Registration deadline: 4 April 2026"
+    deadlineText: "Registration deadline: 30 April 2026"
   },
 
+ 
+
   {
-    slug: "poly-speed-dating-may-2026",
+    slug: "poly-speed-dating-june-2026",
     name: "Poly Speed Dating Berlin",
     shortName: "PSD",
-    date: "2026-05-17",
-    dateText: "17 May 2026",
+    date: "2026-06-03",
+    dateText: "03 June 2026",
     location: "Berlin, near Treptower Park",
     frequency: "Every few months",
-    badge: "Apply by end of April 2026",
+    badge: "Apply by 20 May 2026",
     cardBg: "#ffeb2b",
     logo: "./images/PSD logo.png",
     logoAlt: "Poly Speed Dating Berlin logo",
@@ -88,13 +83,6 @@ window.DDA_EVENTS = [
 
     longDescription:
       "Poly Speed Dating Berlin is a moderated in-person dating event for polyamorous, ethically non-monogamous, open-minded and poly-curious people in Berlin. The event is LGBTQIA+ friendly and designed especially for people who want to connect offline rather than through apps. The format combines structure with a relaxed and welcoming atmosphere, helping participants meet multiple people in one evening without the pressure often found in traditional dating spaces. A key part of the event is that participants can express both romantic and social interest, so the experience is not only about attraction but also about building community, friendships and future connections. Matches are processed afterwards through our custom-made software and shared the next day when interest is mutual.",
-
-    // images: [
-    //   "./images/psd-1.jpg",
-    //   "./images/psd-2.jpg",
-    //   "./images/psd-3.jpg",
-    //   "./images/psd-4.jpg"
-    // ],
 
     price: "~18 EUR",
     priceNote:
@@ -154,7 +142,7 @@ window.DDA_EVENTS = [
     ctaText: "Open Poly Speed Dating Website",
     externalUrl: "https://poly-speed-dating.onrender.com/",
     applicationUrl: "https://poly-speed-dating.onrender.com/",
-    deadlineText: "Application deadline: end of April 2026"
+    deadlineText: "Application deadline: 20 May 2026"
   },
 
   {
@@ -236,15 +224,15 @@ window.DDA_EVENTS = [
     deadlineText: ""
   },
 
-    {
+  {
     slug: "new-bunnies-in-berlin-april-2026",
-    name: "New Bunnies in Berlin",
-    shortName: "NBB",
-    date: "meg May 2026",
+    name: "New Bunnies in Berlin Deadline",
+    shortName: "NBB Deadline",
+    date: "2026-04-26",
     dateText: "26 April 2026",
     location: "Berlin",
     frequency: "Ongoing",
-    badge: "26 April 2026",
+    badge: "Apply by 26 April 2026",
     cardBg: "#d7f0cb",
     logo: "./images/NBIB logo.png",
     logoAlt: "New Bunnies in Berlin logo",
@@ -301,5 +289,5 @@ window.DDA_EVENTS = [
     externalUrl: "https://forms.gle/iKNUU8ozepe3AWfb6",
     applicationUrl: "https://forms.gle/iKNUU8ozepe3AWfb6",
     deadlineText: "Application deadline: 26 April 2026"
-  },
+  }
 ];

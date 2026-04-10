@@ -34,10 +34,8 @@
 
     <div class="max-w-6xl mx-auto px-6 pt-16 pb-12 md:pt-20 md:pb-14 relative text-center">
       <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[0.95]">
-Try a new way to meet people
+        Try a new way to meet people
       </h1>
-
-  
     </div>
   </section>
 
@@ -47,7 +45,6 @@ Try a new way to meet people
 
       <!-- EVENT LIST -->
       <section class="mb-10">
-    
         <div id="dda-event-list" class="dda-event-list-grid"></div>
       </section>
 
@@ -85,6 +82,28 @@ Try a new way to meet people
     (function () {
       const RAW_EVENTS = Array.isArray(window.DDA_EVENTS) ? window.DDA_EVENTS : [];
 
+      const EXTRA_CALENDAR_EVENTS = [
+        {
+          date: "2026-05-20",
+          slug: "poly-speed-dating-june-2026",
+          name: "PSD Deadline",
+          shortName: "PSD Deadline",
+          dateText: "20 May 2026",
+          location: "Berlin, near Treptower Park",
+          frequency: "Every few months",
+          shortDescription: "Application deadline for Poly Speed Dating Berlin.",
+          applicationUrl: "https://poly-speed-dating.onrender.com/",
+          externalUrl: "https://poly-speed-dating.onrender.com/",
+          cardBg: "#ffd36e",
+          deadlineText: "Application deadline: 20 May 2026",
+          html: `
+            <h3 class="dda-event-detail-title">PSD Deadline</h3>
+            <p>Application deadline for Poly Speed Dating Berlin.</p>
+            <p class="dda-event-detail-deadline">Application deadline: 20 May 2026</p>
+          `
+        }
+      ];
+
       const MONTHS = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -121,8 +140,8 @@ Try a new way to meet people
           .replace(/'/g, "&#039;");
       }
 
-      const EVENTS = Object.fromEntries(
-        RAW_EVENTS.map(event => [
+      const EVENTS = Object.fromEntries([
+        ...RAW_EVENTS.map(event => [
           event.date,
           {
             slug: event.slug,
@@ -142,15 +161,36 @@ Try a new way to meet people
               ${event.deadlineText ? `<p class="dda-event-detail-deadline">${escapeHtml(event.deadlineText)}</p>` : ""}
             `
           }
+        ]),
+        ...EXTRA_CALENDAR_EVENTS.map(event => [
+          event.date,
+          {
+            slug: event.slug,
+            name: event.name,
+            dateText: event.dateText,
+            label: event.shortName || event.name,
+            location: event.location,
+            frequency: event.frequency,
+            shortDescription: event.shortDescription,
+            applicationUrl: event.applicationUrl,
+            externalUrl: event.externalUrl,
+            cardBg: event.cardBg,
+            deadlineText: event.deadlineText,
+            html: event.html
+          }
         ])
-      );
+      ]);
 
       function getInitialCalendarDate() {
-        if (!RAW_EVENTS.length) return new Date();
+        const allDates = [
+          ...RAW_EVENTS.map(event => event.date),
+          ...EXTRA_CALENDAR_EVENTS.map(event => event.date)
+        ].sort((a, b) => a.localeCompare(b));
 
-        const sorted = [...RAW_EVENTS].sort((a, b) => a.date.localeCompare(b.date));
-        const first = sorted[0];
-        const parts = first.date.split("-").map(Number);
+        if (!allDates.length) return new Date();
+
+        const first = allDates[0];
+        const parts = first.split("-").map(Number);
 
         if (parts.length !== 3) return new Date();
 
@@ -308,7 +348,7 @@ Try a new way to meet people
               ? `<div class="dda-event-badge">${escapeHtml(ev.name)}</div>`
               : "";
 
-            const style = ev ? `style="background:${escapeHtml(ev.cardBg || "#fff9f2")};"` : "";
+            const style = ev ? `style="background:${escapeHtml(ev.cardBg || "#ffd36e")};"` : "";
 
             return `
               <button class="${cls}" type="button" data-date="${key}" ${style}>
