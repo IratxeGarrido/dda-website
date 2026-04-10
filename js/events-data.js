@@ -246,7 +246,7 @@ window.DDA_EVENTS = [
     frequency: "Ongoing",
     badge: "26 April 2026",
     cardBg: "#d7f0cb",
-    logo: "./images/DDA-logo.png",
+    logo: "./images/NBIB logo.png",
     logoAlt: "New Bunnies in Berlin logo",
 
     shortDescription:
