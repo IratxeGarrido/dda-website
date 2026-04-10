@@ -3,8 +3,8 @@ window.DDA_EVENTS = [
     slug: "blind-duck-dating-registry-deadline-april-2026",
     name: "Blind Duck Dating Berlin",
     shortName: "BDD",
-    date: "2026-04-04",
-    dateText: "Mid April 2026",
+    date: "2026-30-04",
+    dateText: "Mid May 2026",
     location: "Berlin",
     frequency: "Ongoing",
     badge: "Apply by 4 April 2026",
@@ -260,7 +260,7 @@ window.DDA_EVENTS = [
     audience:
       "People new to Berlin, expats, and locals looking for friendship, community and optional dating",
     format: "Curated face-to-face small group social experience",
-    duration: "~90 min",
+    duration: "2h-3h",
     capacity: "8 participants",
     language: "English",
     organizer: "Duck Dating Apps",
@@ -297,7 +297,7 @@ window.DDA_EVENTS = [
       }
     ],
 
-    ctaText: "Join the Bunny Flock (free)",
+    ctaText: "Give us a few more days to set things up",
     externalUrl: "https://forms.gle/iKNUU8ozepe3AWfb6",
     applicationUrl: "https://forms.gle/iKNUU8ozepe3AWfb6",
     deadlineText: "Application deadline: 26 April 2026"
