@@ -1,8 +1,8 @@
 window.DDA_EVENTS = [
   {
     slug: "blind-duck-dating-registry-deadline-april-2026",
-    name: "Blind Duck Dating Deadline",
-    shortName: "BDD Deadline",
+    name: "Blind Duck Dating - Berlin",
+    shortName: "BDD-april-2026",
     date: "2026-04-30",
     dateText: "30 April 2026",
     location: "Berlin",
@@ -58,12 +58,10 @@ window.DDA_EVENTS = [
     ],
 
     ctaText: "Register to the Dating Flock (free)",
-    externalUrl: "https://forms.gle/iKNUU8ozepe3AWfb6",
-    applicationUrl: "https://forms.gle/iKNUU8ozepe3AWfb6",
+    externalUrl: "./apply.html",
+    applicationUrl: "./apply.html",
     deadlineText: "Registration deadline: 30 April 2026"
   },
-
- 
 
   {
     slug: "poly-speed-dating-june-2026",
@@ -139,9 +137,9 @@ window.DDA_EVENTS = [
       }
     ],
 
-    ctaText: "Open Poly Speed Dating Website",
-    externalUrl: "https://poly-speed-dating.onrender.com/",
-    applicationUrl: "https://poly-speed-dating.onrender.com/",
+    ctaText: "Apply for Poly Speed Dating",
+    externalUrl: "./apply.html",
+    applicationUrl: "./apply.html",
     deadlineText: "Application deadline: 20 May 2026"
   },
 
@@ -218,76 +216,76 @@ window.DDA_EVENTS = [
       }
     ],
 
-    ctaText: "Go to Website",
-    externalUrl: "https://poly-speed-dating.onrender.com/polyfest.html",
-    applicationUrl: "https://poly-speed-dating.onrender.com/polyfest.html",
+    ctaText: "Apply / stay informed",
+    externalUrl: "./apply.html",
+    applicationUrl: "./apply.html",
     deadlineText: ""
   },
 
-  {
-    slug: "new-bunnies-in-berlin-april-2026",
-    name: "New Bunnies in Berlin Deadline",
-    shortName: "NBB Deadline",
-    date: "2026-04-26",
-    dateText: "26 April 2026",
-    location: "Berlin",
-    frequency: "Ongoing",
-    badge: "Apply by 26 April 2026",
-    cardBg: "#d7f0cb",
-    logo: "./images/NBIB logo.png",
-    logoAlt: "New Bunnies in Berlin logo",
+  // {
+  //   slug: "new-bunnies-in-berlin-april-2026",
+  //   name: "New Bunnies in Berlin Deadline",
+  //   shortName: "NBB Deadline",
+  //   date: "2026-04-26",
+  //   dateText: "26 April 2026",
+  //   location: "Berlin",
+  //   frequency: "Ongoing",
+  //   badge: "Apply by 26 April 2026",
+  //   cardBg: "#d7f0cb",
+  //   logo: "./images/NBIB logo.png",
+  //   logoAlt: "New Bunnies in Berlin logo",
 
-    shortDescription:
-      "New in Berlin? Meet new people in a relaxed curated group — friendship first, dating second.",
+  //   shortDescription:
+  //     "New in Berlin? Meet new people in a relaxed curated group — friendship first, dating second.",
 
-    longDescription:
-      "New Bunnies in Berlin is a curated in-person social experience for people who are new to Berlin or want to expand their circle. The focus is first on making meaningful friendships and social connections, with dating as a secondary possibility. Instead of the pressure of classic dating formats, participants join a carefully selected small group based on vibe, lifestyle and interests. The result is a low-pressure, warm and human way to meet people in Berlin — whether you are looking for new friends, community, or possibly romance.",
+  //   longDescription:
+  //     "New Bunnies in Berlin is a curated in-person social experience for people who are new to Berlin or want to expand their circle. The focus is first on making meaningful friendships and social connections, with dating as a secondary possibility. Instead of the pressure of classic dating formats, participants join a carefully selected small group based on vibe, lifestyle and interests. The result is a low-pressure, warm and human way to meet people in Berlin — whether you are looking for new friends, community, or possibly romance.",
 
-    price: "5 EUR",
-    priceNote: "Payment is requested only after confirmation.",
-    audience:
-      "People new to Berlin, expats, and locals looking for friendship, community and optional dating",
-    format: "Curated face-to-face small group social experience",
-    duration: "2h-3h",
-    capacity: "8 participants",
-    language: "English",
-    organizer: "Duck Dating Apps",
+  //   price: "5 EUR",
+  //   priceNote: "Payment is requested only after confirmation.",
+  //   audience:
+  //     "People new to Berlin, expats, and locals looking for friendship, community and optional dating",
+  //   format: "Curated face-to-face small group social experience",
+  //   duration: "2h-3h",
+  //   capacity: "8 participants",
+  //   language: "English",
+  //   organizer: "Duck Dating Apps",
 
-    highlights: [
-      "Friendship-first concept",
-      "Ideal for newcomers, expats and locals open to meeting new people",
-      "Balanced groups based on vibe, interests and lifestyle",
-      "Relaxed in-person setting in Berlin",
-      "Optional social and romantic matching afterwards"
-    ],
+  //   highlights: [
+  //     "Friendship-first concept",
+  //     "Ideal for newcomers, expats and locals open to meeting new people",
+  //     "Balanced groups based on vibe, interests and lifestyle",
+  //     "Relaxed in-person setting in Berlin",
+  //     "Optional social and romantic matching afterwards"
+  //   ],
 
-    schedule: [
-      "You apply once and tell us a bit about yourself, your vibe and your interests.",
-      "You receive a group suggestion with a short summary and a suggested time and place.",
-      "You decide if you want to join the meet-up in Berlin.",
-      "Meet your curated small group for around 90 minutes in a café, bar, park or similar setting.",
-      "After the event, indicate who you would like to connect with socially and/or romantically.",
-      "We share the results the next day if there is a mutual match."
-    ],
+  //   schedule: [
+  //     "You apply once and tell us a bit about yourself, your vibe and your interests.",
+  //     "You receive a group suggestion with a short summary and a suggested time and place.",
+  //     "You decide if you want to join the meet-up in Berlin.",
+  //     "Meet your curated small group for around 90 minutes in a café, bar, park or similar setting.",
+  //     "After the event, indicate who you would like to connect with socially and/or romantically.",
+  //     "We share the results the next day if there is a mutual match."
+  //   ],
 
-    faq: [
-      {
-        q: "Is this mainly a dating event?",
-        a: "No. The main focus is on friendship, social connection and finding your people in Berlin. Dating is secondary and optional."
-      },
-      {
-        q: "Can I still meet people for dating?",
-        a: "Yes. You can indicate romantic interest afterwards, but the social atmosphere comes first."
-      },
-      {
-        q: "Is this only for people who just moved to Berlin?",
-        a: "No. It is especially great for newcomers, but also for locals who want to meet new people in a more intentional way."
-      }
-    ],
+  //   faq: [
+  //     {
+  //       q: "Is this mainly a dating event?",
+  //       a: "No. The main focus is on friendship, social connection and finding your people in Berlin. Dating is secondary and optional."
+  //     },
+  //     {
+  //       q: "Can I still meet people for dating?",
+  //       a: "Yes. You can indicate romantic interest afterwards, but the social atmosphere comes first."
+  //     },
+  //     {
+  //       q: "Is this only for people who just moved to Berlin?",
+  //       a: "No. It is especially great for newcomers, but also for locals who want to meet new people in a more intentional way."
+  //     }
+  //   ],
 
-    ctaText: "Give us a few more days to set things up",
-    externalUrl: "https://forms.gle/iKNUU8ozepe3AWfb6",
-    applicationUrl: "https://forms.gle/iKNUU8ozepe3AWfb6",
-    deadlineText: "Application deadline: 26 April 2026"
-  }
+  //   ctaText: "Apply for New Bunnies in Berlin",
+  //   externalUrl: "./apply.html",
+  //   applicationUrl: "./apply.html",
+  //   deadlineText: "Application deadline: 26 April 2026"
+  // }
 ];

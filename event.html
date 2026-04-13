@@ -181,7 +181,7 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-4 mt-12">
-          <a id="event-apply-btn" class="inline-flex items-center justify-center rounded-full bg-black text-white px-6 py-3 font-bold hover:opacity-90 transition" href="#" target="_blank" rel="noopener noreferrer">
+          <a id="event-apply-btn" class="inline-flex items-center justify-center rounded-full bg-black text-white px-6 py-3 font-bold hover:opacity-90 transition" href="./apply.html">
             Apply / Open event
           </a>
 
@@ -266,15 +266,24 @@
         if (el && content) el.setAttribute("content", content);
       }
 
+      function buildApplyUrl(ev) {
+        const applyParams = new URLSearchParams({
+          event: ev.name || "",
+          slug: ev.slug || "",
+          source: "website"
+        });
+
+        return `./apply.html?${applyParams.toString()}`;
+      }
+
       if (!event) {
         document.title = "Event not found — Blind Duck Dating";
         titleEl.textContent = "Event not found";
         name2El.textContent = "Sorry, we couldn’t find that event.";
         descEl.textContent = "The link may be outdated or the event may have been removed.";
-        metaEl.innerHTML = `<span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">Please return to the event list</span>`;
+        metaEl.innerHTML = '<span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">Please return to the event list</span>';
         cardEl.style.background = "#ffffff";
         applyBtnEl.href = "./events.html";
-        applyBtnEl.removeAttribute("target");
         applyBtnEl.textContent = "Back to events";
         return;
       }
@@ -320,16 +329,22 @@
       logoEl.src = event.logo || "";
       logoEl.alt = event.logoAlt || event.name || "Event logo";
 
-      applyBtnEl.href = event.applicationUrl || event.externalUrl || "#";
+      applyBtnEl.href = buildApplyUrl(event);
       applyBtnEl.textContent = event.ctaText || "Open event";
 
       cardEl.style.background = event.cardBg || "#ffffff";
 
-      metaEl.innerHTML = `
-        <span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">${escapeHtml(event.dateText || "")}</span>
-        <span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">${escapeHtml(event.location || "Berlin")}</span>
-        <span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">${escapeHtml(event.frequency || "")}</span>
-      `;
+      const metaItems = [
+        event.dateText ? `📅 ${escapeHtml(event.dateText)}` : "",
+        event.location ? `📍 ${escapeHtml(event.location)}` : "",
+        event.frequency ? `⏲ ${escapeHtml(event.frequency)}` : ""
+      ].filter(Boolean);
+
+      metaEl.innerHTML = metaItems.map(item => `
+        <span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">
+          ${item}
+        </span>
+      `).join("");
 
       if (event.deadlineText) {
         deadlineWrapEl.classList.remove("hidden");
@@ -343,9 +358,9 @@
 
       if (Array.isArray(event.images) && event.images.length) {
         gallerySectionEl.classList.remove("hidden");
-        galleryEl.innerHTML = event.images.slice(0, 4).map((src, index) => `
-          <div class="overflow-hidden rounded-[1.5rem] border border-black/10 bg-white aspect-[4/3]">
-            <img src="${escapeHtml(src)}" alt="${escapeHtml(event.name)} image ${index + 1}" class="w-full h-full object-cover" />
+        galleryEl.innerHTML = event.images.map(src => `
+          <div class="rounded-[1.5rem] overflow-hidden border border-black/10 bg-white">
+            <img src="${src}" alt="${escapeHtml(event.name || "Event image")}" class="w-full h-full object-cover">
           </div>
         `).join("");
       }
@@ -361,8 +376,7 @@
         scheduleWrapEl.classList.remove("hidden");
         scheduleEl.innerHTML = event.schedule.map((item, index) => `
           <li class="rounded-3xl border border-black/10 bg-white px-5 py-4">
-            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-pink-500 text-white text-sm font-black mr-3 align-middle">${index + 1}</span>
-            <span class="align-middle font-medium">${escapeHtml(item)}</span>
+            <strong class="mr-2">${index + 1}.</strong>${escapeHtml(item)}
           </li>
         `).join("");
       }

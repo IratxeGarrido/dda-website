@@ -24,6 +24,7 @@
   <script src="./components/footer.js" defer></script>
 
   <style>
+    body { font-family: 'Inter', sans-serif; }
     .grid-bg {
       background-image:
         linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
@@ -49,13 +50,37 @@
       border-radius: 999px;
       transform: rotate(-1.5deg);
     }
+
+    .step-panel[hidden] { display: none !important; }
+    .option-chip input:checked + span,
+    .checkbox-card input:checked + span,
+    .radio-card input:checked + span {
+      border-color: rgba(255, 91, 146, 0.7);
+      background: rgba(255, 91, 146, 0.08);
+      box-shadow: 0 0 0 2px rgba(255, 91, 146, 0.12);
+    }
+
+    .field-error {
+      border-color: #ef4444 !important;
+      box-shadow: 0 0 0 2px rgba(239,68,68,0.12);
+    }
+
+    .helper-error {
+      color: #dc2626;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-top: 0.45rem;
+    }
+
+    .progress-fill {
+      transition: width 220ms ease;
+    }
   </style>
 </head>
 
 <body data-page="apply" class="bg-[#f4efe8] text-[#2f2f2f]">
   <duck-header></duck-header>
 
-  <!-- HERO -->
   <section class="relative overflow-hidden">
     <div class="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
 
@@ -86,21 +111,45 @@
     </div>
   </section>
 
-  <!-- FORM -->
   <main class="pb-20">
     <div class="max-w-5xl mx-auto px-6">
       <div class="bg-white rounded-[2rem] border border-black/10 shadow-sm p-6 md:p-8">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p id="step-label" class="text-sm font-black uppercase tracking-[0.16em] text-[#ff5b92]">Step 1/3</p>
+              <h2 id="step-title" class="text-2xl md:text-3xl font-black mt-2">My info</h2>
+            </div>
+            <div class="text-sm font-bold text-black/55">Application flow</div>
+          </div>
+
+          <div class="w-full h-3 rounded-full bg-black/10 overflow-hidden">
+            <div id="progress-fill" class="progress-fill h-full rounded-full bg-gradient-to-r from-[#ff5b92] via-[#ffd36e] to-[#ff8b4e]" style="width: 33.333%;"></div>
+          </div>
+        </div>
+
         <form
           id="application-form"
-          class="space-y-8"
+          class="space-y-8 mt-8"
           method="POST"
           target="hidden_iframe"
+          novalidate
         >
           <input type="hidden" name="eventName" id="eventNameHidden" value="Blind Duck Dating Berlin" />
+          <input type="hidden" name="eventSlug" id="eventSlugHidden" value="" />
+          <input type="hidden" name="source" id="sourceHidden" value="direct" />
+          <input type="hidden" name="source_id" id="sourceIdHidden" value="" />
+          <input type="hidden" name="utm_source" id="utmSourceHidden" value="" />
+          <input type="hidden" name="utm_medium" id="utmMediumHidden" value="" />
+          <input type="hidden" name="utm_campaign" id="utmCampaignHidden" value="" />
+          <input type="hidden" name="ref" id="refHidden" value="" />
+          <input type="hidden" name="landing_page_url" id="landingPageUrlHidden" value="" />
+          <input type="hidden" name="user_agent" id="userAgentHidden" value="" />
+          <input type="hidden" name="identitySelection" id="identitySelectionHidden" value="" />
+          <input type="hidden" name="interestedInSelection" id="interestedInSelectionHidden" value="" />
 
-          <section>
-            <h2 class="text-2xl md:text-3xl font-black">Event details</h2>
-            <div class="mt-5 grid gap-5">
+          <section class="step-panel" data-step="1">
+            <div class="space-y-8">
               <div>
                 <label for="eventNameDisplay" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
                   Event
@@ -113,277 +162,544 @@
                   class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base text-black/70"
                 />
               </div>
+
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label for="firstName" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                    First name *
+                  </label>
+                  <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    required
+                    class="required-step1 w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                  />
+                </div>
+
+                <div>
+                  <label for="lastName" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                    Last name
+                  </label>
+                  <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                  />
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label for="email" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                    Email *
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    class="required-step1 w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                  />
+                </div>
+
+                <div>
+                  <label for="ageRange" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                    My age range *
+                  </label>
+                  <select
+                    id="ageRange"
+                    name="ageRange"
+                    required
+                    class="required-step1 w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                  >
+                    <option value="">Select age range</option>
+                    <option>18–25</option>
+                    <option>22–30</option>
+                    <option>26–35</option>
+                    <option>32–40</option>
+                    <option>36–45</option>
+                    <option>42–50</option>
+                    <option>46–55</option>
+                    <option>52–60</option>
+                    <option>60+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="bio" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  My bio *
+                </label>
+                <textarea
+                  id="bio"
+                  name="bio"
+                  rows="4"
+                  required
+                  placeholder="Share a bit about yourself and what kind of person you are."
+                  class="required-step1 w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                ></textarea>
+              </div>
+
+              <div>
+                <p class="block text-sm font-black uppercase tracking-[0.12em] mb-3">
+                  I do not plan to leave Berlin in the next 6 months *
+                </p>
+                <div class="grid sm:grid-cols-2 gap-3" data-required-group="stayingInBerlin" data-step-required="1">
+                  <label class="radio-card">
+                    <input class="sr-only" type="radio" name="stayingInBerlin" value="Yes" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Yes</span>
+                  </label>
+                  <label class="radio-card">
+                    <input class="sr-only" type="radio" name="stayingInBerlin" value="No" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">No</span>
+                  </label>
+                </div>
+                <div class="helper-error hidden" data-error-for="stayingInBerlin">Please choose one option.</div>
+              </div>
+
+              <div>
+                <p class="block text-sm font-black uppercase tracking-[0.12em] mb-3">
+                  Languages you can comfortably speak during the event *
+                </p>
+                <div class="grid md:grid-cols-3 gap-4">
+                  <div>
+                    <label for="language1" class="block text-sm font-bold mb-2">Priority 1 *</label>
+                    <select id="language1" name="language1" required class="required-step1 language-select w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3">
+                      <option value="">Select</option>
+                      <option>English</option>
+                      <option>German</option>
+                      <option>Croatian / Serbian / Bosnian</option>
+                      <option>Spanish</option>
+                      <option>French</option>
+                      <option>Italian</option>
+                      <option>Polish</option>
+                      <option>Turkish</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="language2" class="block text-sm font-bold mb-2">Priority 2</label>
+                    <select id="language2" name="language2" class="language-select w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3">
+                      <option value="">Select</option>
+                      <option>English</option>
+                      <option>German</option>
+                      <option>Croatian / Serbian / Bosnian</option>
+                      <option>Spanish</option>
+                      <option>French</option>
+                      <option>Italian</option>
+                      <option>Polish</option>
+                      <option>Turkish</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="language3" class="block text-sm font-bold mb-2">Priority 3</label>
+                    <select id="language3" name="language3" class="language-select w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3">
+                      <option value="">Select</option>
+                      <option>English</option>
+                      <option>German</option>
+                      <option>Croatian / Serbian / Bosnian</option>
+                      <option>Spanish</option>
+                      <option>French</option>
+                      <option>Italian</option>
+                      <option>Polish</option>
+                      <option>Turkish</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="helper-error hidden" id="language-error">Please do not select the same language twice.</div>
+              </div>
+
+              <div>
+                <p class="block text-sm font-black uppercase tracking-[0.12em] mb-3">
+                  Where would you like to meet? * <span class="normal-case font-medium tracking-normal text-black/55">Select all that apply</span>
+                </p>
+                <div class="grid md:grid-cols-2 gap-3" data-required-group="meetType" data-step-required="1" data-min="1">
+                  <label class="checkbox-card">
+                    <input class="sr-only meet-type" type="checkbox" name="meetType" value="Café" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Café</span>
+                  </label>
+                  <label class="checkbox-card">
+                    <input class="sr-only meet-type" type="checkbox" name="meetType" value="Bar / pub" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Bar / pub</span>
+                  </label>
+                  <label class="checkbox-card">
+                    <input class="sr-only meet-type" type="checkbox" name="meetType" value="Park / outdoors" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Park / outdoors</span>
+                  </label>
+                  <label class="checkbox-card">
+                    <input class="sr-only meet-type" type="checkbox" name="meetType" value="Bouldering / activity" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Bouldering / activity</span>
+                  </label>
+                  <label class="checkbox-card">
+                    <input class="sr-only meet-type" type="checkbox" name="meetType" value="Dinner / food spot" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Dinner / food spot</span>
+                  </label>
+                  <label class="checkbox-card">
+                    <input class="sr-only meet-type" type="checkbox" name="meetType" value="Open to anything" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Open to anything</span>
+                  </label>
+                </div>
+                <div class="helper-error hidden" data-error-for="meetType">Please select at least one option.</div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label for="referredByName" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                    I was referred to this event by — name
+                  </label>
+                  <input
+                    id="referredByName"
+                    name="referredByName"
+                    type="text"
+                    class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                  />
+                </div>
+
+                <div>
+                  <label for="referredByEmail" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                    I was referred to this event by — email
+                  </label>
+                  <input
+                    id="referredByEmail"
+                    name="referredByEmail"
+                    type="email"
+                    class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                  />
+                </div>
+              </div>
             </div>
           </section>
 
-          <section>
-            <h2 class="text-2xl md:text-3xl font-black">About you</h2>
+          <section class="step-panel" data-step="2" hidden>
+            <div class="space-y-8">
+              <div class="rounded-[1.5rem] border border-black/10 bg-[#fff7ef] px-5 py-4">
+                <p class="font-bold">This is the crucial part.</p>
+                <p class="text-black/75 mt-1">We will match you with 100% people based on this part.</p>
+              </div>
 
-            <div class="mt-5 grid md:grid-cols-2 gap-5">
-              <div>
-                <label for="firstName" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                  First name *
-                </label>
-                <input
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  required
-                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                />
+              <div class="rounded-[1.5rem] border border-black/10 bg-[#f8f4ee] px-5 py-4">
+                <p class="font-bold">Gender & attraction disclaimer</p>
+                <p class="mt-1 text-black/70">
+                  Learn how we view gender and attraction:
+                  <a href="https://www.duckdatingapps.com/identity.html" target="_blank" rel="noopener noreferrer" class="underline font-semibold">duckdatingapps.com/identity.html</a>
+                </p>
               </div>
 
               <div>
-                <label for="lastName" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                  Last name
+                <label for="identityBase" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  I identify as *
                 </label>
-                <input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                />
-              </div>
-            </div>
-
-            <div class="mt-5 grid md:grid-cols-2 gap-5">
-              <div>
-                <label for="email" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                  Email *
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                />
-              </div>
-
-              <div>
-                <label for="phone" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                  Phone
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="text"
-                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                />
-              </div>
-            </div>
-
-            <div class="mt-5 grid md:grid-cols-2 gap-5">
-              <div>
-                <label for="age" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                  Age *
-                </label>
-                <input
-                  id="age"
-                  name="age"
-                  type="number"
-                  min="18"
-                  required
-                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                />
+                <select id="identityBase" class="required-step2 w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3">
+                  <option value="">Select an option</option>
+                  <option value="Man">Man</option>
+                  <option value="Woman">Woman</option>
+                  <option value="Non-binary">Non-binary</option>
+                  <option value="Genderqueer">Genderqueer</option>
+                  <option value="Genderfluid">Genderfluid</option>
+                  <option value="Agender">Agender</option>
+                  <option value="Bigender">Bigender</option>
+                  <option value="Multigender">Multigender</option>
+                  <option value="Polygender">Polygender</option>
+                  <option value="Demiboy">Demiboy</option>
+                  <option value="Demigirl">Demigirl</option>
+                  <option value="Androgynous">Androgynous</option>
+                  <option value="Genderflux">Genderflux</option>
+                  <option value="Intergender">Intergender</option>
+                </select>
+                <div id="identitySubWrap" class="mt-4 hidden">
+                  <label for="identitySub" class="block text-sm font-bold mb-2">Choose a more specific option</label>
+                  <select id="identitySub" class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3">
+                    <option value="">Select</option>
+                  </select>
+                </div>
+                <div class="helper-error hidden" data-error-for="identityBase">Please select your gender identity.</div>
               </div>
 
               <div>
-                <label for="city" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                  City
-                </label>
-                <input
-                  id="city"
-                  name="city"
-                  type="text"
-                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                />
+                <p class="block text-sm font-black uppercase tracking-[0.12em] mb-3">
+                  I would like to meet * <span class="normal-case font-medium tracking-normal text-black/55">Select all that apply</span>
+                </p>
+                <div id="interestedGrid" class="grid md:grid-cols-2 gap-3" data-required-group="interestedIn" data-step-required="2" data-min="1">
+                  <!-- generated by JS -->
+                </div>
+                <div class="helper-error hidden" data-error-for="interestedIn">Please select at least one option.</div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between gap-4 mb-2">
+                  <label class="block text-sm font-black uppercase tracking-[0.12em]">
+                    Main intention *
+                  </label>
+                  <div id="intention-total" class="text-sm font-black rounded-full bg-[#fff7ef] px-3 py-1 border border-black/10">Total: 0%</div>
+                </div>
+                <p class="text-sm text-black/60 mb-4">Please make total of 100%. <span class="font-semibold">(0% is a perfectly fine answer to give.)</span></p>
+
+                <div class="space-y-5 rounded-[1.5rem] border border-black/10 bg-[#f8f4ee] p-5">
+                  <div>
+                    <div class="flex items-center justify-between gap-4 mb-2">
+                      <label for="longTermPercent" class="font-bold">Long-term relationship</label>
+                      <span id="longTermValue" class="text-sm font-black">0%</span>
+                    </div>
+                    <input id="longTermPercent" name="longTermPercent" type="range" min="0" max="100" value="0" class="intention-range w-full" />
+                  </div>
+
+                  <div>
+                    <div class="flex items-center justify-between gap-4 mb-2">
+                      <label for="casualPercent" class="font-bold">Casual dating</label>
+                      <span id="casualValue" class="text-sm font-black">0%</span>
+                    </div>
+                    <input id="casualPercent" name="casualPercent" type="range" min="0" max="100" value="0" class="intention-range w-full" />
+                  </div>
+
+                  <div>
+                    <div class="flex items-center justify-between gap-4 mb-2">
+                      <label for="friendsPercent" class="font-bold">Friends / social</label>
+                      <span id="friendsValue" class="text-sm font-black">0%</span>
+                    </div>
+                    <input id="friendsPercent" name="friendsPercent" type="range" min="0" max="100" value="0" class="intention-range w-full" />
+                  </div>
+                </div>
+                <div class="helper-error hidden" id="intention-error">Your total must equal 100% before moving on.</div>
+              </div>
+
+              <div>
+                <p class="block text-sm font-black uppercase tracking-[0.12em] mb-3">
+                  Relationship style *
+                </p>
+                <div class="grid sm:grid-cols-3 gap-3" data-required-group="relationshipStyle" data-step-required="2">
+                  <label class="radio-card">
+                    <input class="sr-only" type="radio" name="relationshipStyle" value="Monogamous" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Monogamous</span>
+                  </label>
+                  <label class="radio-card">
+                    <input class="sr-only" type="radio" name="relationshipStyle" value="Polyamorous / Non-monogamous" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Polyamorous / Non-monogamous</span>
+                  </label>
+                  <label class="radio-card">
+                    <input class="sr-only" type="radio" name="relationshipStyle" value="Open to both" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Open to both</span>
+                  </label>
+                </div>
+                <div class="helper-error hidden" data-error-for="relationshipStyle">Please choose one option.</div>
               </div>
             </div>
           </section>
 
-          <section>
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <h2 class="text-2xl md:text-3xl font-black">Identity & attraction</h2>
-              <a
-                href="./identity.html"
-                class="inline-block font-bold underline underline-offset-4 text-[#2f2f2f] hover:text-[#ff5b92] transition"
+          <section class="step-panel" data-step="3" hidden>
+            <div class="space-y-8">
+              <div class="rounded-[1.5rem] border border-black/10 bg-[#fff7ef] px-5 py-4">
+                <p class="font-bold">Nice to have</p>
+                <p class="text-black/75 mt-1">We will try to match you with this, but can’t promise 100% accuracy. A bit of diversity is fine — you don’t need to find a clone of yourself ;)</p>
+              </div>
+
+              <div>
+                <label for="berlinArea" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Which part of Berlin works best for you?
+                </label>
+                <input
+                  id="berlinArea"
+                  name="berlinArea"
+                  type="text"
+                  placeholder="e.g. Neukölln, Kreuzberg, Friedrichshain, central is easiest..."
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                />
+              </div>
+
+              <div>
+                <label for="conversationStyle" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  I prefer conversations that are
+                </label>
+                <select id="conversationStyle" name="conversationStyle" class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3">
+                  <option value="">Select an option</option>
+                  <option>Deep & meaningful</option>
+                  <option>Fun & light</option>
+                  <option>Mix of both</option>
+                </select>
+              </div>
+
+              <div>
+                <p class="block text-sm font-black uppercase tracking-[0.12em] mb-3">
+                  Ideal evening vibe <span class="normal-case font-medium tracking-normal text-black/55">Select all that apply</span>
+                </p>
+                <div class="grid sm:grid-cols-3 gap-3">
+                  <label class="checkbox-card">
+                    <input class="sr-only" type="checkbox" name="eveningVibe" value="Chill & relaxed" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Chill & relaxed</span>
+                  </label>
+                  <label class="checkbox-card">
+                    <input class="sr-only" type="checkbox" name="eveningVibe" value="Social & lively" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Social & lively</span>
+                  </label>
+                  <label class="checkbox-card">
+                    <input class="sr-only" type="checkbox" name="eveningVibe" value="Flirty" />
+                    <span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Flirty</span>
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <p class="block text-sm font-black uppercase tracking-[0.12em] mb-3">
+                  I would like to meet age range(s)
+                </p>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+                  <label class="checkbox-card"><input class="sr-only" type="checkbox" name="preferredAgeRanges" value="18–25" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">18–25</span></label>
+                  <label class="checkbox-card"><input class="sr-only" type="checkbox" name="preferredAgeRanges" value="22–30" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">22–30</span></label>
+                  <label class="checkbox-card"><input class="sr-only" type="checkbox" name="preferredAgeRanges" value="26–35" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">26–35</span></label>
+                  <label class="checkbox-card"><input class="sr-only" type="checkbox" name="preferredAgeRanges" value="32–40" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">32–40</span></label>
+                  <label class="checkbox-card"><input class="sr-only" type="checkbox" name="preferredAgeRanges" value="36–45" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">36–45</span></label>
+                  <label class="checkbox-card"><input class="sr-only" type="checkbox" name="preferredAgeRanges" value="42–50" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">42–50</span></label>
+                  <label class="checkbox-card"><input class="sr-only" type="checkbox" name="preferredAgeRanges" value="46–55" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">46–55</span></label>
+                  <label class="checkbox-card"><input class="sr-only" type="checkbox" name="preferredAgeRanges" value="52–60" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">52–60</span></label>
+                  <label class="checkbox-card"><input class="sr-only" type="checkbox" name="preferredAgeRanges" value="60+" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">60+</span></label>
+                </div>
+              </div>
+
+              <div>
+                <p class="block text-sm font-black uppercase tracking-[0.12em] mb-3">
+                  Pick up to 3 you enjoy
+                </p>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3" data-max-group="interests" data-max="3">
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Sports" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Sports</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Arts" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Arts</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Music" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Music</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Dancing" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Dancing</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Nature" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Nature</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Tech" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Tech</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Spirituality" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Spirituality</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Reading" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Reading</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Games" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Games</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Activism" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Activism</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Food" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Food</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-interests" type="checkbox" name="interests" value="Travel" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Travel</span></label>
+                </div>
+                <div class="helper-error hidden" id="interests-error">Please select up to 3 interests.</div>
+              </div>
+
+              <div>
+                <p class="block text-sm font-black uppercase tracking-[0.12em] mb-3">
+                  Which music genres do you enjoy most? <span class="normal-case font-medium tracking-normal text-black/55">Select up to 3</span>
+                </p>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3" data-max-group="musicGenres" data-max="3">
+                  <label class="checkbox-card"><input class="sr-only limited-music" type="checkbox" name="musicGenres" value="Pop" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Pop</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-music" type="checkbox" name="musicGenres" value="Rock / indie" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Rock / indie</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-music" type="checkbox" name="musicGenres" value="Electronic / techno" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Electronic / techno</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-music" type="checkbox" name="musicGenres" value="Hip hop / rap" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Hip hop / rap</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-music" type="checkbox" name="musicGenres" value="Jazz / soul / funk" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Jazz / soul / funk</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-music" type="checkbox" name="musicGenres" value="World / latin" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">World / latin</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-music" type="checkbox" name="musicGenres" value="Classical / ambient" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Classical / ambient</span></label>
+                  <label class="checkbox-card"><input class="sr-only limited-music" type="checkbox" name="musicGenres" value="Metal / punk" /><span class="block rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 font-medium cursor-pointer">Metal / punk</span></label>
+                </div>
+                <div class="helper-error hidden" id="music-error">Please select up to 3 music genres.</div>
+              </div>
+
+              <div>
+                <label for="openness" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  How would you describe your openness around dating & intimacy? <span class="normal-case font-medium tracking-normal text-black/55">(optional)</span>
+                </label>
+                <select id="openness" name="openness" class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3">
+                  <option value="">Select an option</option>
+                  <option>More traditional</option>
+                  <option>Curious & open</option>
+                  <option>Kink-friendly / Sex-positive</option>
+                  <option>Other</option>
+                </select>
+                <input
+                  id="opennessOther"
+                  name="opennessOther"
+                  type="text"
+                  placeholder="If other, tell us a bit more"
+                  class="hidden mt-3 w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3"
+                />
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label for="avoid" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                    Anything you want to avoid? <span class="normal-case font-medium tracking-normal text-black/55">(optional – keep it short)</span>
+                  </label>
+                  <textarea
+                    id="avoid"
+                    name="avoid"
+                    rows="4"
+                    class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                  ></textarea>
+                </div>
+
+                <div>
+                  <label for="mustHave" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                    Must-have <span class="normal-case font-medium tracking-normal text-black/55">(optional)</span>
+                  </label>
+                  <textarea
+                    id="mustHave"
+                    name="mustHave"
+                    rows="4"
+                    class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div>
+                <label for="anythingElse" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
+                  Anything else you would like to share?
+                </label>
+                <textarea
+                  id="anythingElse"
+                  name="anythingElse"
+                  rows="4"
+                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
+                ></textarea>
+              </div>
+            </div>
+          </section>
+
+          <div class="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between pt-4">
+            <button
+              id="prev-btn"
+              type="button"
+              class="hidden sm:inline-flex items-center justify-center rounded-full border border-black/15 bg-white px-6 py-3 font-bold hover:bg-black/5 transition"
+            >
+              Previous
+            </button>
+
+            <div class="flex gap-3 w-full sm:w-auto sm:ml-auto">
+              <button
+                id="prev-btn-mobile"
+                type="button"
+                class="hidden inline-flex sm:hidden flex-1 items-center justify-center rounded-full border border-black/15 bg-white px-6 py-3 font-bold hover:bg-black/5 transition"
               >
-                See how we tackle identity and attraction
-              </a>
-            </div>
+                Previous
+              </button>
 
-            <div class="mt-5 grid md:grid-cols-2 gap-5">
-              <div>
-                <label for="pronouns" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                  Pronouns
-                </label>
-                <input
-                  id="pronouns"
-                  name="pronouns"
-                  type="text"
-                  placeholder="e.g. he/him, she/her, they/them"
-                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                />
-              </div>
+              <button
+                id="next-btn"
+                type="button"
+                class="inline-flex flex-1 sm:flex-none items-center justify-center rounded-full bg-black text-white px-6 py-3 font-bold hover:opacity-90 transition"
+              >
+                Next
+              </button>
 
-              <div>
-                <label for="genderIdentity" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                  Gender identity
-                </label>
-                <input
-                  id="genderIdentity"
-                  name="genderIdentity"
-                  type="text"
-                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                />
-              </div>
-            </div>
-
-            <div class="mt-5 grid md:grid-cols-2 gap-5">
-              <div>
-                <label for="attraction" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                  Who are you interested in meeting?
-                </label>
-                <input
-                  id="attraction"
-                  name="attraction"
-                  type="text"
-                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                />
-              </div>
-
-              <div>
-                <label for="relationshipStyle" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                  Relationship style
-                </label>
-                <input
-                  id="relationshipStyle"
-                  name="relationshipStyle"
-                  type="text"
-                  placeholder="e.g. monogamous, polyamorous, open, exploring"
-                  class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                />
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 class="text-2xl md:text-3xl font-black">Anything else?</h2>
-
-            <div class="mt-5">
-              <label for="notes" class="block text-sm font-black uppercase tracking-[0.12em] mb-2">
-                Notes
-              </label>
-              <textarea
-                id="notes"
-                name="notes"
-                rows="6"
-                class="w-full rounded-2xl border border-black/10 bg-[#f8f4ee] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#ff8b4e]"
-                placeholder="Anything you’d like us to know?"
-              ></textarea>
-            </div>
-          </section>
-
-          <section>
-            <div class="rounded-[1.5rem] bg-[#fff8dd] border border-black/10 p-5">
-              <label class="flex items-start gap-3 cursor-pointer">
-                <input
-                  id="consent"
-                  name="consent"
-                  type="checkbox"
-                  required
-                  class="mt-1 h-5 w-5 rounded border-black/20"
-                />
-                <span class="text-base text-black/75">
-                  I understand that submitting this form means my application will be reviewed, but it does not automatically confirm a spot.
-                </span>
-              </label>
-            </div>
-          </section>
-
-          <section class="pt-2">
-            <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <button
                 id="submit-btn"
                 type="submit"
-                class="inline-block bg-[#ff5b92] text-white font-black px-8 py-4 rounded-full shadow-md hover:translate-y-[-2px] transition disabled:opacity-60 disabled:cursor-not-allowed"
+                class="hidden flex-1 sm:flex-none items-center justify-center rounded-full bg-black text-white px-6 py-3 font-bold hover:opacity-90 transition"
               >
-                Submit application
+                Submit
               </button>
-
-              <div
-                id="form-message"
-                class="hidden rounded-2xl px-4 py-3 text-sm md:text-base font-semibold"
-              ></div>
             </div>
-          </section>
-        </form>
+          </div>
 
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+          <div id="form-message" class="hidden rounded-[1.5rem] border border-black/10 px-5 py-4"></div>
+          <iframe name="hidden_iframe" id="hidden_iframe" class="hidden"></iframe>
+        </form>
       </div>
     </div>
   </main>
 
   <duck-footer></duck-footer>
-
-  <script>
-    const form = document.getElementById("application-form");
-    const submitBtn = document.getElementById("submit-btn");
-    const formMessage = document.getElementById("form-message");
-    const hiddenIframe = document.getElementById("hidden_iframe");
-
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyPCGasbFJDpnXNzhA-QMqDPlExZIZVsTmRoV3CQdkXyWK0MfmgaS22tmTtkE9JxsMP1A/exec";
-
-    let isSubmitting = false;
-
-    function setMessage(type, text) {
-      formMessage.classList.remove(
-        "hidden",
-        "bg-[#e8fff1]",
-        "text-[#17663a]",
-        "bg-[#fff0f0]",
-        "text-[#b42318]"
-      );
-
-      if (type === "success") {
-        formMessage.classList.add("bg-[#e8fff1]", "text-[#17663a]");
-      } else {
-        formMessage.classList.add("bg-[#fff0f0]", "text-[#b42318]");
-      }
-
-      formMessage.textContent = text;
-    }
-
-    form.action = SCRIPT_URL;
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      if (SCRIPT_URL.includes("PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE")) {
-        setMessage("error", "Please add your Google Apps Script Web App URL first.");
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Submitting...";
-      formMessage.classList.add("hidden");
-      isSubmitting = true;
-
-      form.submit();
-    });
-
-    hiddenIframe.addEventListener("load", () => {
-      if (!isSubmitting) return;
-
-      setMessage("success", "Application received. Please check your email for confirmation.");
-      form.reset();
-      document.getElementById("eventNameHidden").value = "Blind Duck Dating Berlin";
-
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Submit application";
-      isSubmitting = false;
-    });
-  </script>
+  <script src="./js/apply-form.js"></script>
 </body>
 </html>
