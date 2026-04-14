@@ -266,7 +266,33 @@
         if (el && content) el.setAttribute("content", content);
       }
 
+      /*
       function buildApplyUrl(ev) {
+        const applyParams = new URLSearchParams({
+          event: ev.name || "",
+          slug: ev.slug || "",
+          source: "website"
+        });
+
+        return `./apply.html?${applyParams.toString()}`;
+      }
+      */
+
+      function buildApplyUrl(ev) {
+        const baseUrl = ev.applicationUrl || ev.externalUrl;
+
+        if (baseUrl) {
+          try {
+            const url = new URL(baseUrl);
+            url.searchParams.set("source", "website");
+            url.searchParams.set("slug", ev.slug || "");
+            url.searchParams.set("event", ev.name || "");
+            return url.toString();
+          } catch (error) {
+            return baseUrl;
+          }
+        }
+
         const applyParams = new URLSearchParams({
           event: ev.name || "",
           slug: ev.slug || "",
@@ -329,8 +355,19 @@
       logoEl.src = event.logo || "";
       logoEl.alt = event.logoAlt || event.name || "Event logo";
 
+      /*
       applyBtnEl.href = buildApplyUrl(event);
       applyBtnEl.textContent = event.ctaText || "Open event";
+      */
+
+      const finalApplyUrl = buildApplyUrl(event);
+      applyBtnEl.href = finalApplyUrl;
+      applyBtnEl.textContent = event.ctaText || "Open event";
+
+      if (event.applicationUrl || event.externalUrl) {
+        applyBtnEl.target = "_blank";
+        applyBtnEl.rel = "noopener noreferrer";
+      }
 
       cardEl.style.background = event.cardBg || "#ffffff";
 
