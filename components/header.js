@@ -27,13 +27,14 @@ class DuckHeader extends HTMLElement {
           id="header-inner"
           class="max-w-7xl mx-auto px-4 sm:px-6 py-3 md:py-4 flex items-center justify-between gap-4 transition-all duration-300"
         >
-          <a href="/index.html" class="flex items-center min-w-0 shrink-0">
+          <a href="/index.html" class="flex items-center gap-3 min-w-0 shrink-0">
             <img
               id="header-logo"
               src="/images/DDA-logo.png"
               alt="Duck Dating Apps logo"
               class="h-12 md:h-14 w-auto object-contain transition-all duration-300"
             >
+            <span class="hidden sm:block text-[#2f2f2f] font-semibold tracking-tight leading-tight text-base md:text-lg">Duck Dating Apps</span>
           </a>
 
           <!-- Desktop nav -->
@@ -43,6 +44,7 @@ class DuckHeader extends HTMLElement {
             <a href="/jewel.html" class="${navLinkClass("jewel")}">Our Jewel</a>
             <a href="/faq.html" class="${navLinkClass("faq")}">DAQ's</a>
             <a href="/contact.html" class="${navLinkClass("contact")}">Stay in the loop</a>
+            <a href="https://app.duckdatingapps.com/users/sign_in" class="ml-4 inline-flex items-center justify-center px-4 py-2 rounded-full border border-black/10 bg-white/80 hover:bg-white text-sm font-semibold transition">Login</a>
           </nav>
 
           <!-- Mobile menu button -->
@@ -90,6 +92,7 @@ class DuckHeader extends HTMLElement {
             <a href="/jewel.html" class="${navLinkClass("jewel", true)}">Our Jewel</a>
             <a href="/faq.html" class="${navLinkClass("faq", true)}">DAQ's</a>
             <a href="/contact.html" class="${navLinkClass("contact", true)}">Stay in the loop</a>
+            <a href="https://app.duckdatingapps.com/login" class="inline-flex items-center justify-center px-4 py-3 rounded-full border border-black/10 bg-white/80 hover:bg-white text-base font-semibold transition text-center">Login</a>
           </nav>
         </div>
       </header>
