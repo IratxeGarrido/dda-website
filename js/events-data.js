@@ -58,8 +58,8 @@ window.DDA_EVENTS = [
     ],
 
     ctaText: "Register to the Dating Flock (free)",
-    externalUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdILcOFWupjn3ZyeowPN5yOzLrv-GCi5fUADCaBTxe8sCPn8g/viewform",
-    applicationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdILcOFWupjn3ZyeowPN5yOzLrv-GCi5fUADCaBTxe8sCPn8g/viewform",
+    externalUrl: "https://app.duckdatingapps.com/users/sign_up",
+    applicationUrl: "https://app.duckdatingapps.com/users/sign_up",
     deadlineText: "Registration deadline: 30 April 2026"
   },
 
