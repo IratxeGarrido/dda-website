@@ -49,6 +49,81 @@
   </div>
 </section>
 
+  <!-- REFERRAL INTRO -->
+<section class="pt-6 pb-2">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="block rounded-[2rem] bg-[#eefaf6] border border-black/10 shadow-sm p-6 md:p-8 cursor-pointer hover:translate-y-[-3px] transition" id="referral-card">
+      <div
+        class="inline-flex items-center gap-2 bg-[#8fd3c7] text-[#2f2f2f] rounded-full px-4 py-2 text-sm font-black uppercase tracking-[0.16em]"
+        style="transform: rotate(-2deg);"
+      >
+        Share the love
+      </div>
+
+      <h2 class="mt-5 text-3xl md:text-4xl font-black text-[#2f2f2f] leading-tight">
+        Learn how our referral programs work
+      </h2>
+
+      <p class="mt-4 text-lg text-black/70 max-w-3xl" id="referral-preview">
+        Know great people who'd love our events? Invite them and both of you benefit. We have separate programs for DDA and PSD with different rewards.
+      </p>
+
+      <span class="mt-5 inline-block font-bold underline underline-offset-4 text-[#2f2f2f]" id="referral-toggle">
+        View details
+      </span>
+    </div>
+
+    <!-- REFERRAL DROPDOWN -->
+    <div id="referral-dropdown" class="hidden mt-4 max-w-5xl mx-auto">
+      <div class="bg-[#eefaf6] rounded-[2rem] border border-black/10 shadow-sm p-6 md:p-8 space-y-8">
+
+        <!-- DDA SECTION -->
+        <div>
+          <h3 class="text-2xl md:text-3xl font-black text-[#2f2f2f] mb-4">
+            🎁 Duck Dating Apps (DDA)
+          </h3>
+          <p class="text-black/70 mb-4">
+            Invite someone to join and get rewarded once they participate.
+          </p>
+          <div class="space-y-3 text-black/80">
+            <p><strong>How it works:</strong> You refer a person → They apply and get accepted → After they attend an event, you receive a notification</p>
+            <p><strong>Your reward:</strong> 1 free spot for a future event</p>
+            <p class="text-sm text-black/60">Must be used within 3 months</p>
+          </div>
+        </div>
+
+        <!-- PSD SECTION -->
+        <div>
+          <h3 class="text-2xl md:text-3xl font-black text-[#2f2f2f] mb-4">
+            💕 Poly Speed Dating (PSD)
+          </h3>
+          <p class="text-black/70 mb-4">
+            Know someone perfect for PSD? Invite them to apply.
+          </p>
+          <div class="space-y-3 text-black/80">
+            <p><strong>Scenario 1:</strong> Your referral gets accepted, but you don't → You get a guaranteed seat for the next PSD event (regular price applies)</p>
+            <p><strong>Scenario 2:</strong> Both accepted for the same event → You get a €5 discount on your ticket</p>
+            <p class="text-sm text-black/60">Rewards must be used within 12 months</p>
+          </div>
+        </div>
+
+        <!-- GENERAL RULES -->
+        <div class="bg-white rounded-[1.5rem] border border-black/10 p-4 md:p-6">
+          <h4 class="font-black text-[#2f2f2f] mb-4">General Guidelines</h4>
+          <ul class="space-y-2 text-sm text-black/80">
+            <li>✓ Referrals are free — No cost to participate</li>
+            <li>✓ One successful referral every 3 months</li>
+            <li>✓ Rewards are personal — Cannot be transferred</li>
+            <li>✓ Limited time use — Rewards expire after 3-12 months</li>
+            <li>✓ Legitimate referrals only — We decline misuse or fake referrals</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
   <!-- SEARCH BAR -->
   <div class="mb-10">
     <div class="max-w-5xl mx-auto px-6" style="padding-top: 20px;">
@@ -72,6 +147,26 @@
   </section>
 
   <script>
+    // Referral card toggle
+    document.addEventListener("DOMContentLoaded", function() {
+      const referralCard = document.getElementById("referral-card");
+      const referralDropdown = document.getElementById("referral-dropdown");
+      const referralToggle = document.getElementById("referral-toggle");
+
+      if (referralCard && referralDropdown && referralToggle) {
+        referralCard.addEventListener("click", function() {
+          const isOpen = !referralDropdown.classList.contains("hidden");
+          if (isOpen) {
+            referralDropdown.classList.add("hidden");
+            referralToggle.textContent = "View details";
+          } else {
+            referralDropdown.classList.remove("hidden");
+            referralToggle.textContent = "Hide details";
+          }
+        });
+      }
+    });
+
     const FAQ_SECTIONS = {
       general: {
         title: "General",

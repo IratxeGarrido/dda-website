@@ -53,7 +53,23 @@
   }, 
     {
     "question": "Do you have a referral system?",
-    "answer": "Yes. We currently have two different referral systems, one for Poly Speed Dating (PSD) and one for Blind Duck Dating (BDD). Both reward you for bringing aligned people into the community, but they work slightly differently depending on the format."
+    "answer": "Yes. We currently have two different referral systems, one for Poly Speed Dating (PSD) and one for Blind Duck Dating (DDA). Both reward you for bringing aligned people into the community, but they work slightly differently depending on the format."
+  },
+  {
+    "question": "What is the Duck Dating Apps (DDA) referral program?",
+    "answer": "Invite someone to join Duck Dating Apps and get rewarded once they participate. You refer a person, they apply and get accepted, and after they attend an event, you receive a notification. Your reward: 1 free spot for a future event."
+  },
+  {
+    "question": "What are the requirements for the DDA referral program?",
+    "answer": "The referred person must be a new participant. The reward is granted only after they attend (not just apply or get accepted). The free spot is valid for a standard event ticket and must be used within 3 months. Rewards are not transferable, and you can only receive 1 successful referral every 3 months. We reserve the right to decline misuse or fake referrals."
+  },
+  {
+    "question": "What is the Poly Speed Dating (PSD) referral program?",
+    "answer": "Know someone who'd be a great fit for PSD? Invite them to apply. If your referred person gets accepted but you don't, you receive a guaranteed seat for the next PSD event (regular ticket price still applies). If both you and your referred person get accepted, you receive a €5 discount on your ticket for that event."
+  },
+  {
+    "question": "What are the requirements for the PSD referral program?",
+    "answer": "The referred person must be a new applicant who mentions your name when applying. Referral rewards apply only once per referred person. Guaranteed seats are valid for the next regular PSD edition only. Rewards must be used within 12 months. Discounts cannot be combined with other promotions unless stated otherwise. Rewards are not transferable. You can receive 1 successful referral every 3 months. We reserve the right to decline misuse or fake referrals."
   }
 
   ],
@@ -173,15 +189,7 @@
     {
       "question": "What is the main benefit of PSD in one sentence?",
       "answer": "You can show interest honestly, without awkwardness, and only mutual connections are revealed."
-    },
-    {
-    "question": "How does the Poly Speed Dating (PSD) referral system work?",
-    "answer": "The PSD referral system rewards you based on accepted referrals. 1 accepted referral gives you a reserved seat for a future event (you still pay, but your spot is guaranteed). 2 accepted referrals give you one reserved free spot. 3 accepted referrals give you one free spot for yourself plus one free spot for a friend. Referrals only count once the person is accepted into the event. Rewards are valid starting from the next event (not the current one if already full), and must be used within 365 days. As a bonus, you are also prioritised at the top of the waiting list. If you are called into the same event, the voucher is considered used."
-  },
-  {
-  "question": "How do vouchers work for Poly Speed Dating (PSD)?",
-  "answer": "Some participants may receive vouchers. These vouchers guarantee you a secure seat at an event, but they do not always mean a completely free event, as we still have costs to cover (and drinks are usually included). Vouchers have an expiration date and can also be passed on to friends."
-}
+    }
 
   ],
   "polyfest": [
@@ -244,9 +252,6 @@
     "answer": "Please let us know as soon as possible. We will not be able to refund you, but this gives another person the chance to take the spot, and we really appreciate that. We do keep track of reliable and unreliable participation patterns when prioritising future invitations."
   },
   {
-    "question": "How does the Blind Duck Dating (BDD) referral system work?",
-    "answer": "The BDD referral system is simpler. If you refer one person who is accepted, you receive a 50% discount on your event. If you refer two people who are accepted and register, you receive one free spot."
-  }, {
   "question": "How do you tackle identity and attraction?",
   "answer": "We aim to create an inclusive and respectful experience for everyone. You can read more about how we currently approach identity, attraction, matching, and the limits of our framework on our Identity page.",
   "link": "/identity.html",
