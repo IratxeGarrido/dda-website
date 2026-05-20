@@ -92,7 +92,7 @@ class DuckHeader extends HTMLElement {
             <a href="/jewel.html" class="${navLinkClass("jewel", true)}">Our Jewel</a>
             <a href="/faq.html" class="${navLinkClass("faq", true)}">DAQ's</a>
             <a href="/contact.html" class="${navLinkClass("contact", true)}">Stay in the loop</a>
-            <a href="https://app.duckdatingapps.com/login" class="inline-flex items-center justify-center px-4 py-3 rounded-full border border-black/10 bg-white/80 hover:bg-white text-base font-semibold transition text-center">Login</a>
+            <a href="https://app.duckdatingapps.com/users/sign_in" class="inline-flex items-center justify-center px-4 py-3 rounded-full border border-black/10 bg-white/80 hover:bg-white text-base font-semibold transition text-center">Login</a>
           </nav>
         </div>
       </header>

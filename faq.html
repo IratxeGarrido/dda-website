@@ -123,6 +123,81 @@
   </div>
 </section>
 
+  <!-- LOYALTY PROGRAM -->
+<section class="pt-6 pb-2">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="block rounded-[2rem] bg-[#fff8dd] border border-black/10 shadow-sm p-6 md:p-8 cursor-pointer hover:translate-y-[-3px] transition" id="loyalty-card">
+      <div
+        class="inline-flex items-center gap-2 bg-[#ffd36e] text-[#2f2f2f] rounded-full px-4 py-2 text-sm font-black uppercase tracking-[0.16em]"
+        style="transform: rotate(-2deg);"
+      >
+        Keep Coming Back
+      </div>
+
+      <h2 class="mt-5 text-3xl md:text-4xl font-black text-[#2f2f2f] leading-tight">
+        Loyalty rewards for repeat attendees
+      </h2>
+
+      <p class="mt-4 text-lg text-black/70 max-w-3xl" id="loyalty-preview">
+        We reward people who come back. Build community with us and enjoy special discounts and free events.
+      </p>
+
+      <span class="mt-5 inline-block font-bold underline underline-offset-4 text-[#2f2f2f]" id="loyalty-toggle">
+        View details
+      </span>
+    </div>
+
+    <!-- LOYALTY DROPDOWN -->
+    <div id="loyalty-dropdown" class="hidden mt-4 max-w-5xl mx-auto">
+      <div class="bg-[#fff8dd] rounded-[2rem] border border-black/10 shadow-sm p-6 md:p-8 space-y-8">
+
+        <!-- LOYALTY BENEFITS -->
+        <div>
+          <h3 class="text-2xl md:text-3xl font-black text-[#2f2f2f] mb-4">
+            🎁 Loyalty Rewards
+          </h3>
+          <p class="text-black/70 mb-6">
+            The more you participate, the more you save. We believe in rewarding people who build community with us.
+          </p>
+          <div class="space-y-4">
+            <div class="bg-white rounded-[1.5rem] border border-black/10 p-5 md:p-6">
+              <h4 class="font-black text-lg text-[#2f2f2f] mb-2">3rd Event: 50% Discount</h4>
+              <p class="text-black/70">When you attend your 3rd event, you get 50% off the ticket price.</p>
+            </div>
+            <div class="bg-white rounded-[1.5rem] border border-black/10 p-5 md:p-6">
+              <h4 class="font-black text-lg text-[#2f2f2f] mb-2">5th Event: FREE</h4>
+              <p class="text-black/70">Your 5th event is completely on us. No cost — just show up and connect.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <div>
+          <h3 class="text-xl md:text-2xl font-black text-[#2f2f2f] mb-4">How It Works</h3>
+          <div class="bg-white rounded-[1.5rem] border border-black/10 p-5 md:p-6 space-y-3 text-black/80">
+            <p><strong>Track your participation:</strong> Every event you attend counts toward your loyalty status.</p>
+            <p><strong>Automatic discount:</strong> When you reach your 3rd or 5th event, the discount applies automatically to your ticket.</p>
+            <p><strong>Applies to all events:</strong> Both DDA (Blind Duck Dating) and PSD (Poly Speed Dating) count toward your loyalty rewards.</p>
+          </div>
+        </div>
+
+        <!-- TERMS -->
+        <div>
+          <h3 class="text-xl md:text-2xl font-black text-[#2f2f2f] mb-4">Terms & Conditions</h3>
+          <ul class="space-y-2 text-sm text-black/80 bg-white rounded-[1.5rem] border border-black/10 p-5 md:p-6">
+            <li>✓ Rewards apply to regular ticket prices only</li>
+            <li>✓ Discounts cannot be combined with referral rewards or other promotions unless stated otherwise</li>
+            <li>✓ Loyalty status is tied to your account and non-transferable</li>
+            <li>✓ Only confirmed attendance counts — applications or invitations do not</li>
+            <li>✓ Both DDA and PSD events count toward your loyalty progression</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
   <!-- SEARCH BAR -->
   <div class="mb-10">
     <div class="max-w-5xl mx-auto px-6" style="padding-top: 20px;">
@@ -161,6 +236,24 @@
           } else {
             referralDropdown.classList.remove("hidden");
             referralToggle.textContent = "Hide details";
+          }
+        });
+      }
+
+      // Loyalty card toggle
+      const loyaltyCard = document.getElementById("loyalty-card");
+      const loyaltyDropdown = document.getElementById("loyalty-dropdown");
+      const loyaltyToggle = document.getElementById("loyalty-toggle");
+
+      if (loyaltyCard && loyaltyDropdown && loyaltyToggle) {
+        loyaltyCard.addEventListener("click", function() {
+          const isOpen = !loyaltyDropdown.classList.contains("hidden");
+          if (isOpen) {
+            loyaltyDropdown.classList.add("hidden");
+            loyaltyToggle.textContent = "View details";
+          } else {
+            loyaltyDropdown.classList.remove("hidden");
+            loyaltyToggle.textContent = "Hide details";
           }
         });
       }
