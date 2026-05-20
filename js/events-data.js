@@ -138,8 +138,8 @@ window.DDA_EVENTS = [
     ],
 
     ctaText: "Apply for Poly Speed Dating",
-    externalUrl: "./apply.html",
-    applicationUrl: "./apply.html",
+    externalUrl: "https://poly-speed-dating.onrender.com/apply.html",
+    applicationUrl: "https://poly-speed-dating.onrender.com/apply.html",
     deadlineText: "Application deadline: 20 May 2026"
   },
 
