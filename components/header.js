@@ -34,7 +34,7 @@ class DuckHeader extends HTMLElement {
               alt="Duck Dating Apps logo"
               class="h-12 md:h-14 w-auto object-contain transition-all duration-300"
             >
-            <span class="hidden sm:block text-[#2f2f2f] font-semibold tracking-tight leading-tight text-base md:text-lg">Duck Dating Apps</span>
+            <span class="block text-[#2f2f2f] font-semibold tracking-tight leading-tight text-sm sm:text-base md:text-lg">Duck Dating Apps</span>
           </a>
 
           <!-- Desktop nav -->
