@@ -3,11 +3,11 @@ window.DDA_EVENTS = [
     slug: "blind-duck-dating-registry-deadline-april-2026",
     name: "Blind Duck Dating - Berlin",
     shortName: "BDD-april-2026",
-    date: "2026-04-30",
-    dateText: "30 April 2026",
+    date: "2026-06-01",
+    dateText: "Beginning of June 2026",
     location: "Berlin",
     frequency: "Ongoing",
-    badge: "Apply by 30 April 2026",
+    badge: "Apply by 30 May 2026",
     cardBg: "#e6f7ff",
     logo: "./images/DDA-logo.png",
     logoAlt: "Blind Duck Dating Berlin logo",
@@ -60,7 +60,7 @@ window.DDA_EVENTS = [
     ctaText: "Register to the Dating Flock (free)",
     externalUrl: "https://app.duckdatingapps.com/users/sign_up",
     applicationUrl: "https://app.duckdatingapps.com/users/sign_up",
-    deadlineText: "Registration deadline: 30 April 2026"
+    deadlineText: "Registration deadline: 30 May 2026"
   },
 
   {
