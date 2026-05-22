@@ -142,6 +142,21 @@
           <span id="event-deadline"></span>
         </div>
 
+        <section id="event-video-wrap" class="mt-12 hidden">
+          <h3 class="text-2xl md:text-3xl font-black tracking-tight mb-5">Watch the event in action</h3>
+          <div class="relative w-full bg-black rounded-[1.5rem] overflow-hidden shadow-lg" style="padding-bottom: 56.25%;">
+            <iframe
+              id="event-video-embed"
+              class="absolute top-0 left-0 w-full h-full"
+              src=""
+              title="Event preview video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </section>
+
         <section id="event-gallery-section" class="mt-12 hidden">
           <h3 class="text-2xl md:text-3xl font-black tracking-tight">Gallery</h3>
           <div id="event-gallery" class="grid sm:grid-cols-2 gap-4 mt-5"></div>
@@ -228,6 +243,9 @@
       const formatEl = document.getElementById("event-format");
       const audienceEl = document.getElementById("event-audience");
       const organizerEl = document.getElementById("event-organizer");
+
+      const videoWrapEl = document.getElementById("event-video-wrap");
+      const videoEmbedEl = document.getElementById("event-video-embed");
 
       const gallerySectionEl = document.getElementById("event-gallery-section");
       const galleryEl = document.getElementById("event-gallery");
@@ -386,6 +404,16 @@
       if (event.deadlineText) {
         deadlineWrapEl.classList.remove("hidden");
         deadlineEl.textContent = event.deadlineText;
+      }
+
+      // Add video for BDD events
+      if (event.slug === "blind-duck-dating-registry-deadline-april-2026") {
+        videoWrapEl.classList.remove("hidden");
+        const youtubeUrl = "https://www.youtube.com/watch?v=uODaA2Krub8";
+        const videoId = youtubeUrl.split("v=")[1];
+        if (videoId) {
+          videoEmbedEl.src = `https://www.youtube.com/embed/${videoId}`;
+        }
       }
 
       if (event.longDescription) {
