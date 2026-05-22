@@ -198,6 +198,49 @@
   </div>
 </section>
 
+  <!-- VIDEO SECTION -->
+<section class="pt-6 pb-2">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="block rounded-[2rem] bg-[#f0f4ff] border border-black/10 shadow-sm p-6 md:p-8 cursor-pointer hover:translate-y-[-3px] transition" id="video-card">
+      <div
+        class="inline-flex items-center gap-2 bg-[#4a90e2] text-white rounded-full px-4 py-2 text-sm font-black uppercase tracking-[0.16em]"
+        style="transform: rotate(-2deg);"
+      >
+        See It In Action
+      </div>
+
+      <h2 class="mt-5 text-3xl md:text-4xl font-black text-[#2f2f2f] leading-tight">
+        Watch how Blind Duck Dating works
+      </h2>
+
+      <p class="mt-4 text-lg text-black/70 max-w-3xl" id="video-preview">
+        Get a behind-the-scenes look at what our events are like. See how people connect, how the matching works, and why our community loves it.
+      </p>
+
+      <span class="mt-5 inline-block font-bold underline underline-offset-4 text-[#2f2f2f]" id="video-toggle">
+        Watch video
+      </span>
+    </div>
+
+    <!-- VIDEO DROPDOWN -->
+    <div id="video-dropdown" class="hidden mt-4 max-w-5xl mx-auto">
+      <div class="bg-[#f0f4ff] rounded-[2rem] border border-black/10 shadow-sm p-6 md:p-8">
+        <div class="relative w-full bg-black rounded-[1.5rem] overflow-hidden shadow-lg" style="padding-bottom: 56.25%;">
+          <iframe
+            id="video-embed"
+            class="absolute top-0 left-0 w-full h-full"
+            src="https://www.youtube.com/embed/uODaA2Krub8"
+            title="Blind Duck Dating - How it works"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
   <!-- SEARCH BAR -->
   <div class="mb-10">
     <div class="max-w-5xl mx-auto px-6" style="padding-top: 20px;">
@@ -254,6 +297,24 @@
           } else {
             loyaltyDropdown.classList.remove("hidden");
             loyaltyToggle.textContent = "Hide details";
+          }
+        });
+      }
+
+      // Video card toggle
+      const videoCard = document.getElementById("video-card");
+      const videoDropdown = document.getElementById("video-dropdown");
+      const videoToggle = document.getElementById("video-toggle");
+
+      if (videoCard && videoDropdown && videoToggle) {
+        videoCard.addEventListener("click", function() {
+          const isOpen = !videoDropdown.classList.contains("hidden");
+          if (isOpen) {
+            videoDropdown.classList.add("hidden");
+            videoToggle.textContent = "Watch video";
+          } else {
+            videoDropdown.classList.remove("hidden");
+            videoToggle.textContent = "Hide video";
           }
         });
       }
