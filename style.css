@@ -82,6 +82,7 @@ body {
   transition: transform 0.18s ease, box-shadow 0.18s ease;
   color: #2f2f2f;
   text-decoration: none;
+  min-height: 200px;
 }
 
 .dda-event-card:hover {
