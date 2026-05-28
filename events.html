@@ -231,7 +231,9 @@
           return;
         }
 
-        listEl.innerHTML = events.map(event => `
+        listEl.innerHTML = events.map(event => {
+          const isNBB = event.slug === "new-bunnies-in-berlin-june-2026";
+          return `
           <a
             href="./event.html?slug=${encodeURIComponent(event.slug)}"
             class="dda-event-card relative"
@@ -243,7 +245,7 @@
               class="dda-event-card-logo"
             />
 
-            ${event.badge ? `
+            ${!isNBB && event.badge ? `
               <div class="dda-event-card-badge">
                 ${escapeHtml(event.badge)}
               </div>
@@ -259,13 +261,16 @@
 
               <p class="dda-event-card-text">${escapeHtml(event.shortDescription || "")}</p>
 
-              <div class="dda-event-card-bottom">
-                <span class="dda-event-card-link">Open event page</span>
-                <span class="dda-event-card-date">${escapeHtml(event.dateText || event.date)}</span>
-              </div>
+              ${!isNBB ? `
+                <div class="dda-event-card-bottom">
+                  <span class="dda-event-card-link">Open event page</span>
+                  <span class="dda-event-card-date">${escapeHtml(event.dateText || event.date)}</span>
+                </div>
+              ` : ""}
             </div>
           </a>
-        `).join("");
+        `;
+        }).join("");
       }
 
       function createCalendar(container) {
