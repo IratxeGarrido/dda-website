@@ -233,6 +233,7 @@
 
         listEl.innerHTML = events.map(event => {
           const isNBB = event.slug === "new-bunnies-in-berlin-june-2026";
+          const isPSD = event.slug === "poly-speed-dating-june-2026";
           return `
           <a
             href="./event.html?slug=${encodeURIComponent(event.slug)}"
@@ -245,7 +246,13 @@
               class="dda-event-card-logo"
             />
 
-            ${!isNBB && event.badge ? `
+            ${isNBB ? `
+              <div class="dda-event-card-badge" style="background: #ff5b92; color: white;">
+                COMING SOON
+              </div>
+            ` : ""}
+
+            ${!isNBB && !isPSD && event.badge ? `
               <div class="dda-event-card-badge">
                 ${escapeHtml(event.badge)}
               </div>
