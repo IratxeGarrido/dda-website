@@ -258,23 +258,6 @@
               </div>
             ` : ""}
 
-            <div class="dda-event-card-inner">
-              <p class="dda-event-card-meta">
-                📍 ${escapeHtml(event.location || "Berlin")}
-                ${event.frequency ? `&nbsp;&nbsp;|&nbsp;&nbsp; ⏲ ${escapeHtml(event.frequency)}` : ""}
-              </p>
-
-              <h3 class="dda-event-card-title">${escapeHtml(event.name)}</h3>
-
-              <p class="dda-event-card-text">${escapeHtml(event.shortDescription || "")}</p>
-
-              ${!isNBB ? `
-                <div class="dda-event-card-bottom">
-                  <span class="dda-event-card-link">Open event page</span>
-                  <span class="dda-event-card-date">${escapeHtml(event.dateText || event.date)}</span>
-                </div>
-              ` : ""}
-            </div>
           </a>
         `;
         }).join("");
