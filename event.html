@@ -35,7 +35,6 @@
 
         <div class="grid md:grid-cols-[1.4fr_0.8fr] gap-8 items-start">
           <div>
-            <p id="event-type" class="text-sm font-black uppercase tracking-[0.2em] text-pink-500">EVENT</p>
             <h2 id="event-name-2" class="mt-3 text-3xl md:text-5xl font-black tracking-tight leading-[0.98]">Event Name</h2>
             <p id="event-description" class="mt-4 text-base md:text-lg text-black/75 max-w-2xl"></p>
           </div>
@@ -142,9 +141,7 @@
 
         <div class="mt-10 text-base text-black/75">
           <p>
-            Explore more
-            <a href="./events.html" class="underline font-semibold">dating events in Berlin</a>
-            by Blind Duck Dating.
+            <a href="https://www.duckdatingapps.com/faq.html" class="underline font-semibold">More FAQ's</a>
           </p>
         </div>
 
@@ -173,7 +170,6 @@
       const event = events.find(item => item.slug === slug);
 
       const name2El = document.getElementById("event-name-2");
-      const typeEl = document.getElementById("event-type");
       const descEl = document.getElementById("event-description");
       const dateEl = document.getElementById("event-date-text");
       const locationEl = document.getElementById("event-location");
@@ -294,7 +290,6 @@
       updateMetaTag('meta[property="og:url"]', canonicalUrl);
 
       name2El.textContent = event.name || "Event";
-      typeEl.textContent = (event.shortName || "EVENT").toUpperCase();
       descEl.textContent = event.shortDescription || "";
 
       setText(dateEl, event.dateText);
