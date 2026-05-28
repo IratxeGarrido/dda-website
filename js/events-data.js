@@ -56,7 +56,7 @@ window.DDA_EVENTS = [
       }
     ],
 
-    ctaText: "Apply Now<br><i>free</i>",
+    ctaText: "Apply Now (free)",
     externalUrl: "https://app.duckdatingapps.com/users/sign_up",
     applicationUrl: "https://app.duckdatingapps.com/users/sign_up",
     deadlineText: "Registration deadline: 15 June 2026"
