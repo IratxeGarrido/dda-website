@@ -15,7 +15,7 @@ window.DDA_EVENTS = [
     shortDescription:
       "A curated in-person dating experience in Berlin where 8 people meet face to face in a balanced group based on values, interests and vibe.",
 
-    instagramVideoUrl: "https://www.instagram.com/p/DYzls_etJEs/",
+    videoUrl: "https://www.youtube.com/shorts/NhdCrvOJXGE",
 
     price: "5 EUR",
     priceNote: "Payment is requested only after confirmation.",
@@ -78,7 +78,7 @@ window.DDA_EVENTS = [
     shortDescription:
       "An in-person poly speed dating event in Berlin for non-monogamous, polyamorous, open-minded and LGBTQIA+ people who want to meet offline.",
 
-    instagramVideoUrl: "https://www.instagram.com/p/DX2I3wbNqoO/",
+    videoUrl: "https://www.youtube.com/watch?v=ekwBtrL89LY",
 
     price: "~18 EUR",
     priceNote:
