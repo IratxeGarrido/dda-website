@@ -28,38 +28,6 @@
 
   <duck-header></duck-header>
 
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 grid-bg opacity-40 pointer-events-none"></div>
-
-    <div class="max-w-5xl mx-auto px-6 pt-16 pb-12 md:pt-20 md:pb-14 relative">
-      <div id="event-top-badge" class="inline-flex items-center gap-2 bg-white border border-black/10 rounded-full px-4 py-2 text-sm font-bold sticker mb-6">
-        <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
-        EVENT
-      </div>
-
-      <a
-        class="dda-single-event-link inline-flex items-center justify-center w-9 h-9 rounded-full bg-pink-500 text-white hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-300 shadow-sm"
-        href="./events.html"
-        aria-label="Back to Events"
-        title="Back to Events"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-        <span class="sr-only">Back to events</span>
-      </a>
-
-      <h1 id="event-title" class="text-4xl md:text-6xl font-black tracking-tight leading-[0.95] max-w-4xl mt-6">
-        Dating Event in Berlin
-      </h1>
-
-      <div id="event-meta" class="mt-6 flex flex-wrap gap-3"></div>
-
-      <p id="event-seo-intro" class="mt-6 text-base md:text-lg text-black/75 max-w-3xl">
-        Join Blind Duck Dating for an inclusive in-person dating event in Berlin.
-      </p>
-    </div>
-  </section>
 
   <main class="pb-20 px-4">
     <div class="max-w-5xl mx-auto">
@@ -204,7 +172,6 @@
       const slug = params.get("slug");
       const event = events.find(item => item.slug === slug);
 
-      const titleEl = document.getElementById("event-title");
       const name2El = document.getElementById("event-name-2");
       const typeEl = document.getElementById("event-type");
       const descEl = document.getElementById("event-description");
@@ -214,11 +181,9 @@
       const badgeTextEl = document.getElementById("event-badge-text");
       const logoEl = document.getElementById("event-logo");
       const applyBtnEl = document.getElementById("event-apply-btn");
-      const metaEl = document.getElementById("event-meta");
       const cardEl = document.getElementById("event-card");
       const deadlineWrapEl = document.getElementById("event-deadline-wrap");
       const deadlineEl = document.getElementById("event-deadline");
-      const seoIntroEl = document.getElementById("event-seo-intro");
 
       const priceEl = document.getElementById("event-price");
       const priceNoteEl = document.getElementById("event-price-note");
@@ -304,10 +269,8 @@
 
       if (!event) {
         document.title = "Event not found — Blind Duck Dating";
-        titleEl.textContent = "Event not found";
         name2El.textContent = "Sorry, we couldn’t find that event.";
         descEl.textContent = "The link may be outdated or the event may have been removed.";
-        metaEl.innerHTML = '<span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">Please return to the event list</span>';
         cardEl.style.background = "#ffffff";
         applyBtnEl.href = "./events.html";
         applyBtnEl.textContent = "Back to events";
@@ -330,7 +293,6 @@
       updateMetaTag('meta[property="og:description"]', seoDescription);
       updateMetaTag('meta[property="og:url"]', canonicalUrl);
 
-      titleEl.textContent = event.name || "Dating Event in Berlin";
       name2El.textContent = event.name || "Event";
       typeEl.textContent = (event.shortName || "EVENT").toUpperCase();
       descEl.textContent = event.shortDescription || "";
@@ -346,10 +308,6 @@
       setText(formatEl, event.format);
       setText(audienceEl, event.audience);
       setText(organizerEl, event.organizer);
-
-      if (seoIntroEl) {
-        seoIntroEl.textContent = event.longDescription || event.shortDescription || "";
-      }
 
       priceNoteEl.textContent = event.priceNote || "";
       logoEl.src = event.logo || "";
@@ -370,18 +328,6 @@
       }
 
       cardEl.style.background = event.cardBg || "#ffffff";
-
-      const metaItems = [
-        event.dateText ? `📅 ${escapeHtml(event.dateText)}` : "",
-        event.location ? `📍 ${escapeHtml(event.location)}` : "",
-        event.frequency ? `⏲ ${escapeHtml(event.frequency)}` : ""
-      ].filter(Boolean);
-
-      metaEl.innerHTML = metaItems.map(item => `
-        <span class="inline-flex items-center rounded-full bg-white border border-black/10 px-4 py-2 text-sm font-bold">
-          ${item}
-        </span>
-      `).join("");
 
       if (event.deadlineText) {
         deadlineWrapEl.classList.remove("hidden");
