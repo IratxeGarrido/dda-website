@@ -34,25 +34,6 @@
   <script src="/components/footer.js" defer></script>
 
   <style>
-    .testimonial-track {
-      display: flex;
-      width: max-content;
-      animation: scrollTestimonials 42s linear infinite;
-    }
-
-    .testimonial-track:hover {
-      animation-play-state: paused;
-    }
-
-    @keyframes scrollTestimonials {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
     @keyframes duckFloat1 {
       0% {
         opacity: 0;
@@ -313,9 +294,9 @@
             Curated blind dating events in Berlin with 8-person groups, real-life conversation,
             and balanced matching based on shared interests and vibe.
           </p>
-          <span class="mt-6 inline-block font-bold underline underline-offset-4">Register to the Dating Flock</span>
+          <span class="mt-6 inline-block font-bold underline underline-offset-4">Apply for free</span>
           <br>
-          <span class="text-sm italic">Deadline 4<sup>th</sup> April 2026</span>
+          <span class="text-sm italic">Deadline<sup>th</sup> 15 June 2026</span>
 
         </a>
 
@@ -447,15 +428,6 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="pt-8 pb-20 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="relative">
-        <div id="testimonial-track" class="testimonial-track gap-6 py-4"></div>
-      </div>
-    </div>
-  </section>
-
   <!-- INCLUSIVE LABELS -->
  <section class="mt-0 overflow-visible relative z-10">
     <div class="relative min-h-[120px] md:min-h-[160px]">
@@ -485,6 +457,5 @@
 
   <duck-footer></duck-footer>
 
-  <script src="/js/testimonials.js"></script>
 </body>
 </html>
