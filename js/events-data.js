@@ -15,8 +15,7 @@ window.DDA_EVENTS = [
     shortDescription:
       "A curated in-person dating experience in Berlin where 8 people meet face to face in a balanced group based on values, interests and vibe.",
 
-    longDescription:
-      "Blind Duck Dating Berlin is a curated in-person dating format for people who want something more intentional than swiping. Instead of endless chatting and unclear signals, participants join a carefully structured real-life dating experience designed to create ease, chemistry and meaningful conversation. The format focuses on making dating in Berlin feel lighter, more human and less awkward, while still keeping a sense of intention and selection. It is ideal for singles who want to meet people offline in Berlin through a smaller, more personal and thoughtfully matched group setting.",
+    instagramVideoUrl: "https://www.instagram.com/p/DYzls_etJEs/",
 
     price: "5 EUR",
     priceNote: "Payment is requested only after confirmation.",
@@ -79,8 +78,7 @@ window.DDA_EVENTS = [
     shortDescription:
       "An in-person poly speed dating event in Berlin for non-monogamous, polyamorous, open-minded and LGBTQIA+ people who want to meet offline.",
 
-    longDescription:
-      "Poly Speed Dating Berlin is a moderated in-person dating event for polyamorous, ethically non-monogamous, open-minded and poly-curious people in Berlin. The event is LGBTQIA+ friendly and designed especially for people who want to connect offline rather than through apps. The format combines structure with a relaxed and welcoming atmosphere, helping participants meet multiple people in one evening without the pressure often found in traditional dating spaces. A key part of the event is that participants can express both romantic and social interest, so the experience is not only about attraction but also about building community, friendships and future connections. Matches are processed afterwards through our custom-made software and shared the next day when interest is mutual.",
+    instagramVideoUrl: "https://www.instagram.com/p/DX2I3wbNqoO/",
 
     price: "~18 EUR",
     priceNote:

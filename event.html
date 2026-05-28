@@ -388,7 +388,21 @@
         deadlineEl.textContent = event.deadlineText;
       }
 
-      if (event.longDescription) {
+      if (event.instagramVideoUrl) {
+        longDescriptionWrapEl.classList.remove("hidden");
+        longDescriptionWrapEl.querySelector("h3").textContent = "Watch";
+        longDescriptionEl.innerHTML = `
+          <iframe
+            src="https://www.instagram.com/p/${event.instagramVideoUrl.split("/p/")[1].split("/")[0]}/embed/captioned/"
+            width="100%"
+            height="600"
+            style="max-width: 100%; border-radius: 12px; border: 1px solid #e5e5e5;"
+            frameborder="0"
+            scrolling="no"
+            allowtransparency="true"
+          ></iframe>
+        `;
+      } else if (event.longDescription) {
         longDescriptionWrapEl.classList.remove("hidden");
         longDescriptionEl.textContent = event.longDescription;
       }
