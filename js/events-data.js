@@ -7,7 +7,7 @@ window.DDA_EVENTS = [
     dateText: "Beginning of June 2026",
     location: "Berlin",
     frequency: "Ongoing",
-    badge: "Apply by 30 May 2026",
+    badge: "Apply by 15 June 2026",
     cardBg: "#e6f7ff",
     logo: "./images/DDA-logo.png",
     logoAlt: "Blind Duck Dating Berlin logo",
@@ -60,7 +60,7 @@ window.DDA_EVENTS = [
     ctaText: "Register to the Dating Flock (free)",
     externalUrl: "https://app.duckdatingapps.com/users/sign_up",
     applicationUrl: "https://app.duckdatingapps.com/users/sign_up",
-    deadlineText: "Registration deadline: 30 May 2026"
+    deadlineText: "Registration deadline: 15 June 2026"
   },
 
   {
@@ -230,7 +230,7 @@ window.DDA_EVENTS = [
     dateText: "20 June 2026",
     location: "Berlin",
     frequency: "Ongoing",
-    badge: "Apply by 10 June 2026",
+    badge: "Coming Soon",
     cardBg: "#d7f0cb",
     logo: "./images/NBIB logo.png",
     logoAlt: "New Bunnies in Berlin logo",
