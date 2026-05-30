@@ -615,9 +615,10 @@
       recognition.continuous = true;
       recognition.interimResults = true;
       recognition.lang = 'en-US';
+      recognition.maxAlternatives = 1;
 
       recognition.onstart = () => {
-        transcript.textContent = 'Listening...';
+        transcript.textContent = 'Listening... Speak now!';
         transcriptDisplay.classList.remove('hidden');
       };
 
@@ -631,22 +632,32 @@
             interimTranscript += transcriptSegment;
           }
         }
-        transcript.textContent = finalTranscript + interimTranscript;
+        const displayText = finalTranscript + interimTranscript;
+        transcript.textContent = displayText || 'Listening... Speak now!';
+        if (displayText.trim()) {
+          useVoiceBtn.disabled = false;
+        }
       };
 
       recognition.onend = () => {
+        if (!finalTranscript.trim()) {
+          transcript.textContent = 'No text captured. Try speaking louder or more clearly.';
+        }
         if (finalTranscript.trim()) {
           useVoiceBtn.disabled = false;
         }
       };
 
       recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
         if (event.error === 'no-speech') {
-          transcript.textContent = 'No speech detected. Try again.';
+          transcript.textContent = 'No speech detected. Make sure your microphone is working and speak clearly.';
         } else if (event.error === 'network') {
-          transcript.textContent = 'Network error. Please check your connection.';
+          transcript.textContent = 'Network error. Please check your internet connection.';
+        } else if (event.error === 'not-allowed') {
+          transcript.textContent = 'Microphone access denied. Please allow microphone access in your browser settings.';
         } else {
-          transcript.textContent = 'Error: ' + event.error;
+          transcript.textContent = 'Error: ' + event.error + '. Try again.';
         }
       };
     }
