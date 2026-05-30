@@ -482,6 +482,8 @@
       <div class="p-6 md:p-8 space-y-4">
         <!-- VOICE INPUT SECTION -->
         <div id="voiceSection" class="space-y-4">
+          <p class="text-xs text-black/60 bg-[#f8f4ee] px-3 py-2 rounded-lg">⏱ Max 30 seconds • Will auto-stop when limit reached</p>
+
           <div class="flex items-center gap-3">
             <button
               id="recordBtn"
@@ -498,6 +500,24 @@
               class="flex-1 bg-gray-300 text-gray-500 font-bold py-3 px-4 rounded-full transition disabled:opacity-50 flex items-center justify-center gap-2"
             >
               ⏹ Stop
+            </button>
+          </div>
+
+          <div id="timerDisplay" class="hidden text-center text-sm font-bold text-[#ff5b92]">
+            Recording: <span id="timer">0</span>s / 30s
+          </div>
+
+          <div id="playbackSection" class="hidden space-y-3">
+            <div class="bg-[#f8f4ee] rounded-xl p-4 border border-black/10">
+              <p class="text-xs font-bold text-black/60 mb-2">🎙 Your recording:</p>
+              <audio id="audioPlayback" controls class="w-full"></audio>
+            </div>
+            <button
+              id="transcribeBtn"
+              type="button"
+              class="w-full bg-[#4a90e2] hover:bg-[#3a7bc8] text-white font-bold py-3 px-4 rounded-full transition flex items-center justify-center gap-2"
+            >
+              ✨ Transcribe
             </button>
           </div>
 
@@ -569,17 +589,26 @@
     const stopBtn = document.getElementById('stopBtn');
     const clearBtn = document.getElementById('clearBtn');
     const useVoiceBtn = document.getElementById('useVoiceBtn');
+    const transcribeBtn = document.getElementById('transcribeBtn');
     const submitBtn = document.getElementById('submitBtn');
     const feedbackForm = document.getElementById('feedbackForm');
     const feedbackText = document.getElementById('feedbackText');
     const transcript = document.getElementById('transcript');
     const transcriptDisplay = document.getElementById('transcriptDisplay');
+    const playbackSection = document.getElementById('playbackSection');
+    const audioPlayback = document.getElementById('audioPlayback');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timerText = document.getElementById('timer');
     const recordText = document.getElementById('recordText');
     const recordIcon = document.getElementById('recordIcon');
 
-    let recognition;
+    let mediaRecorder;
+    let audioChunks = [];
     let isRecording = false;
+    let recordingTime = 0;
+    let recordingTimer;
     let finalTranscript = '';
+    const MAX_RECORDING_TIME = 30000; // 30 seconds
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const isSupported = !!SpeechRecognition;
@@ -587,46 +616,95 @@
     if (!isSupported) {
       recordBtn.disabled = true;
       recordBtn.innerHTML = '❌ Not supported';
-    } else {
-      recognition = new SpeechRecognition();
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.lang = 'en-US';
+    }
 
-      recognition.onstart = () => {
+    async function startRecording() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
+        recordingTime = 0;
+        finalTranscript = '';
+
+        mediaRecorder.ondataavailable = (event) => {
+          audioChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          audioPlayback.src = audioUrl;
+
+          isRecording = false;
+          recordBtn.disabled = false;
+          stopBtn.disabled = true;
+          recordIcon.textContent = '🎤';
+          recordText.textContent = 'Start Recording';
+          timerDisplay.classList.add('hidden');
+          playbackSection.classList.remove('hidden');
+          clearInterval(recordingTimer);
+        };
+
+        mediaRecorder.start();
         isRecording = true;
         recordBtn.disabled = true;
         stopBtn.disabled = false;
         recordIcon.textContent = '🔴';
         recordText.textContent = 'Recording...';
-        finalTranscript = '';
+        timerDisplay.classList.remove('hidden');
+        playbackSection.classList.add('hidden');
+        transcriptDisplay.classList.add('hidden');
+
+        recordingTimer = setInterval(() => {
+          recordingTime += 100;
+          timerText.textContent = Math.floor(recordingTime / 1000);
+
+          if (recordingTime >= MAX_RECORDING_TIME) {
+            clearInterval(recordingTimer);
+            mediaRecorder.stop();
+          }
+        }, 100);
+      } catch (error) {
+        alert('Cannot access microphone. Please check permissions.');
+        console.error('Microphone error:', error);
+      }
+    }
+
+    function stopRecording() {
+      if (isRecording && mediaRecorder) {
+        mediaRecorder.stop();
+        mediaRecorder.stream.getTracks().forEach(track => track.stop());
+      }
+    }
+
+    function transcribeAudio() {
+      if (!mediaRecorder || audioChunks.length === 0) return;
+
+      transcribeBtn.disabled = true;
+      transcribeBtn.textContent = '✨ Transcribing...';
+
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+
+      recognition.onstart = () => {
         transcript.textContent = 'Listening...';
         transcriptDisplay.classList.remove('hidden');
       };
 
       recognition.onresult = (event) => {
-        let interimTranscript = '';
+        finalTranscript = '';
         for (let i = event.resultIndex; i < event.results.length; i++) {
-          const transcriptSegment = event.results[i][0].transcript;
-          if (event.results[i].isFinal) {
-            finalTranscript += transcriptSegment + ' ';
-          } else {
-            interimTranscript += transcriptSegment;
-          }
+          finalTranscript += event.results[i][0].transcript + ' ';
         }
-        transcript.textContent = finalTranscript + interimTranscript;
+        transcript.textContent = finalTranscript.trim();
+        useVoiceBtn.disabled = false;
       };
 
       recognition.onend = () => {
-        isRecording = false;
-        recordBtn.disabled = false;
-        stopBtn.disabled = true;
-        recordIcon.textContent = '🎤';
-        recordText.textContent = 'Start Recording';
-
-        if (finalTranscript.trim()) {
-          useVoiceBtn.disabled = false;
-        }
+        transcribeBtn.disabled = false;
+        transcribeBtn.textContent = '✨ Transcribe';
       };
 
       recognition.onerror = (event) => {
@@ -637,6 +715,17 @@
         } else {
           transcript.textContent = 'Error: ' + event.error;
         }
+        transcribeBtn.disabled = false;
+        transcribeBtn.textContent = '✨ Transcribe';
+      };
+
+      const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+
+      audio.onloadedmetadata = () => {
+        recognition.start();
+        audio.play();
       };
     }
 
@@ -646,30 +735,37 @@
 
     closeBtn.addEventListener('click', () => {
       feedbackModal.classList.add('hidden');
-      if (isRecording) recognition.abort();
+      if (isRecording) stopRecording();
     });
 
     feedbackModal.addEventListener('click', (e) => {
       if (e.target === feedbackModal) {
         feedbackModal.classList.add('hidden');
-        if (isRecording) recognition.abort();
+        if (isRecording) stopRecording();
       }
     });
 
     recordBtn.addEventListener('click', () => {
-      if (isSupported) recognition.start();
+      if (isSupported) startRecording();
     });
 
     stopBtn.addEventListener('click', () => {
-      if (isSupported) recognition.stop();
+      stopRecording();
+    });
+
+    transcribeBtn.addEventListener('click', () => {
+      transcribeAudio();
     });
 
     clearBtn.addEventListener('click', () => {
       finalTranscript = '';
       transcript.textContent = '';
       transcriptDisplay.classList.add('hidden');
+      playbackSection.classList.add('hidden');
       useVoiceBtn.disabled = true;
       feedbackText.value = '';
+      audioChunks = [];
+      recordingTime = 0;
     });
 
     useVoiceBtn.addEventListener('click', () => {
@@ -686,6 +782,7 @@
         finalTranscript = '';
         transcript.textContent = '';
         transcriptDisplay.classList.add('hidden');
+        playbackSection.classList.add('hidden');
         submitBtn.textContent = '✓ Sent! Thank you!';
 
         setTimeout(() => {
