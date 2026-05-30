@@ -677,42 +677,23 @@
       useVoiceBtn.disabled = true;
     });
 
-    feedbackForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    feedbackForm.addEventListener('submit', (e) => {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
 
-      try {
-        const formData = new FormData(feedbackForm);
-        const response = await fetch(feedbackForm.action, {
-          method: 'POST',
-          body: formData,
-        });
+      setTimeout(() => {
+        feedbackText.value = '';
+        finalTranscript = '';
+        transcript.textContent = '';
+        transcriptDisplay.classList.add('hidden');
+        submitBtn.textContent = '✓ Sent! Thank you!';
 
-        if (response.ok) {
-          feedbackText.value = '';
-          finalTranscript = '';
-          transcript.textContent = '';
-          transcriptDisplay.classList.add('hidden');
-          submitBtn.textContent = '✓ Sent! Thank you!';
-          submitBtn.disabled = true;
-
-          setTimeout(() => {
-            feedbackModal.classList.add('hidden');
-            submitBtn.textContent = 'Send Feedback';
-            submitBtn.disabled = false;
-          }, 2000);
-        } else {
+        setTimeout(() => {
+          feedbackModal.classList.add('hidden');
           submitBtn.textContent = 'Send Feedback';
           submitBtn.disabled = false;
-          alert('Something went wrong. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        submitBtn.textContent = 'Send Feedback';
-        submitBtn.disabled = false;
-        alert('Network error. Please try again.');
-      }
+        }, 2000);
+      }, 500);
     });
   </script>
 
