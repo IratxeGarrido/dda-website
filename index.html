@@ -626,15 +626,16 @@
         let interimTranscript = '';
         for (let i = event.resultIndex; i < event.results.length; i++) {
           const transcriptSegment = event.results[i][0].transcript;
+          console.log('Captured:', transcriptSegment, 'Final:', event.results[i].isFinal);
           if (event.results[i].isFinal) {
             finalTranscript += transcriptSegment + ' ';
           } else {
             interimTranscript += transcriptSegment;
           }
         }
-        const displayText = finalTranscript + interimTranscript;
+        const displayText = (finalTranscript + interimTranscript).trim();
         transcript.textContent = displayText || 'Listening... Speak now!';
-        if (displayText.trim()) {
+        if (displayText) {
           useVoiceBtn.disabled = false;
         }
       };
@@ -679,7 +680,11 @@
           const audioUrl = URL.createObjectURL(audioBlob);
           audioPlayback.src = audioUrl;
 
-          recognition.stop();
+          // Give recognition time to process final results (500ms delay)
+          setTimeout(() => {
+            recognition.stop();
+          }, 500);
+
           isRecording = false;
           recordBtn.disabled = false;
           stopBtn.disabled = true;
