@@ -512,13 +512,6 @@
               <p class="text-xs font-bold text-black/60 mb-2">🎙 Your recording:</p>
               <audio id="audioPlayback" controls class="w-full"></audio>
             </div>
-            <button
-              id="transcribeBtn"
-              type="button"
-              class="w-full bg-[#4a90e2] hover:bg-[#3a7bc8] text-white font-bold py-3 px-4 rounded-full transition flex items-center justify-center gap-2"
-            >
-              ✨ Transcribe
-            </button>
           </div>
 
           <div id="transcriptDisplay" class="hidden bg-[#f8f4ee] rounded-xl p-4 min-h-[100px] border border-black/10">
@@ -604,6 +597,7 @@
 
     let mediaRecorder;
     let audioChunks = [];
+    let recognition;
     let isRecording = false;
     let recordingTime = 0;
     let recordingTimer;
@@ -616,6 +610,45 @@
     if (!isSupported) {
       recordBtn.disabled = true;
       recordBtn.innerHTML = '❌ Not supported';
+    } else {
+      recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = 'en-US';
+
+      recognition.onstart = () => {
+        transcript.textContent = 'Listening...';
+        transcriptDisplay.classList.remove('hidden');
+      };
+
+      recognition.onresult = (event) => {
+        let interimTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcriptSegment = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalTranscript += transcriptSegment + ' ';
+          } else {
+            interimTranscript += transcriptSegment;
+          }
+        }
+        transcript.textContent = finalTranscript + interimTranscript;
+      };
+
+      recognition.onend = () => {
+        if (finalTranscript.trim()) {
+          useVoiceBtn.disabled = false;
+        }
+      };
+
+      recognition.onerror = (event) => {
+        if (event.error === 'no-speech') {
+          transcript.textContent = 'No speech detected. Try again.';
+        } else if (event.error === 'network') {
+          transcript.textContent = 'Network error. Please check your connection.';
+        } else {
+          transcript.textContent = 'Error: ' + event.error;
+        }
+      };
     }
 
     async function startRecording() {
@@ -635,6 +668,7 @@
           const audioUrl = URL.createObjectURL(audioBlob);
           audioPlayback.src = audioUrl;
 
+          recognition.stop();
           isRecording = false;
           recordBtn.disabled = false;
           stopBtn.disabled = true;
@@ -646,6 +680,7 @@
         };
 
         mediaRecorder.start();
+        recognition.start();
         isRecording = true;
         recordBtn.disabled = true;
         stopBtn.disabled = false;
@@ -677,58 +712,6 @@
       }
     }
 
-    function transcribeAudio() {
-      if (!mediaRecorder || audioChunks.length === 0) return;
-
-      transcribeBtn.disabled = true;
-      transcribeBtn.textContent = '✨ Transcribing...';
-
-      const recognition = new SpeechRecognition();
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.lang = 'en-US';
-
-      recognition.onstart = () => {
-        transcript.textContent = 'Listening...';
-        transcriptDisplay.classList.remove('hidden');
-      };
-
-      recognition.onresult = (event) => {
-        finalTranscript = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          finalTranscript += event.results[i][0].transcript + ' ';
-        }
-        transcript.textContent = finalTranscript.trim();
-        useVoiceBtn.disabled = false;
-      };
-
-      recognition.onend = () => {
-        transcribeBtn.disabled = false;
-        transcribeBtn.textContent = '✨ Transcribe';
-      };
-
-      recognition.onerror = (event) => {
-        if (event.error === 'no-speech') {
-          transcript.textContent = 'No speech detected. Try again.';
-        } else if (event.error === 'network') {
-          transcript.textContent = 'Network error. Please check your connection.';
-        } else {
-          transcript.textContent = 'Error: ' + event.error;
-        }
-        transcribeBtn.disabled = false;
-        transcribeBtn.textContent = '✨ Transcribe';
-      };
-
-      const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-      const audioUrl = URL.createObjectURL(audioBlob);
-      const audio = new Audio(audioUrl);
-
-      audio.onloadedmetadata = () => {
-        recognition.start();
-        audio.play();
-      };
-    }
-
     feedbackBtn.addEventListener('click', () => {
       feedbackModal.classList.remove('hidden');
     });
@@ -751,10 +734,6 @@
 
     stopBtn.addEventListener('click', () => {
       stopRecording();
-    });
-
-    transcribeBtn.addEventListener('click', () => {
-      transcribeAudio();
     });
 
     clearBtn.addEventListener('click', () => {
