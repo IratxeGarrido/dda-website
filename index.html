@@ -456,16 +456,132 @@
     </a>
   </div>
 
+  <!-- TESTIMONIALS FORM SECTION -->
+  <section class="py-16 md:py-24 bg-[#f9f7f4]">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-black mb-3">Share Your Experience</h2>
+        <p class="text-lg text-black/70">Help other ducklings discover our events. Leave a testimonial!</p>
+      </div>
+
+      <div class="bg-white rounded-[2rem] p-6 md:p-10 border border-black/10 shadow-md">
+        <form id="testimonialForm" action="https://formspree.io/f/mzzdnyqe" method="POST" enctype="multipart/form-data" class="space-y-6">
+
+          <!-- IMAGE UPLOAD -->
+          <div>
+            <label class="block text-sm font-black text-[#2f2f2f] mb-2">Your Photo <span class="text-black/50 font-normal">(optional)</span></label>
+            <div class="relative">
+              <input
+                type="file"
+                name="image"
+                id="imageInput"
+                accept="image/*"
+                class="hidden"
+              />
+              <div id="imagePreview" class="w-24 h-24 mx-auto bg-[#f0f0f0] rounded-xl border-2 border-dashed border-black/20 flex items-center justify-center text-4xl cursor-pointer hover:bg-[#e8e8e8] transition"
+                onclick="document.getElementById('imageInput').click()">
+                <span id="previewContent">🦆</span>
+              </div>
+              <p class="text-xs text-black/50 text-center mt-2">Click to upload or we'll use a duck!</p>
+            </div>
+          </div>
+
+          <!-- NAME -->
+          <div>
+            <label class="block text-sm font-bold text-[#2f2f2f] mb-2">Name *</label>
+            <input
+              type="text"
+              name="name"
+              required
+              class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black"
+              placeholder="Your name"
+            />
+          </div>
+
+          <!-- EMAIL (HIDDEN FROM VIEW) -->
+          <div>
+            <label class="block text-sm font-bold text-[#2f2f2f] mb-2">Email <span class="text-black/50 font-normal">(internal only)</span> *</label>
+            <input
+              type="email"
+              name="email"
+              required
+              class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black"
+              placeholder="your@email.com"
+            />
+            <p class="text-xs text-black/50 mt-1">Your email will only be used for follow-up and won't be displayed publicly</p>
+          </div>
+
+          <!-- EVENT DROPDOWN -->
+          <div>
+            <label class="block text-sm font-bold text-[#2f2f2f] mb-2">Which event did you attend? *</label>
+            <select
+              name="event"
+              required
+              class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black"
+            >
+              <option value="">Select an event</option>
+              <option value="Blind Duck Dating">Blind Duck Dating</option>
+              <option value="Poly Speed Dating 2025">Poly Speed Dating 2025</option>
+              <option value="Poly Speed Dating 2026">Poly Speed Dating 2026</option>
+            </select>
+          </div>
+
+          <!-- TESTIMONIAL -->
+          <div>
+            <label class="block text-sm font-bold text-[#2f2f2f] mb-2">Your Testimonial *</label>
+            <textarea
+              name="testimonial"
+              required
+              class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black resize-none"
+              placeholder="E.g., 'I came looking for a date and left with two new friends! I really appreciated how thoughtful the matching was. It felt so different from dating apps.'"
+              rows="5"
+            ></textarea>
+          </div>
+
+          <!-- STAR RATING -->
+          <div>
+            <label class="block text-sm font-bold text-[#2f2f2f] mb-3">How would you rate your experience? *</label>
+            <div class="flex gap-3" id="starRating">
+              <input type="hidden" name="rating" id="ratingValue" required />
+              <button type="button" class="text-4xl hover:scale-125 transition star-btn" data-value="1">☆</button>
+              <button type="button" class="text-4xl hover:scale-125 transition star-btn" data-value="2">☆</button>
+              <button type="button" class="text-4xl hover:scale-125 transition star-btn" data-value="3">☆</button>
+              <button type="button" class="text-4xl hover:scale-125 transition star-btn" data-value="4">☆</button>
+              <button type="button" class="text-4xl hover:scale-125 transition star-btn" data-value="5">☆</button>
+            </div>
+            <p class="text-sm text-black/60 mt-2"><span id="ratingText">Select a rating</span></p>
+          </div>
+
+          <input type="hidden" name="_subject" value="New Testimonial Submitted" />
+          <input type="hidden" name="_captcha" value="false" />
+
+          <!-- SUBMIT BUTTON -->
+          <button
+            type="submit"
+            id="submitTestimonial"
+            class="w-full bg-[#ff5b92] hover:bg-[#ff4080] text-white font-bold py-4 px-8 rounded-full transition disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+          >
+            Submit for Review
+          </button>
+
+          <p class="text-xs text-black/50 text-center">
+            ⏱ Your testimonial will be reviewed and published shortly
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <duck-footer></duck-footer>
 
   <!-- FLOATING FEEDBACK BUTTON -->
   <button
     id="feedbackBtn"
-    aria-label="Leave voice feedback"
+    aria-label="Leave feedback"
     class="fixed bottom-6 right-6 w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-[#ff5b92] to-[#ff8b4e] text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-transform flex items-center justify-center font-black text-2xl md:text-3xl hover:shadow-[0_10px_25px_rgba(255,91,146,0.4)] z-50"
-    title="Leave voice feedback"
+    title="Leave feedback"
   >
-    🎤
+    💬
   </button>
 
   <!-- FEEDBACK MODAL -->
@@ -520,6 +636,7 @@
   </div>
 
   <script>
+    // FEEDBACK MODAL
     const feedbackBtn = document.getElementById('feedbackBtn');
     const feedbackModal = document.getElementById('feedbackModal');
     const closeBtn = document.getElementById('closeBtn');
@@ -527,8 +644,6 @@
     const feedbackForm = document.getElementById('feedbackForm');
     const feedbackText = document.getElementById('feedbackText');
     const submitBtn = document.getElementById('submitBtn');
-
-
 
     feedbackBtn.addEventListener('click', () => {
       feedbackModal.classList.remove('hidden');
@@ -557,6 +672,81 @@
           submitBtn.textContent = 'Send Feedback';
           submitBtn.disabled = false;
         }, 2000);
+      }, 500);
+    });
+
+    // TESTIMONIAL FORM
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewContent = document.getElementById('previewContent');
+    const starBtns = document.querySelectorAll('.star-btn');
+    const ratingValue = document.getElementById('ratingValue');
+    const ratingText = document.getElementById('ratingText');
+    const submitTestimonial = document.getElementById('submitTestimonial');
+    const testimonialForm = document.getElementById('testimonialForm');
+
+    // Image preview
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          previewContent.textContent = '';
+          imagePreview.style.backgroundImage = `url('${event.target.result}')`;
+          imagePreview.style.backgroundSize = 'cover';
+          imagePreview.style.backgroundPosition = 'center';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Star rating
+    const ratings = ['😞', '😕', '😐', '🙂', '😍'];
+    const ratingLabels = ['Poor', 'Fair', 'Good', 'Great', 'Amazing!'];
+
+    starBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const value = btn.dataset.value;
+        ratingValue.value = value;
+        ratingText.textContent = ratingLabels[value - 1];
+
+        // Update stars
+        starBtns.forEach((b, idx) => {
+          if (idx < value) {
+            b.textContent = '★';
+            b.style.color = '#ff5b92';
+          } else {
+            b.textContent = '☆';
+            b.style.color = 'inherit';
+          }
+        });
+      });
+    });
+
+    // Form submission
+    testimonialForm.addEventListener('submit', (e) => {
+      if (!ratingValue.value) {
+        e.preventDefault();
+        alert('Please select a rating');
+        return;
+      }
+
+      submitTestimonial.disabled = true;
+      submitTestimonial.textContent = 'Submitting...';
+
+      setTimeout(() => {
+        submitTestimonial.textContent = '✓ Thank you! Your testimonial is being reviewed';
+
+        setTimeout(() => {
+          testimonialForm.reset();
+          previewContent.textContent = '🦆';
+          imagePreview.style.backgroundImage = '';
+          starBtns.forEach(btn => btn.textContent = '☆');
+          ratingText.textContent = 'Select a rating';
+          submitTestimonial.textContent = 'Submit for Review';
+          submitTestimonial.disabled = false;
+        }, 3000);
       }, 500);
     });
   </script>
