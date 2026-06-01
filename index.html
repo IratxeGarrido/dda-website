@@ -33,6 +33,9 @@
   <script src="/components/header.js" defer></script>
   <script src="/components/footer.js" defer></script>
 
+  <!-- Vosk Speech Recognition -->
+  <script src="https://cdn.jsdelivr.net/npm/vosk-browser@0.3.1/vosk.js"></script>
+
   <style>
     @keyframes duckFloat1 {
       0% {
@@ -530,6 +533,13 @@
               <p class="text-xs font-bold text-black/60 mb-2">🎙 Your recording:</p>
               <audio id="audioPlayback" controls class="w-full"></audio>
             </div>
+            <button
+              id="voskTranscribeBtn"
+              type="button"
+              class="w-full bg-[#4a90e2] hover:bg-[#3a7bc8] text-white font-bold py-3 px-4 rounded-full transition flex items-center justify-center gap-2"
+            >
+              ✨ Transcribe with AI
+            </button>
           </div>
 
           <div id="transcriptDisplay" class="hidden bg-[#f8f4ee] rounded-xl p-4 min-h-[100px] border border-black/10">
@@ -821,6 +831,78 @@
       feedbackText.value = finalTranscript.trim();
       showTab('write');
       useVoiceBtn.disabled = true;
+    });
+
+    // Vosk transcription
+    const voskTranscribeBtn = document.getElementById('voskTranscribeBtn');
+    let voskRecognizer;
+    let voskInitialized = false;
+
+    async function initVosk() {
+      try {
+        if (voskInitialized) return;
+
+        // Load Vosk model from CDN
+        const modelUrl = 'https://cdn.jsdelivr.net/npm/vosk-model-en-us@0.42.4/model.tar.gz';
+
+        voskRecognizer = new Vosk.Recognizer({ model: modelUrl, sampleRate: 16000 });
+        voskInitialized = true;
+        console.log('Vosk initialized');
+      } catch (error) {
+        console.error('Vosk init error:', error);
+        transcript.textContent = 'Error initializing Vosk. Try using browser Speech Recognition instead.';
+        transcriptDisplay.classList.remove('hidden');
+      }
+    }
+
+    async function transcribeWithVosk() {
+      if (!audioChunks || audioChunks.length === 0) {
+        transcript.textContent = 'No audio to transcribe';
+        transcriptDisplay.classList.remove('hidden');
+        return;
+      }
+
+      voskTranscribeBtn.disabled = true;
+      voskTranscribeBtn.textContent = '⏳ Transcribing...';
+      transcript.textContent = 'Processing audio...';
+      transcriptDisplay.classList.remove('hidden');
+
+      try {
+        await initVosk();
+
+        // Convert audio chunks to WAV
+        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        const arrayBuffer = await audioBlob.arrayBuffer();
+
+        // Process audio with Vosk
+        const audioData = new Uint8Array(arrayBuffer);
+        voskRecognizer.acceptWaveform(audioData);
+        const result = voskRecognizer.getResult();
+
+        if (result && result.result) {
+          finalTranscript = result.result.map(r => r.conf > 0.5 ? r.result : '').join(' ').trim();
+        } else if (result && result.partial) {
+          finalTranscript = result.partial;
+        }
+
+        if (finalTranscript) {
+          transcript.textContent = finalTranscript;
+          useVoiceBtn.disabled = false;
+        } else {
+          transcript.textContent = 'Could not transcribe audio. Try speaking clearer or use Write tab.';
+        }
+
+      } catch (error) {
+        console.error('Vosk transcription error:', error);
+        transcript.textContent = 'Transcription failed: ' + error.message;
+      } finally {
+        voskTranscribeBtn.disabled = false;
+        voskTranscribeBtn.textContent = '✨ Transcribe with AI';
+      }
+    }
+
+    voskTranscribeBtn.addEventListener('click', () => {
+      transcribeWithVosk();
     });
 
 
