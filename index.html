@@ -546,9 +546,16 @@
               id="feedbackText"
               required
               class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black resize-none"
-              placeholder="Type or paste your voice feedback here..."
+              placeholder="Type your feedback here..."
               rows="5"
             ></textarea>
+            <button
+              id="speakFeedbackBtn"
+              type="button"
+              class="mt-2 w-full bg-[#4a90e2] hover:bg-[#3a7bc8] text-white font-semibold py-2 px-4 rounded-full transition text-sm flex items-center justify-center gap-2"
+            >
+              🎤 Speak feedback (fallback)
+            </button>
           </div>
 
           <input type="hidden" name="_subject" value="Anonymous Voice Feedback" />
@@ -766,6 +773,60 @@
     useVoiceBtn.addEventListener('click', () => {
       feedbackText.value = finalTranscript.trim();
       useVoiceBtn.disabled = true;
+    });
+
+    // Speak feedback button functionality
+    const speakFeedbackBtn = document.getElementById('speakFeedbackBtn');
+    let speakRecognition;
+
+    if (isSupported) {
+      speakRecognition = new SpeechRecognition();
+      speakRecognition.continuous = false;
+      speakRecognition.interimResults = true;
+      speakRecognition.lang = 'en-US';
+
+      speakRecognition.onstart = () => {
+        speakFeedbackBtn.textContent = '🔴 Listening...';
+        speakFeedbackBtn.disabled = true;
+      };
+
+      speakRecognition.onresult = (event) => {
+        let interimText = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcriptSegment = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            feedbackText.value += transcriptSegment + ' ';
+          } else {
+            interimText += transcriptSegment;
+          }
+        }
+      };
+
+      speakRecognition.onend = () => {
+        speakFeedbackBtn.textContent = '🎤 Speak feedback (fallback)';
+        speakFeedbackBtn.disabled = false;
+      };
+
+      speakRecognition.onerror = (event) => {
+        console.error('Speak error:', event.error);
+        if (event.error === 'no-speech') {
+          feedbackText.value += '[No speech detected]';
+        } else if (event.error === 'not-allowed') {
+          feedbackText.value += '[Microphone access denied]';
+        } else {
+          feedbackText.value += '[Error: ' + event.error + ']';
+        }
+        speakFeedbackBtn.textContent = '🎤 Speak feedback (fallback)';
+        speakFeedbackBtn.disabled = false;
+      };
+    }
+
+    speakFeedbackBtn.addEventListener('click', () => {
+      if (isSupported && speakRecognition) {
+        speakRecognition.start();
+      } else {
+        feedbackText.value += '[Speech recognition not supported]';
+      }
     });
 
     feedbackForm.addEventListener('submit', (e) => {
