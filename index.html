@@ -126,6 +126,15 @@
         padding: 0.85rem 1rem;
       }
     }
+
+    /* Hide scrollbar for carousel */
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
   </style>
 </head>
 
@@ -521,8 +530,8 @@
                 </button>
 
                 <!-- Carousel Container -->
-                <div id="avatarCarousel" class="flex-1 overflow-hidden">
-                  <div id="avatarGrid" class="flex gap-3 transition-transform duration-300 ease-out">
+                <div id="avatarCarousel" class="flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide">
+                  <div id="avatarGrid" class="flex gap-3 transition-transform duration-300 ease-out pb-2">
                     <!-- Avatars will be inserted here -->
                   </div>
                 </div>
@@ -924,7 +933,7 @@
       { name: 'Rosie Valencia', emoji: '💗', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337166/Pink_Hair_ubijq2.png' },
       { name: 'Storm Atlas', emoji: '⛈️', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337166/Grey_Purple_hair_fc5ilq.png' },
           { name: 'Skyler Pride', emoji: '🏳️‍🌈', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337162/Rainbow_Flag_bqafqt.png' },
-      { name: 'Taylor Armstrong', emoji: '🔧', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337166/Construction_Duck_mwsguf.png' },
+      { name: 'Harry S. Stamper', emoji: '🔧', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337166/Construction_Duck_mwsguf.png' },
       { name: 'Harper Madison', emoji: '🎩', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337166/Main_Hat_az275k.png' },
       { name: 'Phoenix Winters', emoji: '❄️', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337166/Cool_Black_Duck_xxpify.png' },
       { name: 'Avery Stone', emoji: '💎', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337165/Gangsta_Girl_l5x31p.png' },
@@ -932,16 +941,16 @@
       { name: 'Riley Skate', emoji: '🛹', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337165/Skateboard_Duck_o2deru.png' },
       { name: 'Aria Curls', emoji: '💕', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337165/Curly_Hair_b2fcho.png' },
       { name: 'Jazz Sylvester', emoji: '✨', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337164/Fly_Duck_ns8bb5.png' },
-      { name: 'Dakota Westfield', emoji: '🤠', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337164/Cowgirl_Duck_rzmvle.png' },
+      { name: 'Dakota Kinx', emoji: '🤠', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337164/Cowgirl_Duck_rzmvle.png' },
       { name: 'Cloud Bailey', emoji: '☁️', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337164/Fluuffy_Duck_rz3qsw.png' },
       { name: 'Sunny Crawford', emoji: '☀️', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337163/Blond_Boy_zdcv9a.png' },
-      { name: 'Morgan Blake', emoji: '🔥', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337163/Burner_Quack_lycixe.png' },
+      { name: 'Burny Buns', emoji: '🔥', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337163/Burner_Quack_lycixe.png' },
       { name: 'Sage Greenwood', emoji: '💚', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337163/Green_Cutie_dy0qsx.png' },
       { name: 'Lucia Santos', emoji: '🌺', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337163/Latina_Duck_ppfisy.png' },
       { name: 'Finley Brushwell', emoji: '🎨', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337163/Painter_Quack_hf2uvw.png' },
-      { name: 'Echo Holloway', emoji: '🎵', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337162/Raver_Duck_ckdwx6.png' },
+      { name: 'Echo von Rave', emoji: '🎵', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337162/Raver_Duck_ckdwx6.png' },
   { name: 'Iris Bloom', emoji: '🌸', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337162/Rainbow_Flower_jjlenq.png' },
-      { name: 'Rebel Sinclair', emoji: '⚡', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337162/Bad_Boy_a8q8n3.png' },
+      { name: 'Vin Benzin', emoji: '⚡', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337162/Bad_Boy_a8q8n3.png' },
       { name: 'Peace Shepherd', emoji: '☮️', url: 'https://res.cloudinary.com/dxlmwpnxs/image/upload/v1780337162/Hippie_Love_hyn9cn.png' }
     ];
 
@@ -1084,15 +1093,16 @@
       avatarGrid.appendChild(btn);
     });
 
-    // Carousel navigation - infinite circular scrolling
+    // Carousel navigation - scroll all ducks continuously
     function updateCarouselPosition() {
       const avatarButtons = document.querySelectorAll('.avatar-btn');
       const totalItems = avatarButtons.length;
+      const itemWidth = 64 + 12; // avatar width + gap
 
       // Wrap around infinitely (modulo for true circular behavior)
       currentIndex = ((currentIndex % totalItems) + totalItems) % totalItems;
 
-      const offset = -(currentIndex * (64 + 12)); // 64px avatar + 12px gap
+      const offset = -(currentIndex * itemWidth);
       avatarGrid.style.transform = `translateX(${offset}px)`;
     }
 
