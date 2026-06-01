@@ -495,12 +495,15 @@
             <label class="block text-sm font-black text-[#2f2f2f] mb-3">Profile Picture <span class="text-black/50 font-normal">(optional)</span></label>
 
             <!-- Toggle Switch -->
-            <div class="flex items-center justify-center gap-4 mb-4 bg-[#f0f0f0] p-3 rounded-lg">
+            <div class="flex items-center justify-center gap-2 mb-4 bg-[#f0f0f0] p-3 rounded-lg flex-wrap">
               <button type="button" id="toggleDuck" class="toggle-btn active px-4 py-2 rounded-full font-bold text-sm transition bg-[#ff5b92] text-white">
                 🦆 Choose Duck Avatar
               </button>
               <button type="button" id="toggleUpload" class="toggle-btn px-4 py-2 rounded-full font-bold text-sm transition text-black/60 hover:text-black">
                 📸 Upload Your Photo
+              </button>
+              <button type="button" id="toggleBecomeDuck" class="toggle-btn px-4 py-2 rounded-full font-bold text-sm transition text-black/60 hover:text-black">
+                ✨ Become a Duck
               </button>
             </div>
 
@@ -559,7 +562,55 @@
               </div>
             </div>
 
+            <!-- BECOME A DUCK -->
+            <div id="becomeDuckSection" class="hidden">
+              <div class="bg-gradient-to-br from-[#ffd36e]/20 to-[#ff5b92]/10 rounded-2xl p-6 border-2 border-[#ffd36e]/50">
+                <div class="text-center mb-6">
+                  <p class="text-3xl mb-2">✨</p>
+                  <h3 class="text-lg font-black text-[#2f2f2f] mb-2">Support Our Project</h3>
+                  <p class="text-sm text-black/70">Upload your image and we'll create a custom duck avatar for you</p>
+                </div>
+
+                <input
+                  type="file"
+                  id="duckImageInput"
+                  accept="image/*"
+                  class="hidden"
+                />
+                <div id="duckImagePreview" class="w-32 h-32 mx-auto bg-[#f0f0f0] rounded-xl border-2 border-dashed border-[#ffd36e] flex items-center justify-center text-5xl cursor-pointer hover:bg-[#e8e8e8] transition mb-4"
+                  onclick="document.getElementById('duckImageInput').click()">
+                  <span id="duckPreviewContent">🦆</span>
+                </div>
+                <p class="text-xs text-black/50 text-center mb-4">Click to upload your reference image</p>
+
+                <div id="duckImageUrlDisplay" class="mt-3 p-3 bg-white rounded-lg hidden mb-4">
+                  <p class="text-xs font-bold text-black/70 mb-1">Image uploaded:</p>
+                  <p id="duckImageUrl" class="text-xs text-[#ff5b92] break-all font-mono"></p>
+                </div>
+
+                <div class="bg-white rounded-xl p-4 border border-[#ffd36e] mb-4">
+                  <div class="flex items-center justify-between mb-2">
+                    <p class="font-bold text-[#2f2f2f]">Custom Duck Avatar</p>
+                    <span class="text-lg font-black text-[#ff5b92]">€5</span>
+                  </div>
+                  <p class="text-xs text-black/60">Your unique duck will be created and added to our community. All proceeds support the project.</p>
+                </div>
+
+                <button
+                  type="button"
+                  id="becomeDuckBtn"
+                  class="w-full bg-gradient-to-r from-[#ffd36e] to-[#ff5b92] hover:shadow-lg text-white font-bold py-3 px-6 rounded-full transition"
+                >
+                  💳 Proceed to Payment (€5)
+                </button>
+                <p class="text-xs text-black/50 text-center mt-3">
+                  Payment will be processed securely. A moderator will create your duck within 48 hours.
+                </p>
+              </div>
+            </div>
+
             <input type="hidden" id="imageUrlField" name="image_url" />
+            <input type="hidden" id="duckImageUrlField" name="duck_image_url" />
           </div>
 
           <!-- NAME & AGE -->
@@ -787,8 +838,10 @@
     // TESTIMONIAL FORM
     const toggleDuck = document.getElementById('toggleDuck');
     const toggleUpload = document.getElementById('toggleUpload');
+    const toggleBecomeDuck = document.getElementById('toggleBecomeDuck');
     const avatarSection = document.getElementById('avatarSection');
     const uploadSection = document.getElementById('uploadSection');
+    const becomeDuckSection = document.getElementById('becomeDuckSection');
     const avatarGrid = document.getElementById('avatarGrid');
     const selectedAvatarDisplay = document.getElementById('selectedAvatarDisplay');
     const selectedAvatarPreview = document.getElementById('selectedAvatarPreview');
@@ -799,29 +852,54 @@
     const imageUrlDisplay = document.getElementById('imageUrlDisplay');
     const imageUrl = document.getElementById('imageUrl');
     const imageUrlField = document.getElementById('imageUrlField');
+    const duckImageInput = document.getElementById('duckImageInput');
+    const duckImagePreview = document.getElementById('duckImagePreview');
+    const duckPreviewContent = document.getElementById('duckPreviewContent');
+    const duckImageUrlDisplay = document.getElementById('duckImageUrlDisplay');
+    const duckImageUrl = document.getElementById('duckImageUrl');
+    const duckImageUrlField = document.getElementById('duckImageUrlField');
+    const becomeDuckBtn = document.getElementById('becomeDuckBtn');
     const starBtns = document.querySelectorAll('.star-btn');
     const ratingValue = document.getElementById('ratingValue');
     const ratingText = document.getElementById('ratingText');
     const submitTestimonial = document.getElementById('submitTestimonial');
     const testimonialForm = document.getElementById('testimonialForm');
 
-    // Toggle between duck avatar and photo upload
+    // Toggle between duck avatar, photo upload, and become a duck
     toggleDuck.addEventListener('click', () => {
       avatarSection.classList.remove('hidden');
       uploadSection.classList.add('hidden');
+      becomeDuckSection.classList.add('hidden');
       toggleDuck.classList.add('active', 'bg-[#ff5b92]', 'text-white');
       toggleDuck.classList.remove('text-black/60');
       toggleUpload.classList.remove('active', 'bg-[#ff5b92]', 'text-white');
       toggleUpload.classList.add('text-black/60');
+      toggleBecomeDuck.classList.remove('active', 'bg-[#ff5b92]', 'text-white');
+      toggleBecomeDuck.classList.add('text-black/60');
     });
 
     toggleUpload.addEventListener('click', () => {
       uploadSection.classList.remove('hidden');
       avatarSection.classList.add('hidden');
+      becomeDuckSection.classList.add('hidden');
       toggleUpload.classList.add('active', 'bg-[#ff5b92]', 'text-white');
       toggleUpload.classList.remove('text-black/60');
       toggleDuck.classList.remove('active', 'bg-[#ff5b92]', 'text-white');
       toggleDuck.classList.add('text-black/60');
+      toggleBecomeDuck.classList.remove('active', 'bg-[#ff5b92]', 'text-white');
+      toggleBecomeDuck.classList.add('text-black/60');
+    });
+
+    toggleBecomeDuck.addEventListener('click', () => {
+      becomeDuckSection.classList.remove('hidden');
+      avatarSection.classList.add('hidden');
+      uploadSection.classList.add('hidden');
+      toggleBecomeDuck.classList.add('active', 'bg-[#ff5b92]', 'text-white');
+      toggleBecomeDuck.classList.remove('text-black/60');
+      toggleDuck.classList.remove('active', 'bg-[#ff5b92]', 'text-white');
+      toggleDuck.classList.add('text-black/60');
+      toggleUpload.classList.remove('active', 'bg-[#ff5b92]', 'text-white');
+      toggleUpload.classList.add('text-black/60');
     });
 
     // Avatar options with direct Cloudinary links
@@ -882,6 +960,63 @@
           alert(`Image upload failed: ${error.message}`);
         });
       }
+    });
+
+    // Duck image upload to Cloudinary
+    duckImageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        duckPreviewContent.textContent = '⏳';
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'ml_default');
+        formData.append('folder', 'profile-pics');
+
+        fetch('https://api.cloudinary.com/v1_1/dxlmwpnxs/image/upload', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.error) {
+            throw new Error(data.error.message || 'Upload error');
+          }
+          if (data.secure_url) {
+            duckPreviewContent.textContent = '';
+            duckImagePreview.style.backgroundImage = `url('${data.secure_url}')`;
+            duckImagePreview.style.backgroundSize = 'cover';
+            duckImagePreview.style.backgroundPosition = 'center';
+
+            duckImageUrl.textContent = data.secure_url;
+            duckImageUrlField.value = data.secure_url;
+            duckImageUrlDisplay.classList.remove('hidden');
+
+            console.log('Duck image uploaded:', data.secure_url);
+          } else {
+            throw new Error('No URL returned from upload');
+          }
+        })
+        .catch(error => {
+          console.error('Upload error:', error);
+          duckPreviewContent.textContent = '❌';
+          alert(`Image upload failed: ${error.message}`);
+        });
+      }
+    });
+
+    // Become a Duck button handler
+    becomeDuckBtn.addEventListener('click', () => {
+      if (!duckImageUrlField.value) {
+        alert('Please upload an image first');
+        return;
+      }
+      alert('Thank you! You will be redirected to payment. A moderator will create your custom duck within 48 hours.');
     });
 
     // Carousel functionality
