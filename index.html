@@ -496,13 +496,6 @@
           >
             ✏️ Write
           </button>
-          <button
-            id="tabSpeak"
-            type="button"
-            class="flex-1 py-3 px-4 font-bold text-sm border-b-2 border-transparent text-black/60 hover:text-black transition"
-          >
-            🗣️ Speak
-          </button>
         </div>
 
         <!-- RECORD FEEDBACK SECTION -->
@@ -589,44 +582,6 @@
           </form>
         </div>
 
-        <!-- SPEAK FEEDBACK SECTION -->
-        <div id="speakSection" class="hidden space-y-4">
-          <p class="text-xs text-black/60 bg-[#f8f4ee] px-3 py-2 rounded-lg">Speak your feedback and it will appear below</p>
-
-          <button
-            id="speakFeedbackBtn"
-            type="button"
-            class="w-full bg-[#4a90e2] hover:bg-[#3a7bc8] text-white font-bold py-3 px-4 rounded-full transition flex items-center justify-center gap-2"
-          >
-            🗣️ Start Speaking
-          </button>
-
-          <div id="speakOutputSection" class="bg-[#f8f4ee] rounded-xl p-4 border border-black/10 min-h-[100px]">
-            <p id="speakOutput" class="text-black/70 text-sm leading-relaxed">Your transcribed feedback will appear here...</p>
-          </div>
-
-          <form id="speakForm" action="https://formspree.io/f/mnjgejbq" method="POST" class="space-y-4">
-            <textarea
-              name="feedback"
-              id="speakText"
-              required
-              class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black resize-none"
-              placeholder="Edit your feedback here..."
-              rows="4"
-            ></textarea>
-
-            <input type="hidden" name="_subject" value="Anonymous Voice Feedback" />
-            <input type="hidden" name="_captcha" value="false" />
-
-            <button
-              type="submit"
-              id="speakSubmitBtn"
-              class="w-full bg-[#2f2f2f] hover:bg-black text-white font-bold py-3 px-8 rounded-full transition disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Send Feedback
-            </button>
-          </form>
-        </div>
 
         <button
           id="closeBtn"
@@ -647,10 +602,8 @@
     // Tabs
     const tabRecord = document.getElementById('tabRecord');
     const tabWrite = document.getElementById('tabWrite');
-    const tabSpeak = document.getElementById('tabSpeak');
     const recordSection = document.getElementById('recordSection');
     const writeSection = document.getElementById('writeSection');
-    const speakSection = document.getElementById('speakSection');
 
     // Record section
     const recordBtn = document.getElementById('recordBtn');
@@ -671,12 +624,6 @@
     const feedbackText = document.getElementById('feedbackText');
     const submitBtn = document.getElementById('submitBtn');
 
-    // Speak section
-    const speakFeedbackBtn = document.getElementById('speakFeedbackBtn');
-    const speakForm = document.getElementById('speakForm');
-    const speakText = document.getElementById('speakText');
-    const speakOutput = document.getElementById('speakOutput');
-    const speakSubmitBtn = document.getElementById('speakSubmitBtn');
 
     let mediaRecorder;
     let audioChunks = [];
@@ -815,14 +762,11 @@
     function showTab(tabName) {
       recordSection.classList.add('hidden');
       writeSection.classList.add('hidden');
-      speakSection.classList.add('hidden');
 
       tabRecord.classList.remove('border-[#ff5b92]', 'text-[#ff5b92]');
       tabRecord.classList.add('border-transparent', 'text-black/60');
       tabWrite.classList.remove('border-[#ff5b92]', 'text-[#ff5b92]');
       tabWrite.classList.add('border-transparent', 'text-black/60');
-      tabSpeak.classList.remove('border-[#ff5b92]', 'text-[#ff5b92]');
-      tabSpeak.classList.add('border-transparent', 'text-black/60');
 
       if (tabName === 'record') {
         recordSection.classList.remove('hidden');
@@ -832,16 +776,11 @@
         writeSection.classList.remove('hidden');
         tabWrite.classList.add('border-[#ff5b92]', 'text-[#ff5b92]');
         tabWrite.classList.remove('border-transparent', 'text-black/60');
-      } else if (tabName === 'speak') {
-        speakSection.classList.remove('hidden');
-        tabSpeak.classList.add('border-[#ff5b92]', 'text-[#ff5b92]');
-        tabSpeak.classList.remove('border-transparent', 'text-black/60');
       }
     }
 
     tabRecord.addEventListener('click', () => showTab('record'));
     tabWrite.addEventListener('click', () => showTab('write'));
-    tabSpeak.addEventListener('click', () => showTab('speak'));
 
     feedbackBtn.addEventListener('click', () => {
       feedbackModal.classList.remove('hidden');
@@ -879,105 +818,11 @@
     });
 
     useVoiceBtn.addEventListener('click', () => {
-      speakText.value = finalTranscript.trim();
-      showTab('speak');
+      feedbackText.value = finalTranscript.trim();
+      showTab('write');
       useVoiceBtn.disabled = true;
     });
 
-    // Speak feedback button functionality
-    let speakRecognition;
-
-    if (isSupported) {
-      speakRecognition = new SpeechRecognition();
-      speakRecognition.continuous = false;
-      speakRecognition.interimResults = true;
-      speakRecognition.lang = 'en-US';
-
-      speakRecognition.onstart = () => {
-        speakFeedbackBtn.textContent = '🔴 Listening...';
-        speakFeedbackBtn.disabled = true;
-        speakOutput.textContent = 'Listening...';
-      };
-
-      speakRecognition.onresult = (event) => {
-        let interimText = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          const transcriptSegment = event.results[i][0].transcript;
-          if (event.results[i].isFinal) {
-            speakText.value += transcriptSegment + ' ';
-            speakOutput.textContent = speakText.value;
-          } else {
-            interimText += transcriptSegment;
-          }
-        }
-      };
-
-      speakRecognition.onend = () => {
-        speakFeedbackBtn.textContent = '🎤 Speak feedback (fallback)';
-        speakFeedbackBtn.disabled = false;
-      };
-
-      speakRecognition.onend = () => {
-        speakFeedbackBtn.textContent = '🗣️ Start Speaking';
-        speakFeedbackBtn.disabled = false;
-      };
-
-      speakRecognition.onerror = (event) => {
-        console.error('Speak error:', event.error);
-        if (event.error === 'no-speech') {
-          speakOutput.textContent = '[No speech detected]';
-        } else if (event.error === 'not-allowed') {
-          speakOutput.textContent = '[Microphone access denied]';
-        } else {
-          speakOutput.textContent = '[Error: ' + event.error + ']';
-        }
-        speakFeedbackBtn.textContent = '🗣️ Start Speaking';
-        speakFeedbackBtn.disabled = false;
-      };
-    }
-
-    speakFeedbackBtn.addEventListener('click', () => {
-      if (isSupported && speakRecognition) {
-        speakRecognition.start();
-      } else {
-        speakOutput.textContent = '[Speech recognition not supported]';
-      }
-    });
-
-    speakForm.addEventListener('submit', (e) => {
-      speakSubmitBtn.disabled = true;
-      speakSubmitBtn.textContent = 'Sending...';
-
-      setTimeout(() => {
-        speakText.value = '';
-        speakOutput.textContent = 'Your transcribed feedback will appear here...';
-        speakSubmitBtn.textContent = '✓ Sent! Thank you!';
-
-        setTimeout(() => {
-          feedbackModal.classList.add('hidden');
-          speakSubmitBtn.textContent = 'Send Feedback';
-          speakSubmitBtn.disabled = false;
-          showTab('record');
-        }, 2000);
-      }, 500);
-    });
-
-    feedbackForm.addEventListener('submit', (e) => {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-
-      setTimeout(() => {
-        feedbackText.value = '';
-        submitBtn.textContent = '✓ Sent! Thank you!';
-
-        setTimeout(() => {
-          feedbackModal.classList.add('hidden');
-          submitBtn.textContent = 'Send Feedback';
-          submitBtn.disabled = false;
-          showTab('record');
-        }, 2000);
-      }, 500);
-    });
 
     feedbackForm.addEventListener('submit', (e) => {
       submitBtn.disabled = true;
