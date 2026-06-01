@@ -481,42 +481,31 @@
       </div>
 
       <div class="p-6 md:p-8 space-y-4">
-        <!-- WRITE & SPEAK SECTION -->
-        <div class="space-y-4">
-          <form id="feedbackForm" action="https://formspree.io/f/mnjgejbq" method="POST" class="space-y-4">
-            <div>
-              <label class="block text-sm font-bold text-[#2f2f2f] mb-2">Your Feedback</label>
-              <textarea
-                name="feedback"
-                id="feedbackText"
-                required
-                class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black resize-none"
-                placeholder="Type or speak your feedback here..."
-                rows="5"
-              ></textarea>
+        <!-- FEEDBACK FORM -->
+        <form id="feedbackForm" action="https://formspree.io/f/mnjgejbq" method="POST" class="space-y-4">
+          <div>
+            <label class="block text-sm font-bold text-[#2f2f2f] mb-2">Your Feedback</label>
+            <textarea
+              name="feedback"
+              id="feedbackText"
+              required
+              class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black resize-none"
+              placeholder="Share your thoughts, questions, or ideas..."
+              rows="5"
+            ></textarea>
+          </div>
 
-              <button
-                id="speakBtn"
-                type="button"
-                class="mt-3 w-full bg-[#4a90e2] hover:bg-[#3a7bc8] text-white font-bold py-3 px-4 rounded-full transition flex items-center justify-center gap-2"
-              >
-                <span id="speakIcon">🎤</span>
-                <span id="speakText">Speak Feedback</span>
-              </button>
-            </div>
+          <input type="hidden" name="_subject" value="Anonymous Feedback" />
+          <input type="hidden" name="_captcha" value="false" />
 
-            <input type="hidden" name="_subject" value="Anonymous Feedback" />
-            <input type="hidden" name="_captcha" value="false" />
-
-            <button
-              type="submit"
-              id="submitBtn"
-              class="w-full bg-[#2f2f2f] hover:bg-black text-white font-bold py-3 px-8 rounded-full transition disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Send Feedback
-            </button>
-          </form>
-        </div>
+          <button
+            type="submit"
+            id="submitBtn"
+            class="w-full bg-[#2f2f2f] hover:bg-black text-white font-bold py-3 px-8 rounded-full transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Send Feedback
+          </button>
+        </form>
 
 
         <button
@@ -538,64 +527,7 @@
     const feedbackForm = document.getElementById('feedbackForm');
     const feedbackText = document.getElementById('feedbackText');
     const submitBtn = document.getElementById('submitBtn');
-    const speakBtn = document.getElementById('speakBtn');
-    const speakIcon = document.getElementById('speakIcon');
-    const speakText = document.getElementById('speakText');
 
-
-    // Speech to Text
-    let speechRecognition;
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const isSupported = !!SpeechRecognition;
-
-    if (isSupported) {
-      speechRecognition = new SpeechRecognition();
-      speechRecognition.continuous = false;
-      speechRecognition.interimResults = true;
-      speechRecognition.lang = 'en-US';
-
-      speechRecognition.onstart = () => {
-        speakBtn.textContent = '🔴 Listening...';
-        speakBtn.disabled = true;
-        speakIcon.textContent = '🔴';
-      };
-
-      speechRecognition.onresult = (event) => {
-        let interimText = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          const transcriptSegment = event.results[i][0].transcript;
-          if (event.results[i].isFinal) {
-            feedbackText.value += transcriptSegment + ' ';
-          } else {
-            interimText = transcriptSegment;
-          }
-        }
-      };
-
-      speechRecognition.onend = () => {
-        speakBtn.textContent = '🎤 Speak Feedback';
-        speakBtn.disabled = false;
-        speakIcon.textContent = '🎤';
-      };
-
-      speechRecognition.onerror = (event) => {
-        console.error('Speech error:', event.error);
-        let errorMsg = 'Error: ' + event.error;
-        if (event.error === 'no-speech') {
-          errorMsg = 'No speech detected. Try again.';
-        } else if (event.error === 'not-allowed') {
-          errorMsg = 'Microphone access denied. Allow in browser settings.';
-        } else if (event.error === 'network') {
-          errorMsg = 'Network error. Check your connection.';
-        }
-        feedbackText.value += '[' + errorMsg + '] ';
-        speakBtn.textContent = '🎤 Speak Feedback';
-        speakBtn.disabled = false;
-      };
-    } else {
-      speakBtn.disabled = true;
-      speakBtn.textContent = '❌ Not supported';
-    }
 
 
     feedbackBtn.addEventListener('click', () => {
@@ -604,22 +536,13 @@
 
     closeBtn.addEventListener('click', () => {
       feedbackModal.classList.add('hidden');
-      if (isRecording) stopRecording();
     });
 
     feedbackModal.addEventListener('click', (e) => {
       if (e.target === feedbackModal) {
         feedbackModal.classList.add('hidden');
-        if (isRecording) stopRecording();
       }
     });
-
-    speakBtn.addEventListener('click', () => {
-      if (isSupported) {
-        speechRecognition.start();
-      }
-    });
-
 
     feedbackForm.addEventListener('submit', (e) => {
       submitBtn.disabled = true;
@@ -627,10 +550,6 @@
 
       setTimeout(() => {
         feedbackText.value = '';
-        finalTranscript = '';
-        transcript.textContent = '';
-        transcriptDisplay.classList.add('hidden');
-        playbackSection.classList.add('hidden');
         submitBtn.textContent = '✓ Sent! Thank you!';
 
         setTimeout(() => {
