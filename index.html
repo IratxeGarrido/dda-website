@@ -481,96 +481,31 @@
       </div>
 
       <div class="p-6 md:p-8 space-y-4">
-        <!-- TABS -->
-        <div class="flex gap-2 border-b border-black/10">
-          <button
-            id="tabRecord"
-            type="button"
-            class="flex-1 py-3 px-4 font-bold text-sm border-b-2 border-[#ff5b92] text-[#ff5b92] transition"
-          >
-            🎙 Record
-          </button>
-          <button
-            id="tabWrite"
-            type="button"
-            class="flex-1 py-3 px-4 font-bold text-sm border-b-2 border-transparent text-black/60 hover:text-black transition"
-          >
-            ✏️ Write
-          </button>
-        </div>
-
-        <!-- RECORD FEEDBACK SECTION -->
-        <div id="recordSection" class="space-y-4">
-          <p class="text-xs text-black/60 bg-[#f8f4ee] px-3 py-2 rounded-lg">⏱ Max 30 seconds • Will auto-stop when limit reached</p>
-
-          <div class="flex items-center gap-3">
-            <button
-              id="recordBtn"
-              type="button"
-              class="flex-1 bg-[#ff5b92] hover:bg-[#ff4080] text-white font-bold py-3 px-4 rounded-full transition flex items-center justify-center gap-2"
-            >
-              <span id="recordIcon">🎤</span>
-              <span id="recordText">Start Recording</span>
-            </button>
-            <button
-              id="stopBtn"
-              type="button"
-              disabled
-              class="flex-1 bg-gray-300 text-gray-500 font-bold py-3 px-4 rounded-full transition disabled:opacity-50 flex items-center justify-center gap-2"
-            >
-              ⏹ Stop
-            </button>
-          </div>
-
-          <div id="timerDisplay" class="hidden text-center text-sm font-bold text-[#ff5b92]">
-            Recording: <span id="timer">0</span>s / 30s
-          </div>
-
-          <div id="playbackSection" class="hidden space-y-3">
-            <div class="bg-[#f8f4ee] rounded-xl p-4 border border-black/10">
-              <p class="text-xs font-bold text-black/60 mb-2">🎙 Your recording:</p>
-              <audio id="audioPlayback" controls class="w-full"></audio>
-            </div>
-          </div>
-
-          <div id="transcriptDisplay" class="hidden bg-[#f8f4ee] rounded-xl p-4 min-h-[100px] border border-black/10">
-            <p id="transcript" class="text-black/70 text-sm leading-relaxed"></p>
-          </div>
-
-          <div class="flex gap-2">
-            <button
-              id="clearBtn"
-              type="button"
-              class="flex-1 bg-gray-200 hover:bg-gray-300 text-black font-semibold py-2 px-4 rounded-full transition"
-            >
-              Clear
-            </button>
-            <button
-              id="useVoiceBtn"
-              type="button"
-              disabled
-              class="flex-1 bg-[#4a90e2] hover:bg-[#3a7bc8] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded-full transition"
-            >
-              Use This
-            </button>
-          </div>
-        </div>
-
-        <!-- WRITE FEEDBACK SECTION -->
-        <div id="writeSection" class="hidden space-y-4">
+        <!-- WRITE & SPEAK SECTION -->
+        <div class="space-y-4">
           <form id="feedbackForm" action="https://formspree.io/f/mnjgejbq" method="POST" class="space-y-4">
             <div>
+              <label class="block text-sm font-bold text-[#2f2f2f] mb-2">Your Feedback</label>
               <textarea
                 name="feedback"
                 id="feedbackText"
                 required
                 class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black resize-none"
-                placeholder="Type your feedback here..."
+                placeholder="Type or speak your feedback here..."
                 rows="5"
               ></textarea>
+
+              <button
+                id="speakBtn"
+                type="button"
+                class="mt-3 w-full bg-[#4a90e2] hover:bg-[#3a7bc8] text-white font-bold py-3 px-4 rounded-full transition flex items-center justify-center gap-2"
+              >
+                <span id="speakIcon">🎤</span>
+                <span id="speakText">Speak Feedback</span>
+              </button>
             </div>
 
-            <input type="hidden" name="_subject" value="Anonymous Voice Feedback" />
+            <input type="hidden" name="_subject" value="Anonymous Feedback" />
             <input type="hidden" name="_captcha" value="false" />
 
             <button
@@ -600,187 +535,68 @@
     const feedbackModal = document.getElementById('feedbackModal');
     const closeBtn = document.getElementById('closeBtn');
 
-    // Tabs
-    const tabRecord = document.getElementById('tabRecord');
-    const tabWrite = document.getElementById('tabWrite');
-    const recordSection = document.getElementById('recordSection');
-    const writeSection = document.getElementById('writeSection');
-
-    // Record section
-    const recordBtn = document.getElementById('recordBtn');
-    const stopBtn = document.getElementById('stopBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const useVoiceBtn = document.getElementById('useVoiceBtn');
-    const recordText = document.getElementById('recordText');
-    const recordIcon = document.getElementById('recordIcon');
-    const transcript = document.getElementById('transcript');
-    const transcriptDisplay = document.getElementById('transcriptDisplay');
-    const playbackSection = document.getElementById('playbackSection');
-    const audioPlayback = document.getElementById('audioPlayback');
-    const timerDisplay = document.getElementById('timerDisplay');
-    const timerText = document.getElementById('timer');
-
-    // Write section
     const feedbackForm = document.getElementById('feedbackForm');
     const feedbackText = document.getElementById('feedbackText');
     const submitBtn = document.getElementById('submitBtn');
+    const speakBtn = document.getElementById('speakBtn');
+    const speakIcon = document.getElementById('speakIcon');
+    const speakText = document.getElementById('speakText');
 
 
-    let mediaRecorder;
-    let audioChunks = [];
-    let recognition;
-    let isRecording = false;
-    let recordingTime = 0;
-    let recordingTimer;
-    let finalTranscript = '';
-    const MAX_RECORDING_TIME = 30000; // 30 seconds
-
+    // Speech to Text
+    let speechRecognition;
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const isSupported = !!SpeechRecognition;
 
-    if (!isSupported) {
-      recordBtn.disabled = true;
-      recordBtn.innerHTML = '❌ Not supported';
-    } else {
-      recognition = new SpeechRecognition();
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.lang = 'en-US';
-      recognition.maxAlternatives = 1;
+    if (isSupported) {
+      speechRecognition = new SpeechRecognition();
+      speechRecognition.continuous = false;
+      speechRecognition.interimResults = true;
+      speechRecognition.lang = 'en-US';
 
-      recognition.onstart = () => {
-        transcript.textContent = 'Listening... Speak now!';
-        transcriptDisplay.classList.remove('hidden');
+      speechRecognition.onstart = () => {
+        speakBtn.textContent = '🔴 Listening...';
+        speakBtn.disabled = true;
+        speakIcon.textContent = '🔴';
       };
 
-      recognition.onresult = (event) => {
-        let interimTranscript = '';
+      speechRecognition.onresult = (event) => {
+        let interimText = '';
         for (let i = event.resultIndex; i < event.results.length; i++) {
           const transcriptSegment = event.results[i][0].transcript;
           if (event.results[i].isFinal) {
-            finalTranscript += transcriptSegment + ' ';
+            feedbackText.value += transcriptSegment + ' ';
           } else {
-            interimTranscript += transcriptSegment;
+            interimText = transcriptSegment;
           }
         }
-        const displayText = (finalTranscript + interimTranscript).trim();
-        transcript.textContent = displayText || 'Listening... Speak now!';
-        if (displayText) {
-          useVoiceBtn.disabled = false;
-        }
       };
 
-      recognition.onend = () => {
-        if (!finalTranscript.trim()) {
-          transcript.textContent = 'No text captured. Try speaking louder or more clearly.';
-        }
-        if (finalTranscript.trim()) {
-          useVoiceBtn.disabled = false;
-        }
+      speechRecognition.onend = () => {
+        speakBtn.textContent = '🎤 Speak Feedback';
+        speakBtn.disabled = false;
+        speakIcon.textContent = '🎤';
       };
 
-      recognition.onerror = (event) => {
-        console.error('Speech recognition error:', event.error);
+      speechRecognition.onerror = (event) => {
+        console.error('Speech error:', event.error);
+        let errorMsg = 'Error: ' + event.error;
         if (event.error === 'no-speech') {
-          transcript.textContent = 'No speech detected. Make sure your microphone is working and speak clearly.';
-        } else if (event.error === 'network') {
-          transcript.textContent = 'Network error. Please check your internet connection.';
+          errorMsg = 'No speech detected. Try again.';
         } else if (event.error === 'not-allowed') {
-          transcript.textContent = 'Microphone access denied. Please allow microphone access in your browser settings.';
-        } else {
-          transcript.textContent = 'Error: ' + event.error + '. Try again.';
+          errorMsg = 'Microphone access denied. Allow in browser settings.';
+        } else if (event.error === 'network') {
+          errorMsg = 'Network error. Check your connection.';
         }
+        feedbackText.value += '[' + errorMsg + '] ';
+        speakBtn.textContent = '🎤 Speak Feedback';
+        speakBtn.disabled = false;
       };
+    } else {
+      speakBtn.disabled = true;
+      speakBtn.textContent = '❌ Not supported';
     }
 
-    async function startRecording() {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        mediaRecorder = new MediaRecorder(stream);
-        audioChunks = [];
-        recordingTime = 0;
-        finalTranscript = '';
-
-        mediaRecorder.ondataavailable = (event) => {
-          audioChunks.push(event.data);
-        };
-
-        mediaRecorder.onstop = () => {
-          const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-          const audioUrl = URL.createObjectURL(audioBlob);
-          audioPlayback.src = audioUrl;
-
-          // Give recognition time to process final results (500ms delay)
-          setTimeout(() => {
-            recognition.stop();
-          }, 500);
-
-          isRecording = false;
-          recordBtn.disabled = false;
-          stopBtn.disabled = true;
-          recordIcon.textContent = '🎤';
-          recordText.textContent = 'Start Recording';
-          timerDisplay.classList.add('hidden');
-          playbackSection.classList.remove('hidden');
-          clearInterval(recordingTimer);
-        };
-
-        mediaRecorder.start();
-        recognition.start();
-        isRecording = true;
-        recordBtn.disabled = true;
-        stopBtn.disabled = false;
-        recordIcon.textContent = '🔴';
-        recordText.textContent = 'Recording...';
-        timerDisplay.classList.remove('hidden');
-        playbackSection.classList.add('hidden');
-        transcriptDisplay.classList.add('hidden');
-
-        recordingTimer = setInterval(() => {
-          recordingTime += 100;
-          timerText.textContent = Math.floor(recordingTime / 1000);
-
-          if (recordingTime >= MAX_RECORDING_TIME) {
-            clearInterval(recordingTimer);
-            mediaRecorder.stop();
-          }
-        }, 100);
-      } catch (error) {
-        alert('Cannot access microphone. Please check permissions.');
-        console.error('Microphone error:', error);
-      }
-    }
-
-    function stopRecording() {
-      if (isRecording && mediaRecorder) {
-        mediaRecorder.stop();
-        mediaRecorder.stream.getTracks().forEach(track => track.stop());
-      }
-    }
-
-    // Tab switching
-    function showTab(tabName) {
-      recordSection.classList.add('hidden');
-      writeSection.classList.add('hidden');
-
-      tabRecord.classList.remove('border-[#ff5b92]', 'text-[#ff5b92]');
-      tabRecord.classList.add('border-transparent', 'text-black/60');
-      tabWrite.classList.remove('border-[#ff5b92]', 'text-[#ff5b92]');
-      tabWrite.classList.add('border-transparent', 'text-black/60');
-
-      if (tabName === 'record') {
-        recordSection.classList.remove('hidden');
-        tabRecord.classList.add('border-[#ff5b92]', 'text-[#ff5b92]');
-        tabRecord.classList.remove('border-transparent', 'text-black/60');
-      } else if (tabName === 'write') {
-        writeSection.classList.remove('hidden');
-        tabWrite.classList.add('border-[#ff5b92]', 'text-[#ff5b92]');
-        tabWrite.classList.remove('border-transparent', 'text-black/60');
-      }
-    }
-
-    tabRecord.addEventListener('click', () => showTab('record'));
-    tabWrite.addEventListener('click', () => showTab('write'));
 
     feedbackBtn.addEventListener('click', () => {
       feedbackModal.classList.remove('hidden');
@@ -798,29 +614,10 @@
       }
     });
 
-    recordBtn.addEventListener('click', () => {
-      if (isSupported) startRecording();
-    });
-
-    stopBtn.addEventListener('click', () => {
-      stopRecording();
-    });
-
-    clearBtn.addEventListener('click', () => {
-      finalTranscript = '';
-      transcript.textContent = '';
-      transcriptDisplay.classList.add('hidden');
-      playbackSection.classList.add('hidden');
-      useVoiceBtn.disabled = true;
-      feedbackText.value = '';
-      audioChunks = [];
-      recordingTime = 0;
-    });
-
-    useVoiceBtn.addEventListener('click', () => {
-      feedbackText.value = finalTranscript.trim();
-      showTab('write');
-      useVoiceBtn.disabled = true;
+    speakBtn.addEventListener('click', () => {
+      if (isSupported) {
+        speechRecognition.start();
+      }
     });
 
 
