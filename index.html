@@ -929,11 +929,14 @@
           method: 'POST',
           body: formData
         })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        .then(response => response.json().then(data => ({ok: response.ok, status: response.status, data})))
+        .then(({ok, status, data}) => {
+          if (!ok) {
+            const errorMsg = data.error?.message || `Upload failed: ${status}`;
+            console.error('Cloudinary error details:', data);
+            throw new Error(errorMsg);
           }
-          return response.json();
+          return data;
         })
         .then(data => {
           if (data.error) {
@@ -977,11 +980,14 @@
           method: 'POST',
           body: formData
         })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        .then(response => response.json().then(data => ({ok: response.ok, status: response.status, data})))
+        .then(({ok, status, data}) => {
+          if (!ok) {
+            const errorMsg = data.error?.message || `Upload failed: ${status}`;
+            console.error('Cloudinary error details:', data);
+            throw new Error(errorMsg);
           }
-          return response.json();
+          return data;
         })
         .then(data => {
           if (data.error) {
