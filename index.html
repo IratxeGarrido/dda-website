@@ -465,37 +465,34 @@
       </div>
 
       <div class="bg-white rounded-[2rem] p-6 md:p-10 border border-black/10 shadow-md">
-        <form id="testimonialForm" action="https://formspree.io/f/mzzdnyqe" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form id="testimonialForm" action="https://formspree.io/f/mkoelkwl" method="POST" class="space-y-6">
 
-          <!-- IMAGE UPLOAD -->
-          <div>
-            <label class="block text-sm font-black text-[#2f2f2f] mb-2">Your Photo <span class="text-black/50 font-normal">(optional)</span></label>
-            <div class="relative">
+          <!-- NAME & AGE -->
+          <div class="grid grid-cols-3 gap-4">
+            <div class="col-span-2">
+              <label class="block text-sm font-bold text-[#2f2f2f] mb-2">Name *</label>
               <input
-                type="file"
-                name="image"
-                id="imageInput"
-                accept="image/*"
-                class="hidden"
+                type="text"
+                name="name"
+                id="nameInput"
+                required
+                class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black"
+                placeholder="Your name"
               />
-              <div id="imagePreview" class="w-24 h-24 mx-auto bg-[#f0f0f0] rounded-xl border-2 border-dashed border-black/20 flex items-center justify-center text-4xl cursor-pointer hover:bg-[#e8e8e8] transition"
-                onclick="document.getElementById('imageInput').click()">
-                <span id="previewContent">🦆</span>
-              </div>
-              <p class="text-xs text-black/50 text-center mt-2">Click to upload or we'll use a duck!</p>
             </div>
-          </div>
-
-          <!-- NAME -->
-          <div>
-            <label class="block text-sm font-bold text-[#2f2f2f] mb-2">Name *</label>
-            <input
-              type="text"
-              name="name"
-              required
-              class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black"
-              placeholder="Your name"
-            />
+            <div>
+              <label class="block text-sm font-bold text-[#2f2f2f] mb-2">Age *</label>
+              <input
+                type="number"
+                name="age"
+                id="ageInput"
+                required
+                min="18"
+                max="120"
+                class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black"
+                placeholder="e.g., 28"
+              />
+            </div>
           </div>
 
           <!-- EMAIL (HIDDEN FROM VIEW) -->
@@ -508,7 +505,7 @@
               class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black"
               placeholder="your@email.com"
             />
-            <p class="text-xs text-black/50 mt-1">Your email will only be used for follow-up and won't be displayed publicly</p>
+            <p class="text-xs text-black/50 mt-1">Your email will only be used to verify your account, and won't be displayed publicly</p>
           </div>
 
           <!-- EVENT DROPDOWN -->
@@ -523,6 +520,23 @@
               <option value="Blind Duck Dating">Blind Duck Dating</option>
               <option value="Poly Speed Dating 2025">Poly Speed Dating 2025</option>
               <option value="Poly Speed Dating 2026">Poly Speed Dating 2026</option>
+            </select>
+          </div>
+
+          <!-- LOOKING FOR -->
+          <div>
+            <label class="block text-sm font-bold text-[#2f2f2f] mb-2">What are you looking for? *</label>
+            <select
+              name="looking_for"
+              required
+              class="w-full rounded-xl border border-black/10 bg-[#f8f4ee] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-black"
+            >
+              <option value="">Select what you're looking for</option>
+              <option value="Romance">Romance</option>
+              <option value="Friendship">Friendship</option>
+              <option value="Community">Community</option>
+              <option value="Romance & Friendship">Romance & Friendship</option>
+              <option value="Exploring">Exploring</option>
             </select>
           </div>
 
@@ -676,29 +690,11 @@
     });
 
     // TESTIMONIAL FORM
-    const imageInput = document.getElementById('imageInput');
-    const imagePreview = document.getElementById('imagePreview');
-    const previewContent = document.getElementById('previewContent');
     const starBtns = document.querySelectorAll('.star-btn');
     const ratingValue = document.getElementById('ratingValue');
     const ratingText = document.getElementById('ratingText');
     const submitTestimonial = document.getElementById('submitTestimonial');
     const testimonialForm = document.getElementById('testimonialForm');
-
-    // Image preview
-    imageInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          previewContent.textContent = '';
-          imagePreview.style.backgroundImage = `url('${event.target.result}')`;
-          imagePreview.style.backgroundSize = 'cover';
-          imagePreview.style.backgroundPosition = 'center';
-        };
-        reader.readAsDataURL(file);
-      }
-    });
 
     // Star rating
     const ratings = ['😞', '😕', '😐', '🙂', '😍'];
@@ -740,8 +736,6 @@
 
         setTimeout(() => {
           testimonialForm.reset();
-          previewContent.textContent = '🦆';
-          imagePreview.style.backgroundImage = '';
           starBtns.forEach(btn => btn.textContent = '☆');
           ratingText.textContent = 'Select a rating';
           submitTestimonial.textContent = 'Submit for Review';
