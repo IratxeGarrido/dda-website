@@ -845,14 +845,22 @@
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', 'ml_default');
-        formData.append('folder', 'dda_testimonials');
+        formData.append('folder', 'profile-pics');
 
         fetch('https://api.cloudinary.com/v1_1/dxlmwpnxs/image/upload', {
           method: 'POST',
           body: formData
         })
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
         .then(data => {
+          if (data.error) {
+            throw new Error(data.error.message || 'Upload error');
+          }
           if (data.secure_url) {
             previewContent.textContent = '';
             imagePreview.style.backgroundImage = `url('${data.secure_url}')`;
@@ -864,12 +872,14 @@
             imageUrlDisplay.classList.remove('hidden');
 
             console.log('Image uploaded:', data.secure_url);
+          } else {
+            throw new Error('No URL returned from upload');
           }
         })
         .catch(error => {
           console.error('Upload error:', error);
           previewContent.textContent = '❌';
-          alert('Image upload failed. Please try again.');
+          alert(`Image upload failed: ${error.message}`);
         });
       }
     });
@@ -1066,7 +1076,7 @@
         {
           cloudName: "dxlmwpnxs",
           uploadPreset: "ml_default",
-          folder: "dda_testimonials",
+          folder: "profile-pics",
           sources: ["local", "url"],
           maxFiles: 1,
           clientAllowedFormats: ["jpg", "jpeg", "png", "gif", "webp"]
