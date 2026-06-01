@@ -20,6 +20,7 @@
   <meta property="og:url" content="https://www.duckdatingapps.com/" />
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://upload-widget.cloudinary.com/latest/index.js" type="text/javascript"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -456,6 +457,20 @@
     </a>
   </div>
 
+  <!-- TESTIMONIALS DISPLAY SECTION -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-black mb-3">What Our Ducklings Say</h2>
+        <p class="text-lg text-black/70">Real stories from real people who found connection at our events</p>
+      </div>
+
+      <div id="testimonialsList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Testimonial cards will be inserted here -->
+      </div>
+    </div>
+  </section>
+
   <!-- TESTIMONIALS FORM SECTION -->
   <section class="py-16 md:py-24 bg-[#f9f7f4]">
     <div class="max-w-3xl mx-auto px-6">
@@ -743,6 +758,80 @@
         }, 3000);
       }, 500);
     });
+
+    // TESTIMONIALS DISPLAY
+    // Edit this array to add/remove published testimonials
+    const testimonials = [
+      {
+        name: "Sarah",
+        age: 28,
+        event: "Blind Duck Dating",
+        rating: 5,
+        quote: "I came looking for a date and left with two new friends! I really appreciated how thoughtful the matching was.",
+        image: "https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/v1234567890/testimonial1.jpg"
+      },
+      {
+        name: "Marcus",
+        age: 32,
+        event: "Poly Speed Dating 2025",
+        rating: 5,
+        quote: "Best event I've been to in Berlin. The whole vibe was so different from dating apps. Real conversations, real people.",
+        image: "https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/v1234567890/testimonial2.jpg"
+      },
+      {
+        name: "Julia",
+        age: 26,
+        event: "Blind Duck Dating",
+        rating: 4,
+        quote: "Great experience! The matching algorithm really worked well. Found some genuine connections.",
+        image: "https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/v1234567890/testimonial3.jpg"
+      }
+    ];
+
+    function renderTestimonials() {
+      const testimonialsList = document.getElementById('testimonialsList');
+      testimonialsList.innerHTML = testimonials.map(t => `
+        <div class="bg-[#f9f7f4] rounded-[2rem] p-6 border border-black/10 shadow-md hover:shadow-lg transition">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-16 h-16 rounded-full bg-[#ff5b92] flex-shrink-0 overflow-hidden border-2 border-[#ff5b92]">
+              <img src="${t.image}" alt="${t.name}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/64?text=${t.name}'">
+            </div>
+            <div>
+              <h3 class="font-black text-lg text-[#2f2f2f]">${t.name}, ${t.age}</h3>
+              <p class="text-sm text-black/60">${t.event}</p>
+              <div class="flex gap-0.5 mt-2">
+                ${Array(5).fill('').map((_, i) => `<span class="text-lg">${i < t.rating ? '★' : '☆'}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+          <p class="text-black/70 italic">"${t.quote}"</p>
+        </div>
+      `).join('');
+    }
+
+    // Render testimonials on page load
+    renderTestimonials();
+
+    // Cloudinary Upload Widget
+    window.cloudinaryUploadWidget = () => {
+      cloudinary.openUploadWidget(
+        {
+          cloudName: "YOUR_CLOUD_NAME",
+          uploadPreset: "YOUR_UPLOAD_PRESET",
+          folder: "dda_testimonials",
+          sources: ["local", "url"],
+          maxFiles: 1,
+          clientAllowedFormats: ["jpg", "jpeg", "png", "gif", "webp"]
+        },
+        (error, result) => {
+          if (!error && result && result.event === "success") {
+            const imageUrl = result.info.secure_url;
+            console.log("Image uploaded:", imageUrl);
+            alert("Image uploaded! Copy this URL when adding the testimonial:\n" + imageUrl);
+          }
+        }
+      );
+    };
   </script>
 
 </body>
