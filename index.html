@@ -312,7 +312,7 @@
         </a>
 
         <!-- PSD -->
-        <a href="https://poly-speed-dating.onrender.com/apply.html" class="relative block rounded-[2rem] bg-[#ffeb2b] p-6 pt-7 md:p-8 border border-black/10 shadow-md hover:translate-y-[-4px] transition overflow-hidden">
+        <div class="relative block rounded-[2rem] bg-[#ffeb2b] p-6 pt-7 md:p-8 border border-black/10 shadow-md opacity-75 overflow-hidden">
           <img
             src="/images/PSD logo.png"
             alt="Poly Speed Dating Berlin logo"
@@ -320,10 +320,10 @@
           />
 
           <div
-            class="absolute top-16 right-4 md:top-20 md:right-5 bg-[#ff5b92] text-white px-4 py-2 rounded-full font-black text-xs md:text-sm border border-black/10 shadow-md"
+            class="absolute top-16 right-4 md:top-20 md:right-5 bg-[#ff6b3d] text-white px-4 py-2 rounded-full font-black text-xs md:text-sm border border-black/10 shadow-md"
             style="transform: rotate(10deg);"
           >
-            Next PSD 3<sup>rd</sup> June
+            ⏸ Postponed
           </div>
 
           <p class="text-sm font-black uppercase tracking-[0.16em] text-[#ff5b92] pr-12 md:pr-0">
@@ -334,9 +334,42 @@
             A moderated in-person poly speed dating event in Berlin for polyamorous,
             non-monogamous, LGBTQ+ and open-minded people.
           </p>
-          <span class="mt-6 inline-block font-bold underline underline-offset-4">Apply for 03.06. event</span>
-        </a>
+          <span class="mt-6 inline-block font-bold underline underline-offset-4 text-black/50">Coming soon</span>
+        </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- CALENDAR SECTION -->
+  <section class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="bg-gradient-to-br from-[#ffd36e] to-[#ff5b92] rounded-[2rem] p-6 md:p-8 shadow-lg">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl md:text-3xl font-black text-white" id="monthYear">June 2026</h2>
+          <div class="flex gap-3">
+            <button id="prevMonth" class="bg-white text-[#ff5b92] w-10 h-10 rounded-full font-black hover:scale-110 transition">‹</button>
+            <button id="nextMonth" class="bg-white text-[#ff5b92] w-10 h-10 rounded-full font-black hover:scale-110 transition">›</button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-4 md:p-6">
+          <!-- Days of week header -->
+          <div class="grid grid-cols-7 gap-2 mb-3">
+            <div class="text-center font-black text-sm text-[#ff5b92]">Sun</div>
+            <div class="text-center font-black text-sm text-[#ff5b92]">Mon</div>
+            <div class="text-center font-black text-sm text-[#ff5b92]">Tue</div>
+            <div class="text-center font-black text-sm text-[#ff5b92]">Wed</div>
+            <div class="text-center font-black text-sm text-[#ff5b92]">Thu</div>
+            <div class="text-center font-black text-sm text-[#ff5b92]">Fri</div>
+            <div class="text-center font-black text-sm text-[#ff5b92]">Sat</div>
+          </div>
+
+          <!-- Calendar days -->
+          <div id="calendarDays" class="grid grid-cols-7 gap-2">
+            <!-- Days will be inserted here -->
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1284,6 +1317,68 @@
         toggleIcon.style.transform = 'rotate(0deg)';
       }
     });
+
+    // CALENDAR FUNCTIONALITY
+    const monthYearDisplay = document.getElementById('monthYear');
+    const calendarDaysContainer = document.getElementById('calendarDays');
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
+
+    const today = new Date();
+    let currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    function renderCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+
+      // Update header
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+
+      // Clear calendar
+      calendarDaysContainer.innerHTML = '';
+
+      // Get first day of month and number of days
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // Add empty cells for days before month starts
+      for (let i = 0; i < firstDay; i++) {
+        const emptyCell = document.createElement('div');
+        calendarDaysContainer.appendChild(emptyCell);
+      }
+
+      // Add days of the month
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayCell = document.createElement('div');
+        dayCell.className = 'text-center p-2 md:p-3 rounded-lg font-bold text-sm md:text-base';
+
+        const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+
+        if (isToday) {
+          dayCell.className += ' bg-[#ff5b92] text-white ring-2 ring-[#ffd36e]';
+          dayCell.innerHTML = `<div class="font-black text-lg">${day}</div><div class="text-xs">Today</div>`;
+        } else {
+          dayCell.className += ' bg-[#f0f0f0] text-[#2f2f2f] hover:bg-[#ffd36e] transition cursor-pointer';
+          dayCell.textContent = day;
+        }
+
+        calendarDaysContainer.appendChild(dayCell);
+      }
+    }
+
+    prevMonthBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+    });
+
+    nextMonthBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+    });
+
+    // Initial render
+    renderCalendar();
   </script>
 
 </body>
