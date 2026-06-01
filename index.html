@@ -504,10 +504,35 @@
               </button>
             </div>
 
-            <!-- AVATAR CHOOSER -->
+            <!-- AVATAR CAROUSEL -->
             <div id="avatarSection" class="transition-all">
-              <div id="avatarGrid" class="grid grid-cols-4 md:grid-cols-8 gap-3">
-                <!-- Avatars will be inserted here -->
+              <div class="relative flex items-center gap-4">
+                <!-- Left Arrow -->
+                <button
+                  type="button"
+                  id="carouselPrev"
+                  class="flex-shrink-0 w-10 h-10 rounded-full bg-[#ff5b92] text-white flex items-center justify-center hover:bg-[#ff4080] transition hover:scale-110"
+                  title="Previous duck"
+                >
+                  ❮
+                </button>
+
+                <!-- Carousel Container -->
+                <div id="avatarCarousel" class="flex-1 overflow-hidden">
+                  <div id="avatarGrid" class="flex gap-3 transition-transform duration-300 ease-out">
+                    <!-- Avatars will be inserted here -->
+                  </div>
+                </div>
+
+                <!-- Right Arrow -->
+                <button
+                  type="button"
+                  id="carouselNext"
+                  class="flex-shrink-0 w-10 h-10 rounded-full bg-[#ff5b92] text-white flex items-center justify-center hover:bg-[#ff4080] transition hover:scale-110"
+                  title="Next duck"
+                >
+                  ❯
+                </button>
               </div>
               <div id="selectedAvatarDisplay" class="mt-4 p-4 bg-[#f0f0f0] rounded-lg hidden text-center">
                 <div id="selectedAvatarPreview" class="w-20 h-20 rounded-full mx-auto mb-3 border-2 border-[#ff5b92] overflow-hidden bg-white"></div>
@@ -849,11 +874,17 @@
       }
     });
 
+    // Carousel functionality
+    const carouselPrev = document.getElementById('carouselPrev');
+    const carouselNext = document.getElementById('carouselNext');
+    const avatarCarousel = document.getElementById('avatarCarousel');
+    let currentIndex = 0;
+
     // Generate avatar buttons
     avatars.forEach((avatar) => {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'avatar-btn w-16 h-16 rounded-full overflow-hidden border-3 border-transparent hover:border-[#ff5b92] transition hover:scale-110 bg-white flex items-center justify-center';
+      btn.className = 'avatar-btn flex-shrink-0 w-16 h-16 rounded-full overflow-hidden border-3 border-transparent hover:border-[#ff5b92] transition hover:scale-110 bg-white flex items-center justify-center';
       btn.title = avatar.name;
 
       const img = document.createElement('img');
@@ -869,6 +900,33 @@
       });
 
       avatarGrid.appendChild(btn);
+    });
+
+    // Carousel navigation
+    function updateCarouselPosition() {
+      const avatarButtons = document.querySelectorAll('.avatar-btn');
+      const itemsToShow = 4;
+      const totalItems = avatarButtons.length;
+
+      // Wrap around
+      if (currentIndex < 0) {
+        currentIndex = totalItems - itemsToShow;
+      } else if (currentIndex > totalItems - itemsToShow) {
+        currentIndex = 0;
+      }
+
+      const offset = -(currentIndex * (64 + 12)); // 64px avatar + 12px gap
+      avatarGrid.style.transform = `translateX(${offset}px)`;
+    }
+
+    carouselPrev.addEventListener('click', () => {
+      currentIndex--;
+      updateCarouselPosition();
+    });
+
+    carouselNext.addEventListener('click', () => {
+      currentIndex++;
+      updateCarouselPosition();
     });
 
     // Select avatar function
