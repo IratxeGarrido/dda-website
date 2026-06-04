@@ -201,19 +201,7 @@
       ]);
 
       function getInitialCalendarDate() {
-        const allDates = [
-          ...RAW_EVENTS.map(event => event.date),
-          ...EXTRA_CALENDAR_EVENTS.map(event => event.date)
-        ].sort((a, b) => a.localeCompare(b));
-
-        if (!allDates.length) return new Date();
-
-        const first = allDates[0];
-        const parts = first.split("-").map(Number);
-
-        if (parts.length !== 3) return new Date();
-
-        return new Date(parts[0], parts[1] - 1, parts[2]);
+        return new Date();
       }
 
       function renderEventList() {
