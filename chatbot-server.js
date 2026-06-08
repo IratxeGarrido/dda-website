@@ -2,42 +2,12 @@ import Anthropic from "@anthropic-ai/sdk";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import fs from "fs";
-import path from "path";
-import crypto from "crypto";
-import { fileURLToPath } from "url";
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-
-const PLANNING_DATA_FILE = path.join(__dirname, "data", "planning.json");
-
-// Ensure data directory exists
-if (!fs.existsSync(path.join(__dirname, "data"))) {
-  fs.mkdirSync(path.join(__dirname, "data"));
-}
-
-// Helper functions for planning data
-function loadPlanning() {
-  if (fs.existsSync(PLANNING_DATA_FILE)) {
-    return JSON.parse(fs.readFileSync(PLANNING_DATA_FILE, "utf8"));
-  }
-  return {};
-}
-
-function savePlanning(planning) {
-  fs.writeFileSync(PLANNING_DATA_FILE, JSON.stringify(planning, null, 2));
-}
-
-function generatePollId() {
-  return crypto.randomBytes(8).toString("hex");
-}
 
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -123,154 +93,6 @@ app.post("/api/chat", async (req, res) => {
       error: "Failed to process chat message",
       details: error.message,
     });
-  }
-});
-
-// Planning API Endpoints
-app.post("/api/planning/create", (req, res) => {
-  try {
-    const { title, description, eventDuration, dates, participantCount } = req.body;
-
-    if (!title || !dates || dates.length !== 3) {
-      return res.status(400).json({ error: "Invalid poll data" });
-    }
-
-    const pollId = generatePollId();
-    const planning = loadPlanning();
-
-    planning[pollId] = {
-      id: pollId,
-      title,
-      description: description || "",
-      eventDuration: eventDuration || "",
-      dates,
-      expectedParticipants: participantCount || 8,
-      votes: {},
-      createdAt: new Date().toISOString(),
-    };
-
-    savePlanning(planning);
-
-    res.json({ pollId, success: true });
-  } catch (error) {
-    console.error("Error creating poll:", error);
-    res.status(500).json({ error: "Failed to create poll" });
-  }
-});
-
-app.get("/api/planning/list", (req, res) => {
-  try {
-    const planning = loadPlanning();
-    const pollsList = Object.values(planning).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-    res.json(pollsList);
-  } catch (error) {
-    console.error("Error listing polls:", error);
-    res.status(500).json({ error: "Failed to list polls" });
-  }
-});
-
-app.get("/api/planning/:pollId", (req, res) => {
-  try {
-    const { pollId } = req.params;
-    const planning = loadPlanning();
-
-    if (!planning[pollId]) {
-      return res.status(404).json({ error: "Poll not found" });
-    }
-
-    res.json(planning[pollId]);
-  } catch (error) {
-    console.error("Error loading poll:", error);
-    res.status(500).json({ error: "Failed to load poll" });
-  }
-});
-
-app.post("/api/planning/:pollId/vote", (req, res) => {
-  try {
-    const { pollId } = req.params;
-    const { userName, votes } = req.body;
-
-    if (!userName || !votes) {
-      return res.status(400).json({ error: "Missing vote data" });
-    }
-
-    const planning = loadPlanning();
-
-    if (!planning[pollId]) {
-      return res.status(404).json({ error: "Poll not found" });
-    }
-
-    planning[pollId].votes[userName] = votes;
-    savePlanning(planning);
-
-    res.json({ success: true });
-  } catch (error) {
-    console.error("Error saving vote:", error);
-    res.status(500).json({ error: "Failed to save vote" });
-  }
-});
-
-app.delete("/api/planning/:pollId", (req, res) => {
-  try {
-    const { pollId } = req.params;
-    const planning = loadPlanning();
-
-    if (!planning[pollId]) {
-      return res.status(404).json({ error: "Poll not found" });
-    }
-
-    delete planning[pollId];
-    savePlanning(planning);
-
-    res.json({ success: true });
-  } catch (error) {
-    console.error("Error deleting poll:", error);
-    res.status(500).json({ error: "Failed to delete poll" });
-  }
-});
-
-app.post("/api/planning/:pollId/participant/:action", (req, res) => {
-  try {
-    const { pollId, action } = req.params;
-    const { name } = req.body;
-
-    if (!name) {
-      return res.status(400).json({ error: "Name is required" });
-    }
-
-    const planning = loadPlanning();
-
-    if (!planning[pollId]) {
-      return res.status(404).json({ error: "Poll not found" });
-    }
-
-    const poll = planning[pollId];
-
-    if (action === "add") {
-      if (!poll.participants.includes(name)) {
-        poll.participants.push(name);
-        poll.votes[name] = {
-          dates: {},
-          unavailable: false,
-          alternativeDate: null,
-        };
-        poll.dates.forEach((_, index) => {
-          poll.votes[name].dates[index] = false;
-        });
-      }
-    } else if (action === "remove") {
-      poll.participants = poll.participants.filter((p) => p !== name);
-      delete poll.votes[name];
-    } else {
-      return res.status(400).json({ error: "Invalid action" });
-    }
-
-    savePlanning(planning);
-    res.json({ success: true });
-  } catch (error) {
-    console.error("Error managing participant:", error);
-    res.status(500).json({ error: "Failed to manage participant" });
   }
 });
 

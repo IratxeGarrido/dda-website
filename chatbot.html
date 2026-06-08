@@ -1,0 +1,226 @@
+<!-- Chatbot Widget -->
+<div id="chatbotWidget" class="fixed bottom-6 right-6 w-96 max-w-[calc(100%-2rem)] bg-white rounded-2xl shadow-2xl border border-black/10 flex flex-col h-[600px] max-h-[80vh] z-50 hidden">
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-[#ff5b92] to-[#ffd36e] text-white px-6 py-4 rounded-t-2xl flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">🦆</span>
+      <div>
+        <h3 class="font-black text-lg">Duck Dating Helper</h3>
+        <p class="text-xs opacity-90">Ask about our events</p>
+      </div>
+    </div>
+    <button id="closeChatbot" class="text-white hover:bg-white/20 w-8 h-8 rounded-full flex items-center justify-center transition">
+      ✕
+    </button>
+  </div>
+
+  <!-- Messages Container -->
+  <div id="messagesContainer" class="flex-1 overflow-y-auto p-4 space-y-4 bg-[#f9f7f4]">
+    <div class="flex gap-3">
+      <div class="flex-shrink-0 w-8 h-8 rounded-full bg-[#ff5b92] flex items-center justify-center text-white font-black text-sm">
+        🦆
+      </div>
+      <div class="bg-white rounded-2xl px-4 py-3 shadow-sm max-w-xs">
+        <p class="text-sm text-black/80">Hi! 👋 I'm here to help with questions about our dating events in Berlin. Ask me anything about Blind Duck Dating, Poly Speed Dating, or how to apply!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input Area -->
+  <div class="border-t border-black/10 p-4 bg-white rounded-b-2xl">
+    <div class="flex gap-2">
+      <input
+        type="text"
+        id="chatInput"
+        placeholder="Ask about events..."
+        class="flex-1 rounded-full border border-black/10 bg-[#f8f4ee] px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#ff5b92] text-sm"
+      />
+      <button
+        id="sendBtn"
+        class="bg-[#ff5b92] text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#ff4080] transition"
+      >
+        ↑
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Chatbot Toggle Button -->
+<button
+  id="chatbotToggle"
+  aria-label="Open chatbot"
+  class="fixed bottom-6 right-6 w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-[#ff5b92] to-[#ffd36e] text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-transform flex items-center justify-center font-black text-3xl md:text-4xl hover:shadow-[0_10px_25px_rgba(255,91,146,0.4)] z-40"
+  title="Chat with Duck Dating Helper"
+>
+  🦆
+</button>
+
+<style>
+  #chatbotWidget {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #messagesContainer::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #messagesContainer::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #messagesContainer::-webkit-scrollbar-thumb {
+    background: #ff5b92;
+    border-radius: 3px;
+  }
+
+  .message-typing {
+    display: flex;
+    gap: 4px;
+  }
+
+  .message-typing span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff5b92;
+    animation: typing 1.4s infinite;
+  }
+
+  .message-typing span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .message-typing span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes typing {
+    0%, 60%, 100% {
+      opacity: 0.3;
+      transform: translateY(0);
+    }
+    30% {
+      opacity: 1;
+      transform: translateY(-8px);
+    }
+  }
+</style>
+
+<script>
+  const chatbotToggle = document.getElementById('chatbotToggle');
+  const chatbotWidget = document.getElementById('chatbotWidget');
+  const closeChatbot = document.getElementById('closeChatbot');
+  const chatInput = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('sendBtn');
+  const messagesContainer = document.getElementById('messagesContainer');
+
+  // Toggle chatbot visibility
+  chatbotToggle.addEventListener('click', () => {
+    chatbotWidget.classList.toggle('hidden');
+    if (!chatbotWidget.classList.contains('hidden')) {
+      chatInput.focus();
+    }
+  });
+
+  closeChatbot.addEventListener('click', () => {
+    chatbotWidget.classList.add('hidden');
+  });
+
+  // Send message
+  function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    // Add user message
+    addMessage(message, 'user');
+    chatInput.value = '';
+
+    // Show typing indicator
+    showTypingIndicator();
+
+    // Send to backend
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message })
+    })
+    .then(res => res.json())
+    .then(data => {
+      removeTypingIndicator();
+      addMessage(data.reply, 'bot');
+    })
+    .catch(err => {
+      removeTypingIndicator();
+      addMessage('Sorry, I encountered an error. Please try again.', 'bot');
+      console.error('Chat error:', err);
+    });
+  }
+
+  function addMessage(text, sender) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `flex gap-3 ${sender === 'user' ? 'justify-end' : ''}`;
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = `rounded-2xl px-4 py-3 shadow-sm max-w-xs ${
+      sender === 'user'
+        ? 'bg-[#ff5b92] text-white'
+        : 'bg-white text-black/80'
+    }`;
+
+    contentDiv.innerHTML = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+
+    if (sender === 'bot') {
+      const avatar = document.createElement('div');
+      avatar.className = 'flex-shrink-0 w-8 h-8 rounded-full bg-[#ff5b92] flex items-center justify-center text-white font-black text-sm';
+      avatar.textContent = '🦆';
+      messageDiv.appendChild(avatar);
+    }
+
+    messageDiv.appendChild(contentDiv);
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+
+  function showTypingIndicator() {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'flex gap-3';
+    messageDiv.id = 'typingIndicator';
+
+    const avatar = document.createElement('div');
+    avatar.className = 'flex-shrink-0 w-8 h-8 rounded-full bg-[#ff5b92] flex items-center justify-center text-white font-black text-sm';
+    avatar.textContent = '🦆';
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'rounded-2xl px-4 py-3 shadow-sm bg-white';
+    contentDiv.innerHTML = '<div class="message-typing"><span></span><span></span><span></span></div>';
+
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(contentDiv);
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+
+  function removeTypingIndicator() {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) indicator.remove();
+  }
+
+  // Event listeners
+  sendBtn.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
+</script>
