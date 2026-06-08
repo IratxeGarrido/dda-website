@@ -8,6 +8,29 @@ const pollId = urlParams.get('poll');
 const adminKey = urlParams.get('admin');
 let userName = localStorage.getItem(`user_${pollId}`) || null;
 
+async function readJsonResponse(response, fallbackMessage) {
+  const text = await response.text();
+  let data = null;
+
+  if (text) {
+    try {
+      data = JSON.parse(text);
+    } catch (error) {
+      throw new Error(`Unexpected server response (${response.status})`);
+    }
+  }
+
+  if (!response.ok) {
+    throw new Error(data?.error || data?.message || fallbackMessage || `Request failed (${response.status})`);
+  }
+
+  if (!data) {
+    throw new Error(fallbackMessage || 'Empty response from server');
+  }
+
+  return data;
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('DOM Content Loaded');
 
@@ -49,9 +72,7 @@ async function loadPoll() {
     const response = await fetch(`/api/planning/${pollId}`);
     console.log('Response status:', response.status);
 
-    if (!response.ok) throw new Error('Poll not found');
-
-    currentPoll = await response.json();
+    currentPoll = await readJsonResponse(response, 'Poll not found');
     console.log('Poll loaded:', currentPoll);
 
     currentUser = userName;
@@ -316,9 +337,9 @@ function displayParticipants() {
 }
 
 async function createPoll() {
-  const title = document.getElementById('pollTitle').value;
-  const description = document.getElementById('pollDescription').value;
-  const eventDuration = document.getElementById('eventDuration').value;
+  const title = document.getElementById('pollTitle').value.trim();
+  const description = document.getElementById('pollDescription').value.trim();
+  const eventDuration = (document.getElementById('eventDuration')?.value || '').trim();
   const date1 = document.getElementById('date1').value;
   const date2 = document.getElementById('date2').value;
   const date3 = document.getElementById('date3').value;
@@ -346,8 +367,7 @@ async function createPoll() {
       })
     });
 
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'Failed to create poll');
+    const data = await readJsonResponse(response, 'Failed to create poll');
 
     const pollUrl = `${window.location.origin}/planning.html?poll=${data.pollId}`;
     alert(`Poll created! Share this link:\n\n${pollUrl}`);
@@ -368,7 +388,7 @@ async function createPoll() {
 async function loadAdminPolls() {
   try {
     const response = await fetch('/api/planning/list');
-    const polls = await response.json();
+    const polls = await readJsonResponse(response, 'Failed to load polls');
 
     const listContainer = document.getElementById('pollsList');
     if (polls.length === 0) {
@@ -441,9 +461,7 @@ let currentEditingPoll = null;
 async function managePoll(pollId) {
   try {
     const response = await fetch(`/api/planning/${pollId}`);
-    if (!response.ok) throw new Error('Poll not found');
-
-    currentEditingPoll = await response.json();
+    currentEditingPoll = await readJsonResponse(response, 'Poll not found');
 
     // Populate modal (with null checks)
     const titleEl = document.getElementById('modalPollTitle');

@@ -1,5 +1,13 @@
 {
+  "type": "module",
+  "scripts": {
+    "start": "node chatbot-server.js"
+  },
   "dependencies": {
-    "cloudinary": "^2.10.0"
+    "@anthropic-ai/sdk": "^0.56.0",
+    "cloudinary": "^2.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2"
   }
 }
