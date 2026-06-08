@@ -129,7 +129,7 @@ app.post("/api/chat", async (req, res) => {
 // Planning API Endpoints
 app.post("/api/planning/create", (req, res) => {
   try {
-    const { title, description, dates, participantCount } = req.body;
+    const { title, description, eventDuration, dates, participantCount } = req.body;
 
     if (!title || !dates || dates.length !== 3) {
       return res.status(400).json({ error: "Invalid poll data" });
@@ -142,6 +142,7 @@ app.post("/api/planning/create", (req, res) => {
       id: pollId,
       title,
       description: description || "",
+      eventDuration: eventDuration || "",
       dates,
       expectedParticipants: participantCount || 8,
       votes: {},

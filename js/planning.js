@@ -83,6 +83,11 @@ function displayPoll() {
 
   // Dates section
   html += '<h2 style="font-size: 22px; font-weight: bold; margin: 30px 0 20px 0;">📅 Select Dates</h2>';
+  if (currentPoll.eventDuration) {
+    html += `<div style="background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 12px; border-radius: 4px; margin-bottom: 15px; font-size: 14px; color: #1e40af;">
+      <strong>Duration:</strong> ${currentPoll.eventDuration}
+    </div>`;
+  }
   html += currentPoll.dates.map((date, index) => {
     const dateObj = new Date(date);
     const isSelected = currentVotes.dates[index];
@@ -313,6 +318,7 @@ function displayParticipants() {
 async function createPoll() {
   const title = document.getElementById('pollTitle').value;
   const description = document.getElementById('pollDescription').value;
+  const eventDuration = document.getElementById('eventDuration').value;
   const date1 = document.getElementById('date1').value;
   const date2 = document.getElementById('date2').value;
   const date3 = document.getElementById('date3').value;
@@ -334,6 +340,7 @@ async function createPoll() {
       body: JSON.stringify({
         title,
         description,
+        eventDuration,
         dates,
         participantCount
       })
@@ -346,7 +353,7 @@ async function createPoll() {
     alert(`Poll created! Share this link:\n\n${pollUrl}`);
 
     // Clear form (with null checks)
-    const fields = ['pollTitle', 'pollDescription', 'date1', 'date2', 'date3', 'participantCount'];
+    const fields = ['pollTitle', 'pollDescription', 'eventDuration', 'date1', 'date2', 'date3', 'participantCount'];
     fields.forEach(id => {
       const el = document.getElementById(id);
       if (el) el.value = '';
