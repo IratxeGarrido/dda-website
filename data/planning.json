@@ -1,0 +1,38 @@
+{
+  "29b226a544266977": {
+    "id": "29b226a544266977",
+    "title": "Testing Green",
+    "description": "test",
+    "dates": [
+      "2026-06-12T14:53:00.000Z",
+      "2026-06-23T14:53:00.000Z",
+      "2026-06-18T14:53:00.000Z"
+    ],
+    "expectedParticipants": 8,
+    "votes": {
+      "Voter 4XW005": {
+        "dates": {
+          "0": false,
+          "1": true,
+          "2": true
+        },
+        "unavailable": false,
+        "alternativeDate": null
+      }
+    },
+    "createdAt": "2026-06-08T14:53:21.436Z"
+  },
+  "270ad56d1f241892": {
+    "id": "270ad56d1f241892",
+    "title": "test",
+    "description": "ttee",
+    "dates": [
+      "2026-06-21T14:53:00.000Z",
+      "2026-06-23T14:53:00.000Z",
+      "2026-07-01T14:53:00.000Z"
+    ],
+    "expectedParticipants": 8,
+    "votes": {},
+    "createdAt": "2026-06-08T14:53:44.873Z"
+  }
+}

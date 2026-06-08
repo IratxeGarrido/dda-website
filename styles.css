@@ -1,0 +1,10 @@
+/* Custom styles for Duck Dating Apps */
+
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
