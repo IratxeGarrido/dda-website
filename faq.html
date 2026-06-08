@@ -318,8 +318,8 @@
       question.className = "text-2xl font-black";
       question.textContent = item.question;
 
-      const answer = document.createElement("p");
-      answer.className = "mt-3 text-lg text-black/70";
+      const answer = document.createElement("div");
+      answer.className = "mt-3 text-lg text-black/70 whitespace-pre-line";
       answer.textContent = item.answer;
 
       faqItem.appendChild(question);
