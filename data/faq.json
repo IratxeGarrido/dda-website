@@ -31,6 +31,10 @@
       "linkText": "Go to Events"
     }, 
   {
+    "question": "What are the filter criteria?",
+    "answer": "We use different criteria to help match people. Some are essential preferences we focus on, while others help us create balanced groups. Here's how we filter:\n\nREQUIRED FILTERS — We match based on these:\n• Relationship style (ENM/Mono)\n• Connection type (Friendship, Long-term, Casual) — Note: If you select \"No\" to staying in Berlin for more than 6 months, you can only be eligible for Casual connections\n• Gender & Attraction\n• Language\n\nPREFERENCES — These help us align people, but are flexible:\n• Place to meet\n• Hobbies\n• Group vibe\n• Dating openness\n• Bio\n• Age\n\nWe try to make these preferences align, but we don't stress the match too much on these factors — it would be impossible to match perfectly on everything, and people don't need to align on everything anyway."
+  },
+  {
     "question": "How does payment work?",
     "answer": "For paid events, you only pay if you are invited or selected. Payment details are shared with you afterwards. Not every format works the same way, so always check the event description carefully.",
     "keyword": "payment"
