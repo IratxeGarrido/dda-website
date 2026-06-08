@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "dda-website",
   "type": "module",
   "scripts": {
@@ -14,5 +15,17 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
+=======
+  "type": "module",
+  "scripts": {
+    "start": "node chatbot-server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.56.0",
+    "cloudinary": "^2.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2"
+>>>>>>> 44016934ef5c73f88accd64b265fc0c32dd67d65
   }
 }
